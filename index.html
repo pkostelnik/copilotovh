@@ -3,15 +3,22 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Microsoft Copilot – Fokus trifft Kreativität. Eine moderne Einzelseite rund um M365 Copilot." />
+		<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'" />
 		<link rel="icon" href="favicon.ico" />
 		<title>Microsoft Copilot – Fresh Start</title>
 		<script
 			type="module"
 			src="https://unpkg.com/@fluentui/web-components@2.6.1/dist/web-components.min.js"
+			integrity="sha384-0KsRB8mOw0FzAvOWr5roo8MGiA8XpkLn32+7rFwx3bUcWMNtq2yAc/bT0YGJ2Kpo"
+			crossorigin="anonymous"
 		></script>
 		<link rel="stylesheet" href="styles.css" />
 	</head>
 	<body>
+		<noscript>
+			<p style="text-align:center;padding:2rem;font-family:system-ui">Diese Seite benötigt JavaScript, um korrekt dargestellt zu werden.</p>
+		</noscript>
 		<fluent-design-system-provider use-defaults>
 			<a class="skip-link" href="#main">Zum Inhalt springen</a>
 			<main id="main">
@@ -36,19 +43,19 @@
 
 				<section class="grid">
 					<fluent-card class="card">
-						<h3>Kontext verstehen</h3>
+						<h2>Kontext verstehen</h2>
 						<p>
 							Copilot liefert Antworten, die direkt zu deinen Dokumenten und Zielen passen.
 						</p>
 					</fluent-card>
 					<fluent-card class="card">
-						<h3>Strukturiert planen</h3>
+						<h2>Strukturiert planen</h2>
 						<p>
 							Von Aufgabenlisten bis Roadmaps – Copilot bringt Struktur in komplexe Projekte.
 						</p>
 					</fluent-card>
 					<fluent-card class="card">
-						<h3>Gemeinsam liefern</h3>
+						<h2>Gemeinsam liefern</h2>
 						<p>Schnellere Abstimmungen und klare Zusammenfassungen für Teams.</p>
 					</fluent-card>
 				</section>
@@ -62,7 +69,7 @@
 				</section>
 			</main>
 			<footer>
-				<a href="https://www.microsoft.com/microsoft-copilot" target="_blank" rel="noopener">
+				<a href="https://www.microsoft.com/microsoft-copilot" target="_blank" rel="noopener noreferrer">
 					Microsoft Copilot
 				</a>
 				– mehr Wirkung im Alltag.
