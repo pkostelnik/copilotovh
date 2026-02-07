@@ -349,3 +349,215 @@ footer a {
 footer a:hover {
 	text-decoration: underline;
 }
+
+/* =============================================
+   Dive Phuket Page Styles
+   ============================================= */
+
+.dive-page::before {
+	content: none;
+}
+
+.dive-page {
+	--header-bg: linear-gradient(135deg, #2b5396 0%, #2b7696d1 100%);
+	--header-text: #ffffff;
+	--header-text-secondary: #e6f0f5;
+	--header-description: #edf5fa;
+	--page-bg: #f5f9fc;
+	--page-bg-alt: #ffffff;
+	--text-primary: #1a2b3c;
+	--text-secondary: #2f455c;
+	--text-muted: #4f5f6f;
+	--brand: #2d7a9f;
+	--brand-hover: #2b7696;
+	--accent-bg: #e6f3fa;
+	--accent: #2d7a9f;
+	--border: #d0dbe5;
+
+	margin: 0;
+	padding: 0;
+	font-family: 'Segoe UI', 'SF Pro Display', 'SF Pro', sans-serif;
+	background: var(--page-bg);
+	color: var(--text-primary);
+	min-height: 100vh;
+}
+
+@media (prefers-color-scheme: dark) {
+	.dive-page {
+		--header-text-secondary: #cfdbe4;
+		--header-description: #d8e5ed;
+		--page-bg: #121a23;
+		--page-bg-alt: #18242f;
+		--text-primary: #e8f0f7;
+		--text-secondary: #c5d3df;
+		--text-muted: #9fb2c4;
+		--brand: #5bb8e6;
+		--brand-hover: #4aa1c7;
+		--accent-bg: #1f2e3a;
+		--accent: #5bb8e6;
+		--border: #2f4354;
+	}
+}
+
+.dive-page .poster-container {
+	max-width: 1100px;
+	margin: 0 auto;
+	background: var(--page-bg-alt);
+	border-radius: 32px;
+	box-shadow: 0 8px 32px rgba(58, 143, 183, 0.12);
+	padding: 0;
+	overflow: hidden;
+}
+
+.dive-page header {
+	background: var(--header-bg);
+	color: var(--header-text);
+	text-align: center;
+	padding: 56px 32px 40px 32px;
+	position: relative;
+}
+
+.dive-page .header-title {
+	font-size: clamp(40px, 6vw, 60px);
+	font-weight: 900;
+	margin-bottom: 12px;
+	letter-spacing: 0.01em;
+	text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.dive-page .header-subtitle {
+	font-size: 28px;
+	font-weight: 600;
+	margin-bottom: 16px;
+	color: var(--header-text-secondary);
+}
+
+.dive-page .header-description {
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 32px;
+	max-width: 700px;
+	margin: 0 auto;
+	color: var(--header-description);
+}
+
+.dive-page .content {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 24px;
+	padding: 40px;
+}
+
+.dive-page .column {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.dive-page .card {
+	background: var(--accent-bg);
+	border-radius: 16px;
+	padding: 20px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	border: 1px solid var(--border);
+}
+
+.dive-page .card h3 {
+	margin-top: 0;
+	font-size: 20px;
+	color: var(--brand);
+}
+
+.dive-page .stat-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 16px;
+}
+
+.dive-page .stat {
+	background: var(--page-bg-alt);
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	padding: 16px;
+	text-align: center;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dive-page .stat h4 {
+	margin: 0;
+	font-size: 1.2rem;
+	color: var(--accent);
+}
+
+.dive-page .stat p {
+	margin: 4px 0 0;
+	font-size: 0.9rem;
+	color: var(--text-secondary);
+}
+
+.dive-page .timeline {
+	border-left: 3px solid var(--brand);
+	padding-left: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.dive-page .timeline-item {
+	position: relative;
+	padding-left: 12px;
+}
+
+.dive-page .timeline-item::before {
+	content: '';
+	position: absolute;
+	left: -25px;
+	top: 4px;
+	width: 15px;
+	height: 15px;
+	background: var(--brand);
+	border-radius: 50%;
+	box-shadow:
+		0 0 0 4px var(--page-bg-alt),
+		0 0 0 8px var(--accent-bg);
+}
+
+.dive-page .timeline-item h4 {
+	margin: 0 0 4px;
+	font-size: 1rem;
+	color: var(--brand);
+}
+
+.dive-page .timeline-item p {
+	margin: 0;
+	font-size: 0.9rem;
+	color: var(--text-secondary);
+}
+
+.dive-page ul.checklist {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.dive-page ul.checklist li::before {
+	content: "\2713";
+	color: var(--brand);
+	margin-right: 8px;
+}
+
+.dive-page ul.checklist li {
+	margin-bottom: 8px;
+	font-size: 0.9rem;
+	color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+	.dive-page .content {
+		grid-template-columns: 1fr;
+	}
+
+	.dive-page * {
+		overflow-wrap: anywhere;
+	}
+}

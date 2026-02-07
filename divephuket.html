@@ -3,334 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none'">
   <title>Phuket Dive Plan Infographic</title>
-  <style>
-    :root {
-        /* Light Mode Colors */
-        --header-bg: linear-gradient(135deg, #2b5396 0%, #2b7696d1 100%);
-        --header-text: #ffffff;
-        --header-text-secondary: #e6f0f5;
-        --page-bg: #f5f9fc;
-        --page-bg-alt: #ffffff;
-        --text-primary: #1a2b3c;
-        --text-secondary: #334b63;
-        --text-muted: #667685;
-        --brand: #2c78a0;
-        --brand-hover: #2b7696;
-        --accent-bg: #dceef8;
-        --accent: #2c78a0;
-        --border: #d0dbe5;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --header-bg: linear-gradient(135deg, #2b5396 0%, #2b7696d1 100%);
-            --header-text: #ffffff;
-            --header-text-secondary: #cfdbe4;
-            --page-bg: #121a23;
-            --page-bg-alt: #18242f;
-            --text-primary: #e8f0f7;
-            --text-secondary: #b8c7d6;
-            --text-muted: #7f93a5;
-            --brand: #5bb8e6;
-            --brand-hover: #4aa1c7;
-            --accent-bg: #1f2e3a;
-            --accent: #5bb8e6;
-            --border: #2f4354;
-        }
-    }
-
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Segoe UI', 'SF Pro Display', 'SF Pro', sans-serif;
-        background: var(--page-bg);
-        color: var(--text-primary);
-        min-height: 100vh;
-    }
-    .poster-container {
-        max-width: 1100px;
-        margin: 0 auto;
-        background: var(--page-bg-alt);
-        border-radius: 32px;
-        box-shadow: 0 8px 32px rgba(58,143,183,0.12);
-        padding: 0;
-        overflow: hidden;
-    }
-    header {
-        background: var(--header-bg);
-        color: var(--header-text);
-        text-align: center;
-        padding: 56px 32px 40px 32px;
-        position: relative;
-    }
-    .header-title {
-        font-size: clamp(40px, 6vw, 60px);
-        font-weight: 900;
-        margin-bottom: 12px;
-        letter-spacing: 0.01em;
-        text-shadow: 2px 2px 8px rgba(0,0,0,0.08);
-    }
-    .header-subtitle {
-        font-size: 28px;
-        font-weight: 600;
-        margin-bottom: 16px;
-        color: var(--header-text-secondary);
-    }
-    .header-description {
-        font-size: 20px;
-        font-weight: 400;
-        line-height: 32px;
-        max-width: 700px;
-        margin: 0 auto;
-        color: var(--header-text-secondary);
-    }
-    .content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-        padding: 40px;
-    }
-    .column {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-    }
-    .card {
-        background: var(--accent-bg);
-        border-radius: 16px;
-        padding: 20px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        border: 1px solid var(--border);
-    }
-    .card h3 {
-        margin-top: 0;
-        font-size: 20px;
-        color: var(--brand);
-    }
-    .stat-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 16px;
-    }
-    .stat {
-        background: var(--page-bg-alt);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 16px;
-        text-align: center;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    .stat h4 {
-        margin: 0;
-        font-size: 1.2rem;
-        color: var(--accent);
-    }
-    .stat p {
-        margin: 4px 0 0;
-        font-size: 0.9rem;
-        color: var(--text-secondary);
-    }
-    .timeline {
-        border-left: 3px solid var(--brand);
-        padding-left: 16px;
-    }
-    .timeline-item {
-        margin-bottom: 16px;
-    }
-    .timeline-item h4 {
-        margin: 0 0 4px;
-        font-size: 1rem;
-        color: var(--brand);
-    }
-    .timeline-item p {
-        margin: 0;
-        font-size: 0.9rem;
-        color: var(--text-secondary);
-    }
-    ul.checklist {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    ul.checklist li::before {
-        content: "\2713";
-        color: var(--brand);
-        margin-right: 8px;
-    }
-    ul.checklist li {
-        margin-bottom: 8px;
-        font-size: 0.9rem;
-        color: var(--text-secondary);
-    }
-  :root {
-    /* Light Mode Colors */
-    --header-bg: linear-gradient(135deg, #2b5396 0%, #2b7696d1 100%);
-    --header-text: #ffffff;
-    --header-text-secondary: #e6f0f5;
-    --header-description: #edf5fa;
-    --page-bg: #f5f9fc;
-    --page-bg-alt: #ffffff;
-    --text-primary: #1a2b3c;
-    --text-secondary: #2f455c;
-    --text-muted: #4f5f6f;
-    --brand: #2d7a9f;
-    --brand-hover: #2b7696;
-    --accent-bg: #e6f3fa;
-    --accent: #2d7a9f;
-    --border: #d0dbe5;
-}
-@media (prefers-color-scheme: dark) {
-    :root {
-        /* Dark Mode Colors */
-        --header-bg: linear-gradient(135deg, #2b5396 0%, #2b7696d1 100%);
-        --header-text: #ffffff;
-        --header-text-secondary: #cfdbe4;
-        --header-description: #d8e5ed;
-        --page-bg: #121a23;
-        --page-bg-alt: #18242f;
-        --text-primary: #e8f0f7;
-        --text-secondary: #c5d3df;
-        --text-muted: #9fb2c4;
-        --brand: #5bb8e6;
-        --brand-hover: #4aa1c7;
-        --accent-bg: #1f2e3a;
-        --accent: #5bb8e6;
-        --border: #2f4354;
-    }
-}
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', 'SF Pro Display', 'SF Pro', sans-serif;
-    background: var(--page-bg);
-    color: var(--text-primary);
-    min-height: 100vh;
-}
-.poster-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    background: var(--page-bg-alt);
-    border-radius: 32px;
-    box-shadow: 0 8px 32px rgba(58,143,183,0.12);
-    padding: 0;
-    overflow: hidden;
-}
-header {
-    background: var(--header-bg);
-    color: var(--header-text);
-    text-align: center;
-    padding: 56px 32px 40px 32px;
-    position: relative;
-}
-.header-title {
-    font-size: clamp(40px, 6vw, 60px);
-    font-weight: 900;
-    margin-bottom: 12px;
-    letter-spacing: 0.01em;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.08);
-}
-.header-subtitle {
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    color: var(--header-text-secondary);
-}
-.header-description {
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 32px;
-    max-width: 700px;
-    margin: 0 auto;
-    color: var(--header-description);
-}
-/* Stat Card Component */
-.stat-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: space-between;
-}
-.stat-card {
-    flex: 1 1 45%;
-    background: var(--page-bg);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 16px;
-    text-align: center;
-}
-.stat-number {
-    font-size: 32px;
-    font-weight: 800;
-    color: var(--accent);
-}
-.stat-label {
-    font-size: 14px;
-    color: var(--text-muted);
-}
-/* Timeline Component - Dual-Layer Glowing Dot Style */
-.timeline {
-    border-left: 3px solid var(--brand);
-    padding-left: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-.timeline-item {
-    position: relative;
-    padding-left: 12px;
-}
-.timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -25px;
-    top: 4px;
-    width: 15px;
-    height: 15px;
-    background: var(--brand);
-    border-radius: 50%;
-    box-shadow:
-        0 0 0 4px var(--page-bg-alt),
-        0 0 0 8px var(--accent-bg);
-}
-.timeline-title {
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-    font-size: 16px;
-}
-.timeline-text {
-    color: var(--text-secondary);
-    line-height: 1.6;
-    font-size: 15px;
-}
-@media (max-width: 768px) {
-    .main-content {
-        grid-template-columns: 1fr;
-    }
-    * {
-        overflow-wrap: anywhere;
-    }
-}
-</style>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="dive-page">
+  <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
   <div class="poster-container">
     <header>
-      <div class="header-title">Phuket Dive Plan 2026</div>
-      <div class="header-subtitle">Top 3-Day Itinerary for Whale Shark & Manta Encounters</div>
-      <div class="header-description">Optimierter Tauchplan f fcr den 23.-28. Februar 2026 mit maximalen Gro 0dffisch-Chancen und perfekter Sicherheit</div>
+      <h1 class="header-title">Phuket Dive Plan 2026</h1>
+      <h2 class="header-subtitle">Top 3-Day Itinerary for Whale Shark &amp; Manta Encounters</h2>
+      <p class="header-description">Optimierter Tauchplan für den 23.–28. Februar 2026 mit maximalen Großfisch-Chancen und perfekter Sicherheit</p>
     </header>
-    <div class="content">
+    <main id="main-content" class="content">
       <div class="column">
         <div class="card">
           <h3>Top Insights</h3>
           <ul class="checklist">
             <li>Dienstag = einziger King Cruiser Tag (15-25% Walhai-Chance)</li>
             <li>Racha Noi South Tip = einzige Manta-Option (15-25%)</li>
-            <li>2 Ruhetage zwischen Tauchg e4ngen f fcr optimale Erholung</li>
-            <li>Letzter TG am 28.02. = 48h vor R fcckflug</li>
-            <li>Plan A bietet beste Balance aus Intensit e4t & Sicherheit</li>
+            <li>2 Ruhetage zwischen Tauchgängen für optimale Erholung</li>
+            <li>Letzter TG am 28.02. = 48h vor Rückflug</li>
+            <li>Plan A bietet beste Balance aus Intensität &amp; Sicherheit</li>
           </ul>
         </div>
         <div class="card">
@@ -338,23 +32,23 @@ header {
           <div class="timeline">
             <div class="timeline-item">
               <h4>24.02. – King Cruiser + Shark Point + Koh Dok Mai</h4>
-              <p>H f6chste Walhai-Chance (30-40%), 3 Tauchg e4nge</p>
+              <p>Höchste Walhai-Chance (30–40%), 3 Tauchgänge</p>
             </div>
             <div class="timeline-item">
               <h4>25.02. – Racha Noi & Racha Yai</h4>
-              <p>Manta-Mission (15-25%), beste Sicht, 2-3 Tauchg e4nge</p>
+              <p>Manta-Mission (15–25%), beste Sicht, 2–3 Tauchgänge</p>
             </div>
             <div class="timeline-item">
               <h4>28.02. – Phi Phi & Shark Point</h4>
-              <p>Schwarzspitzen-Haie (80-90%), Schildkr f6ten (85-90%), 3 Tauchg e4nge</p>
+              <p>Schwarzspitzen-Haie (80–90%), Schildkröten (85–90%), 3 Tauchgänge</p>
             </div>
           </div>
         </div>
         <div class="card">
-          <h3>Empfohlene n e4chste Schritte</h3>
+          <h3>Empfohlene nächste Schritte</h3>
           <ul class="checklist">
-            <li>Scuba Deep kontaktieren & Touren vorbuchen</li>
-            <li>Zertifikate & Logbuch vorbereiten</li>
+            <li>Scuba Deep kontaktieren &amp; Touren vorbuchen</li>
+            <li>Zertifikate &amp; Logbuch vorbereiten</li>
             <li>Seekrankheit-Medikamente besorgen</li>
             <li>Begleiter zu Sicherheit briefen</li>
             <li>Check-in am 23.02. im Scuba Deep Office</li>
@@ -363,7 +57,7 @@ header {
       </div>
       <div class="column">
         <div class="card">
-          <h3>Gro 0dffisch-Sichtungswahrscheinlichkeiten</h3>
+          <h3>Großfisch-Sichtungswahrscheinlichkeiten</h3>
           <div class="stat-grid">
             <div class="stat">
               <h4>Walhai</h4>
@@ -382,7 +76,7 @@ header {
               <p>80-90%</p>
             </div>
             <div class="stat">
-              <h4>Schildkr f6ten</h4>
+              <h4>Schildkröten</h4>
               <p>85-90%</p>
             </div>
             <div class="stat">
@@ -396,21 +90,21 @@ header {
           <ul class="checklist">
             <li><strong>Plan A:</strong> Beste Balance, King Cruiser + Manta + Haie</li>
             <li><strong>Plan B:</strong> Entspannter, aber ohne King Cruiser</li>
-            <li><strong>Plan C:</strong> Intensiv, maximale Tauchzeit & Sichtungschancen</li>
+            <li><strong>Plan C:</strong> Intensiv, maximale Tauchzeit &amp; Sichtungschancen</li>
           </ul>
         </div>
         <div class="card">
           <h3>Warum Plan A?</h3>
           <ul class="checklist">
-            <li>King Cruiser nur Dienstag verf fcgbar</li>
-            <li>Optimale Ruhetage f fcr Sicherheit</li>
-            <li>Du kannst anspruchsvolle Spots f fchren</li>
-            <li>H f6chste Sichtungschancen kombiniert</li>
-            <li>Perfekt f fcr eure Erfahrungslevel</li>
+            <li>King Cruiser nur Dienstag verfügbar</li>
+            <li>Optimale Ruhetage für Sicherheit</li>
+            <li>Du kannst anspruchsvolle Spots führen</li>
+            <li>Höchste Sichtungschancen kombiniert</li>
+            <li>Perfekt für eure Erfahrungslevel</li>
           </ul>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 </body>
 </html>
