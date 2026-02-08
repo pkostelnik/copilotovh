@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://unpkg.com; script-src 'unsafe-inline' https://unpkg.com; img-src 'self' data: https://*.basemaps.cartocdn.com https://server.arcgisonline.com https://*.tile.openstreetmap.org; frame-ancestors 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://unpkg.com; script-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data: https://*.basemaps.cartocdn.com https://server.arcgisonline.com https://*.tile.openstreetmap.org; frame-ancestors 'none'">
   <title>Plan C – Interaktive Tauchkarte | Phuket Diving Feb 2025</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
   <style>
@@ -70,6 +70,7 @@
     .lang-switch a.active { background: rgba(255,255,255,0.15); color: #fff; pointer-events: none; }
     .lang-switch a:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.08); }
   </style>
+  <script src="lang-detect.js"></script>
 </head>
 <body>
   <div class="lang-switch" role="navigation" aria-label="Sprachwahl">
