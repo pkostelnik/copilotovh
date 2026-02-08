@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://unpkg.com; script-src 'unsafe-inline' https://unpkg.com; img-src 'self' data: https://*.basemaps.cartocdn.com https://server.arcgisonline.com https://*.tile.openstreetmap.org; frame-ancestors 'none'">
-  <title>Plan A – Interaktive Tauchkarte | Phuket Diving Feb 2025</title>
+  <title>Plan A – Interactive Dive Map | Phuket Diving Feb 2025</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -71,53 +71,53 @@
   </style>
 </head>
 <body>
-  <div class="lang-switch" role="navigation" aria-label="Sprachwahl">
-    <a href="map_plan_a.html" class="active" lang="de">DE</a>
-    <a href="map_plan_a_en.html" lang="en">EN</a>
+  <div class="lang-switch" role="navigation" aria-label="Language selection">
+    <a href="map_plan_a.html" lang="de">DE</a>
+    <a href="map_plan_a_en.html" class="active" lang="en">EN</a>
   </div>
   <header class="header">
-    <a class="back-link" href="divephuket.html" aria-label="Zurück zur Hauptseite">&#8592; Zurück</a>
-    <h1>&#x1F5FA;&#xFE0F; Plan A &ndash; Balancierter Plan &#x2B50;&#x2B50;&#x2B50;&#x2B50;</h1>
-    <p>King Cruiser &rarr; Racha &rarr; Phi Phi &ensp;|&ensp; 3 Tauchtage &middot; 8&ndash;9 Tauchg&auml;nge</p>
+    <a class="back-link" href="divephuket_en.html" aria-label="Back to main page">&#8592; Back</a>
+    <h1>&#x1F5FA;&#xFE0F; Plan A &ndash; Balanced Plan &#x2B50;&#x2B50;&#x2B50;&#x2B50;</h1>
+    <p>King Cruiser &rarr; Racha &rarr; Phi Phi &ensp;|&ensp; 3 Dive Days &middot; 8&ndash;9 Dives</p>
   </header>
 
-  <div id="map" role="application" aria-label="Interaktive Tauchkarte Plan A"></div>
+  <div id="map" role="application" aria-label="Interactive dive map Plan A"></div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script>
-    /* ── Konfiguration ─────────────────────────────────────────── */
+    /* ── Configuration ─────────────────────────────────────────── */
     const COLORS = { tag1: '#ef4444', tag2: '#3b82f6', tag3: '#f59e0b', pier: '#ffffff' };
     const pier = [7.820833, 98.344444];
 
-    /* ── Tauchplätze je Tag ────────────────────────────────────── */
+    /* ── Dive sites per day ────────────────────────────────────── */
     const diveSites = [
-      /* Tag 1 – King Cruiser Tour (Rot) */
-      { name: 'King Cruiser Wreck',     latlng: [7.80148, 98.64306],  day: 1, tg: 1, color: COLORS.tag1, depth: '30–32 m', desc: 'Gesunkene Autofähre (1997), eines der besten Wracktauchgänge Thailands. Höchste Walhai-Wahrscheinlichkeit der Region.', highlights: '🦈 Walhai 30–40% · Barrakuda-Schwärme · Zackenbarsche' },
-      { name: 'Shark Point',            latlng: [7.7985, 98.6265],    day: 1, tg: 2, color: COLORS.tag1, depth: '18–26 m', desc: 'Drei Kalkstein-Zinnen mit üppigen Weichkorallen. Leopardenhai-Hotspot Nr. 1 in Phuket.', highlights: '🐆 Leoparden-Hai 95% · Violette Weichkorallen' },
-      { name: 'Koh Dok Mai',            latlng: [7.79757, 98.53054],  day: 1, tg: 3, color: COLORS.tag1, depth: '5–25 m', desc: 'Steilwand-Tauchgang an unbewohnter Kalksteininsel. Makro-Paradies mit Seepferdchen.', highlights: '🐴 Seepferdchen · Nacktschnecken · Höhlen' },
+      /* Day 1 – King Cruiser Tour (Red) */
+      { name: 'King Cruiser Wreck',     latlng: [7.80148, 98.64306],  day: 1, tg: 1, color: COLORS.tag1, depth: '30–32 m', desc: 'Sunken car ferry (1997), one of Thailand\'s best wreck dives. Highest whale shark probability in the region.', highlights: '🦈 Whale shark 30–40% · Barracuda schools · Groupers' },
+      { name: 'Shark Point',            latlng: [7.7985, 98.6265],    day: 1, tg: 2, color: COLORS.tag1, depth: '18–26 m', desc: 'Three limestone pinnacles with lush soft corals. Leopard shark hotspot No. 1 in Phuket.', highlights: '🐆 Leopard shark 95% · Purple soft corals' },
+      { name: 'Koh Dok Mai',            latlng: [7.79757, 98.53054],  day: 1, tg: 3, color: COLORS.tag1, depth: '5–25 m', desc: 'Wall dive at an uninhabited limestone island. Macro paradise with seahorses.', highlights: '🐴 Seahorses · Nudibranchs · Caves' },
 
-      /* Tag 2 – Racha Tour (Blau) */
-      { name: 'South Tip (Racha Noi)',  latlng: [7.46101, 98.30494],  day: 2, tg: 1, color: COLORS.tag2, depth: '25–35 m', desc: 'Tiefster Tauchplatz der Tour. Starke Strömungen bringen pelagische Jäger – und mit Glück Mantas.', highlights: '🦅 Manta 15–25% · Strömungstauchen · Thunfisch' },
-      { name: 'Marina Bay (Racha Noi)', latlng: [7.48, 98.32],        day: 2, tg: 2, color: COLORS.tag2, depth: '18–25 m', desc: 'Geschützte Bucht mit Sandgrund. Leopardenhaie ruhen häufig auf dem Sandboden.', highlights: '🐆 Leoparden-Hai 70% · Schildkröten · Tintenfische' },
-      { name: 'Racha Yai',             latlng: [7.60347, 98.37708],  day: 2, tg: 3, color: COLORS.tag2, depth: '15–20 m', desc: 'Entspannter Abschluss-Tauchgang. Klare Sicht, bunte Riffe, gute Schildkröten-Chance.', highlights: '🐢 Schildkröten 80% · Korallengärten · Clownfische' },
+      /* Day 2 – Racha Tour (Blue) */
+      { name: 'South Tip (Racha Noi)',  latlng: [7.46101, 98.30494],  day: 2, tg: 1, color: COLORS.tag2, depth: '25–35 m', desc: 'Deepest dive site of the tour. Strong currents bring pelagic hunters – and with luck, mantas.', highlights: '🦅 Manta 15–25% · Drift diving · Tuna' },
+      { name: 'Marina Bay (Racha Noi)', latlng: [7.48, 98.32],        day: 2, tg: 2, color: COLORS.tag2, depth: '18–25 m', desc: 'Sheltered bay with sandy bottom. Leopard sharks frequently rest on the sand.', highlights: '🐆 Leopard shark 70% · Turtles · Cuttlefish' },
+      { name: 'Racha Yai',             latlng: [7.60347, 98.37708],  day: 2, tg: 3, color: COLORS.tag2, depth: '15–20 m', desc: 'Relaxed closing dive. Clear visibility, colorful reefs, good turtle chances.', highlights: '🐢 Turtles 80% · Coral gardens · Clownfish' },
 
-      /* Tag 3 – Phi Phi Tour (Orange) */
-      { name: 'Bida Nok',              latlng: [7.65498, 98.76623],  day: 3, tg: 1, color: COLORS.tag3, depth: '10–28 m', desc: 'Felsinsel südlich von Phi Phi. Schwarzspitzenriffhaie patrouillieren das Riff, Walhai-Chance vorhanden.', highlights: '🦈 Schwarzspitzen 80–90% · Walhai 20–25%' },
-      { name: 'Turtle Rock',           latlng: [7.658, 98.770],      day: 3, tg: 2, color: COLORS.tag3, depth: '8–22 m', desc: 'Schildkröten-Paradies zwischen den Bida-Inseln. Grüne und Echte Karettschildkröten.', highlights: '🐢 Schildkröten 85% · Leoparden-Haie · Muränen' },
-      { name: 'Shark Point (2. Besuch)', latlng: [7.800, 98.628],    day: 3, tg: 3, color: COLORS.tag3, depth: '18–26 m', desc: 'Bonus-Tauchgang! Zweiter Besuch am Shark Point erhöht Leopardenhai-Chance auf nahezu 100%.', highlights: '🐆 Bonus-Chance! · Doppelte Sichtungsmöglichkeit' }
+      /* Day 3 – Phi Phi Tour (Orange) */
+      { name: 'Bida Nok',              latlng: [7.65498, 98.76623],  day: 3, tg: 1, color: COLORS.tag3, depth: '10–28 m', desc: 'Rocky island south of Phi Phi. Blacktip reef sharks patrol the reef, whale shark chance present.', highlights: '🦈 Blacktips 80–90% · Whale shark 20–25%' },
+      { name: 'Turtle Rock',           latlng: [7.658, 98.770],      day: 3, tg: 2, color: COLORS.tag3, depth: '8–22 m', desc: 'Turtle paradise between the Bida islands. Green and Hawksbill turtles.', highlights: '🐢 Turtles 85% · Leopard sharks · Moray eels' },
+      { name: 'Shark Point (2nd visit)', latlng: [7.800, 98.628],    day: 3, tg: 3, color: COLORS.tag3, depth: '18–26 m', desc: 'Bonus dive! Second visit to Shark Point increases leopard shark chance to nearly 100%.', highlights: '🐆 Bonus chance! · Double sighting opportunity' }
     ];
 
-    /* ── Routen (Waypoints aus KML) ───────────────────────────── */
+    /* ── Routes (Waypoints from KML) ──────────────────────────── */
     const routes = [
-      { day: 1, color: COLORS.tag1, label: 'Tag 1: King Cruiser Tour',
+      { day: 1, color: COLORS.tag1, label: 'Day 1: King Cruiser Tour',
         path: [pier, [7.81, 98.36], [7.79, 98.42], [7.8, 98.52], [7.80148, 98.64306], [7.7985, 98.6265], [7.79757, 98.53054]] },
-      { day: 2, color: COLORS.tag2, label: 'Tag 2: Racha Tour',
+      { day: 2, color: COLORS.tag2, label: 'Day 2: Racha Tour',
         path: [pier, [7.81, 98.36], [7.67, 98.37], [7.6, 98.37], [7.52, 98.34], [7.46101, 98.30494], [7.48, 98.32], [7.60347, 98.37708]] },
-      { day: 3, color: COLORS.tag3, label: 'Tag 3: Phi Phi Tour',
+      { day: 3, color: COLORS.tag3, label: 'Day 3: Phi Phi Tour',
         path: [pier, [7.81, 98.36], [7.86, 98.42], [7.82, 98.56], [7.74, 98.68], [7.65498, 98.76623], [7.658, 98.770], [7.800, 98.628]] }
     ];
 
-    /* ── Karte initialisieren ─────────────────────────────────── */
+    /* ── Initialize map ───────────────────────────────────────── */
     const map = L.map('map', { zoomControl: true });
 
     const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -129,37 +129,37 @@
       maxZoom: 20, subdomains: 'abcd'
     }).addTo(map);
 
-    L.control.layers({ 'Straßenkarte': voyager, 'Satellitenbild': satellite }, null, { position: 'topright' }).addTo(map);
+    L.control.layers({ 'Street Map': voyager, 'Satellite': satellite }, null, { position: 'topright' }).addTo(map);
 
-    /* ── Pier-Marker ──────────────────────────────────────────── */
+    /* ── Pier marker ──────────────────────────────────────────── */
     const pierIcon = L.divIcon({
       className: '',
       html: '<div style="width:36px;height:36px;border-radius:50%;background:#fff;border:3px solid #0d3b66;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 3px 8px rgba(0,0,0,0.4);" title="Ao Chalong Pier">&#x2693;</div>',
       iconSize: [36, 36], iconAnchor: [18, 18], popupAnchor: [0, -20]
     });
     L.marker(pier, { icon: pierIcon }).addTo(map)
-      .bindPopup('<div class="pier-popup"><h3>&#x2693; Ao Chalong Pier</h3><p style="font-size:0.85rem;color:#444;">Abfahrtshafen f&uuml;r alle Tauchtouren.<br>Coords: 7.8208&deg;N, 98.3444&deg;E</p></div>');
+      .bindPopup('<div class="pier-popup"><h3>&#x2693; Ao Chalong Pier</h3><p style="font-size:0.85rem;color:#444;">Departure port for all dive tours.<br>Coords: 7.8208&deg;N, 98.3444&deg;E</p></div>');
 
-    /* ── Hilfsfunktion: Tauchplatz-Marker ─────────────────────── */
+    /* ── Helper: dive site marker ─────────────────────────────── */
     function createSiteMarker(site) {
       const icon = L.divIcon({
         className: '',
         html: '<div style="width:34px;height:34px;border-radius:50%;background:' + site.color +
               ';border:3px solid #fff;display:flex;align-items:center;justify-content:center;' +
               'color:#fff;font-weight:bold;font-size:11px;box-shadow:0 3px 8px rgba(0,0,0,0.4);' +
-              'text-shadow:0 1px 2px rgba(0,0,0,0.5);">TG' + site.tg + '</div>',
+              'text-shadow:0 1px 2px rgba(0,0,0,0.5);">D' + site.tg + '</div>',
         iconSize: [34, 34], iconAnchor: [17, 17], popupAnchor: [0, -19]
       });
       const popup = '<div class="site-popup">' +
         '<h3>' + site.name + '</h3>' +
-        '<span class="tag" style="background:' + site.color + '">Tag ' + site.day + ' &ndash; Tauchgang ' + site.tg + '</span>' +
-        '<p class="depth">&#x1F30A; Tiefe: ' + site.depth + '</p>' +
+        '<span class="tag" style="background:' + site.color + '">Day ' + site.day + ' &ndash; Dive ' + site.tg + '</span>' +
+        '<p class="depth">&#x1F30A; Depth: ' + site.depth + '</p>' +
         '<p>' + site.desc + '</p>' +
         '<p class="highlight">' + site.highlights + '</p></div>';
       return L.marker(site.latlng, { icon: icon }).bindPopup(popup);
     }
 
-    /* ── Marker & Routen hinzufügen ───────────────────────────── */
+    /* ── Add markers & routes ─────────────────────────────────── */
     const allMarkers = [];
     diveSites.forEach(function(site) {
       const m = createSiteMarker(site).addTo(map);
@@ -173,45 +173,45 @@
       }).addTo(map).bindTooltip(r.label, { sticky: true, className: 'route-tooltip' });
     });
 
-    /* ── Karte auf alle Punkte einpassen ──────────────────────── */
+    /* ── Fit map to all points ────────────────────────────────── */
     const allPoints = [pier].concat(diveSites.map(function(s) { return s.latlng; }));
     map.fitBounds(allPoints, { padding: [40, 40] });
 
-    /* ── Legende ──────────────────────────────────────────────── */
+    /* ── Legend ────────────────────────────────────────────────── */
     var legend = L.control({ position: 'bottomleft' });
     legend.onAdd = function() {
       var div = L.DomUtil.create('div', 'legend');
       div.innerHTML =
-        '<h4>&#x1F5FA;&#xFE0F; Plan A &ndash; Legende</h4>' +
+        '<h4>&#x1F5FA;&#xFE0F; Plan A &ndash; Legend</h4>' +
         '<div class="legend-item"><span class="legend-dot" style="background:#fff;border-color:#0d3b66;"></span> Ao Chalong Pier</div>' +
-        '<div class="legend-item"><span class="legend-line" style="background:' + COLORS.tag1 + '"></span> Tag 1: King Cruiser Tour</div>' +
-        '<div class="legend-item"><span class="legend-line" style="background:' + COLORS.tag2 + '"></span> Tag 2: Racha Tour</div>' +
-        '<div class="legend-item"><span class="legend-line" style="background:' + COLORS.tag3 + '"></span> Tag 3: Phi Phi Tour</div>' +
+        '<div class="legend-item"><span class="legend-line" style="background:' + COLORS.tag1 + '"></span> Day 1: King Cruiser Tour</div>' +
+        '<div class="legend-item"><span class="legend-line" style="background:' + COLORS.tag2 + '"></span> Day 2: Racha Tour</div>' +
+        '<div class="legend-item"><span class="legend-line" style="background:' + COLORS.tag3 + '"></span> Day 3: Phi Phi Tour</div>' +
         '<hr style="border:none;border-top:1px solid rgba(255,255,255,0.15);margin:8px 0">' +
-        '<div style="opacity:0.7;font-size:0.75rem;">TG = Tauchgang<br>Klick auf Marker f&uuml;r Details</div>';
+        '<div style="opacity:0.7;font-size:0.75rem;">D = Dive<br>Click markers for details</div>';
       return div;
     };
     legend.addTo(map);
 
-    /* ── Info-Panel ────────────────────────────────────────────── */
+    /* ── Info panel ────────────────────────────────────────────── */
     var info = L.control({ position: 'topleft' });
     info.onAdd = function() {
       var div = L.DomUtil.create('div', 'info-panel');
       div.innerHTML =
-        '<h4>&#x1F4C5; Tagesplan</h4>' +
-        '<div class="day" style="border-color:' + COLORS.tag1 + '"><strong>Tag 1 &ndash; 24.02. Mo</strong>' +
+        '<h4>&#x1F4C5; Day Schedule</h4>' +
+        '<div class="day" style="border-color:' + COLORS.tag1 + '"><strong>Day 1 &ndash; 24.02. Mon</strong>' +
         '<span>King Cruiser &rarr; Shark Point &rarr; Koh Dok Mai</span></div>' +
-        '<div class="day" style="border-color:' + COLORS.tag2 + '"><strong>Tag 2 &ndash; 25.02. Di</strong>' +
+        '<div class="day" style="border-color:' + COLORS.tag2 + '"><strong>Day 2 &ndash; 25.02. Tue</strong>' +
         '<span>South Tip &rarr; Marina Bay &rarr; Racha Yai</span></div>' +
-        '<div class="day" style="border-color:' + COLORS.tag3 + '"><strong>Tag 3 &ndash; 28.02. Sa</strong>' +
+        '<div class="day" style="border-color:' + COLORS.tag3 + '"><strong>Day 3 &ndash; 28.02. Sat</strong>' +
         '<span>Bida Nok &rarr; Turtle Rock &rarr; Shark Point</span></div>' +
         '<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.15);font-size:0.75rem;opacity:0.7;">' +
-        '&#x1F30A; 8&ndash;9 Tauchg&auml;nge gesamt<br>&#x1F988; Walhai-Chance: 55&ndash;70%</div>';
+        '&#x1F30A; 8&ndash;9 dives total<br>&#x1F988; Whale shark chance: 55&ndash;70%</div>';
       return div;
     };
     info.addTo(map);
 
-    /* ── Ortsnamen-Labels ─────────────────────────────────────── */
+    /* ── Site name labels ─────────────────────────────────────── */
     diveSites.forEach(function(site) {
       L.tooltip({ permanent: true, direction: 'right', offset: [18, 0], className: 'site-label' })
         .setLatLng(site.latlng)
