@@ -643,6 +643,19 @@ footer a:hover {
 
 	.dive-page .compare-table {
 		font-size: 0.82rem;
+		width: max-content;
+		min-width: 100%;
+	}
+
+	.dive-page .compare-table,
+	.dive-page .compare-table th,
+	.dive-page .compare-table td {
+		overflow-wrap: normal;
+		word-break: normal;
+	}
+
+	.dive-page .compare-table th {
+		white-space: nowrap;
 	}
 
 	.dive-page .compare-table th,
@@ -709,6 +722,19 @@ footer a:hover {
 
 	.dive-page .compare-table {
 		font-size: 0.75rem;
+		width: max-content;
+		min-width: 100%;
+	}
+
+	.dive-page .compare-table,
+	.dive-page .compare-table th,
+	.dive-page .compare-table td {
+		overflow-wrap: normal;
+		word-break: normal;
+	}
+
+	.dive-page .compare-table th {
+		white-space: nowrap;
 	}
 
 	.dive-page .compare-table th,
@@ -841,6 +867,26 @@ footer a:hover {
 @media (prefers-color-scheme: dark) {
 	.dive-page .callout.warning {
 		background: #2d2510;
+	}
+}
+
+/* Table scroll wrapper – visual scroll hint on mobile */
+.dive-page .card > [style*="overflow-x:auto"] {
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: thin;
+}
+
+@media (max-width: 768px) {
+	.dive-page .card > [style*="overflow-x:auto"] {
+		background:
+			linear-gradient(to right, var(--accent-bg) 30%, transparent),
+			linear-gradient(to left, var(--accent-bg) 30%, transparent),
+			linear-gradient(to right, rgba(0,0,0,.15), transparent 12px),
+			linear-gradient(to left, rgba(0,0,0,.15), transparent 12px);
+		background-position: left center, right center, left center, right center;
+		background-size: 20px 100%, 20px 100%, 12px 100%, 12px 100%;
+		background-repeat: no-repeat;
+		background-attachment: local, local, scroll, scroll;
 	}
 }
 
