@@ -350,6 +350,36 @@ footer a:hover {
 	text-decoration: underline;
 }
 
+/* ── Index Page Mobile ── */
+@media (max-width: 480px) {
+	main {
+		padding: 48px 16px 64px;
+		gap: 20px;
+	}
+
+	.hero-stack {
+		height: 130px;
+	}
+
+	.hero p {
+		font-size: 0.92rem;
+	}
+
+	.grid {
+		grid-template-columns: 1fr;
+		gap: 14px;
+	}
+
+	fluent-card.card {
+		padding: 16px;
+	}
+
+	.cta {
+		padding: 20px;
+		grid-template-columns: 1fr;
+	}
+}
+
 /* =============================================
    Dive Phuket Page Styles
    ============================================= */
@@ -552,13 +582,143 @@ footer a:hover {
 	color: var(--text-secondary);
 }
 
+/* Responsive iframe base */
+.dive-page .card iframe {
+	width: 100%;
+	max-width: 100%;
+	border: 0;
+	border-radius: 8px;
+}
+
 @media (max-width: 768px) {
 	.dive-page .content {
 		grid-template-columns: 1fr;
+		padding: 20px;
+		gap: 16px;
 	}
 
 	.dive-page * {
 		overflow-wrap: anywhere;
+	}
+
+	.dive-page header {
+		padding: 40px 20px 28px 20px;
+	}
+
+	.dive-page .header-subtitle {
+		font-size: 22px;
+	}
+
+	.dive-page .header-description {
+		font-size: 17px;
+		line-height: 26px;
+	}
+
+	.dive-page .poster-container {
+		border-radius: 16px;
+	}
+
+	.dive-page .section-title {
+		font-size: 1.3rem;
+	}
+
+	.dive-page .card h3 {
+		font-size: 17px;
+	}
+
+	.dive-page .stat-grid {
+		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+	}
+
+	.dive-page .card iframe {
+		height: 340px;
+	}
+
+	.dive-page .compare-table {
+		font-size: 0.82rem;
+	}
+
+	.dive-page .compare-table th,
+	.dive-page .compare-table td {
+		padding: 6px 8px;
+	}
+}
+
+/* ── Small Phones ── */
+@media (max-width: 480px) {
+	.dive-page header {
+		padding: 32px 16px 20px 16px;
+	}
+
+	.dive-page .header-title {
+		font-size: clamp(26px, 7vw, 40px);
+	}
+
+	.dive-page .header-subtitle {
+		font-size: 18px;
+		margin-bottom: 10px;
+	}
+
+	.dive-page .header-description {
+		font-size: 15px;
+		line-height: 22px;
+	}
+
+	.dive-page .content {
+		padding: 12px;
+		gap: 12px;
+	}
+
+	.dive-page .poster-container {
+		border-radius: 10px;
+	}
+
+	.dive-page .section-title {
+		font-size: 1.1rem;
+	}
+
+	.dive-page .card {
+		padding: 14px;
+		border-radius: 10px;
+	}
+
+	.dive-page .card h3 {
+		font-size: 15px;
+	}
+
+	.dive-page .stat-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.dive-page .prob-row {
+		grid-template-columns: 80px 1fr 42px;
+		font-size: 0.78rem;
+		gap: 6px;
+	}
+
+	.dive-page .card iframe {
+		height: 250px;
+	}
+
+	.dive-page .compare-table {
+		font-size: 0.75rem;
+	}
+
+	.dive-page .compare-table th,
+	.dive-page .compare-table td {
+		padding: 5px 6px;
+	}
+
+	.dive-page .timeline-item h4 {
+		font-size: 0.9rem;
+	}
+
+	.dive-page .timeline-item p {
+		font-size: 0.82rem;
+	}
+
+	.dive-page ul.checklist li {
+		font-size: 0.82rem;
 	}
 }
 
@@ -796,6 +956,18 @@ footer a:hover {
 	}
 	.dive-page .prob-row {
 		grid-template-columns: 100px 1fr 50px;
+	}
+	.dive-page .day-schedule {
+		padding: 16px;
+	}
+}
+
+@media (max-width: 480px) {
+	.dive-page .schedule-item {
+		gap: 4px;
+	}
+	.dive-page .day-schedule h4 {
+		font-size: 0.95rem;
 	}
 }
 

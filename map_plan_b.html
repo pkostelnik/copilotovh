@@ -69,6 +69,15 @@
     }
     .lang-switch a.active { background: rgba(255,255,255,0.15); color: #fff; pointer-events: none; }
     .lang-switch a:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.08); }
+
+    @media (max-width: 480px) {
+      .header { padding: 10px 12px; }
+      .header h1 { font-size: 1rem; padding: 0 48px; }
+      .header p { font-size: 0.75rem; padding: 0 48px; }
+      .back-link { font-size: 0.8rem; left: 8px; }
+      .legend { max-width: 180px; font-size: 0.75rem; padding: 10px 12px; }
+      .info-panel { max-width: 200px; font-size: 0.75rem; padding: 10px 12px; }
+    }
   </style>
   <script src="lang-detect.js"></script>
 </head>
