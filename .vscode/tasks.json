@@ -1,0 +1,10 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Delete write_dive.py",
+			"type": "shell",
+			"command": "rm -f '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh/write_dive.py' '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh/cleanup.sh' && echo 'DELETED OK'"
+		}
+	]
+}
