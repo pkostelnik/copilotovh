@@ -911,3 +911,94 @@ footer a:hover {
 	outline: 2px solid #facc15;
 	outline-offset: -2px;
 }
+
+/* ===== MAP MODAL OVERLAY (Desktop) ===== */
+.map-modal-overlay {
+	display: none;
+	position: fixed;
+	inset: 0;
+	z-index: 10000;
+	background: rgba(0, 0, 0, 0.7);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+	justify-content: center;
+	align-items: center;
+	padding: 24px;
+	animation: mapModalFadeIn 0.25s ease;
+}
+.map-modal-overlay.active {
+	display: flex;
+}
+.map-modal-container {
+	position: relative;
+	width: 100%;
+	max-width: 1400px;
+	height: 90vh;
+	background: #0d1b2a;
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.08);
+}
+.map-modal-toolbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 16px;
+	background: linear-gradient(135deg, #0d3b66 0%, #1a5276 100%);
+	color: #fff;
+	font-family: 'Segoe UI', system-ui, sans-serif;
+}
+.map-modal-title {
+	font-size: 0.95rem;
+	font-weight: 600;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.map-modal-actions {
+	display: flex;
+	gap: 8px;
+	flex-shrink: 0;
+}
+.map-modal-btn {
+	background: rgba(255,255,255,0.12);
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	padding: 6px 14px;
+	font-size: 0.85rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background 0.15s, transform 0.1s;
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+.map-modal-btn:hover {
+	background: rgba(255,255,255,0.22);
+}
+.map-modal-btn:active {
+	transform: scale(0.97);
+}
+.map-modal-close {
+	background: rgba(239, 68, 68, 0.7);
+}
+.map-modal-close:hover {
+	background: rgba(239, 68, 68, 0.95);
+}
+.map-modal-iframe {
+	width: 100%;
+	height: calc(100% - 48px);
+	border: none;
+	display: block;
+}
+@keyframes mapModalFadeIn {
+	from { opacity: 0; transform: scale(0.96); }
+	to   { opacity: 1; transform: scale(1); }
+}
+@media (max-width: 640px) {
+	.map-modal-overlay { padding: 8px; }
+	.map-modal-container { height: 95vh; border-radius: 10px; }
+	.map-modal-title { font-size: 0.82rem; }
+	.map-modal-btn { padding: 5px 10px; font-size: 0.8rem; }
+}

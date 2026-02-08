@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src https://www.google.com; frame-ancestors 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src 'self' https://www.google.com; frame-ancestors 'none'">
   <title>Phuket Dive Plan 2026</title>
   <link rel="stylesheet" href="styles.css">
   <script src="lang-detect.js"></script>
@@ -1058,5 +1058,77 @@
 
     </main>
   </div>
+
+  <!-- Map Modal Overlay (Desktop) -->
+  <div class="map-modal-overlay" id="mapModal" role="dialog" aria-modal="true" aria-label="Interaktive Karte">
+    <div class="map-modal-container">
+      <div class="map-modal-toolbar">
+        <span class="map-modal-title" id="mapModalTitle">Interaktive Karte</span>
+        <div class="map-modal-actions">
+          <a class="map-modal-btn" id="mapModalNewTab" href="#" target="_blank" rel="noopener" title="In neuem Tab &ouml;ffnen">&#x2197; Neuer Tab</a>
+          <button class="map-modal-btn map-modal-close" id="mapModalClose" title="Schlie&szlig;en">&times; Schlie&szlig;en</button>
+        </div>
+      </div>
+      <iframe class="map-modal-iframe" id="mapModalIframe" src="about:blank" title="Interaktive Karte"></iframe>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    'use strict';
+    // Geräte-Erkennung: Touch + schmaler Viewport = Mobil
+    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+                   || (navigator.maxTouchPoints > 1 && window.innerWidth < 1024);
+
+    if (isMobile) return; // Auf Mobilgeräten: Standard-Verhalten (neuer Tab)
+
+    var overlay  = document.getElementById('mapModal');
+    var iframe   = document.getElementById('mapModalIframe');
+    var title    = document.getElementById('mapModalTitle');
+    var newTab   = document.getElementById('mapModalNewTab');
+    var closeBtn = document.getElementById('mapModalClose');
+
+    var mapTitles = {
+      'map_plan_a': 'Plan A \u2013 Balancierter Plan',
+      'map_plan_b': 'Plan B \u2013 Entspannter Einstieg',
+      'map_plan_c': 'Plan C \u2013 Maximale Tauchzeit'
+    };
+
+    function openModal(href) {
+      var key = '';
+      if (href.indexOf('map_plan_a') !== -1) key = 'map_plan_a';
+      else if (href.indexOf('map_plan_b') !== -1) key = 'map_plan_b';
+      else if (href.indexOf('map_plan_c') !== -1) key = 'map_plan_c';
+      title.textContent = mapTitles[key] || 'Interaktive Karte';
+      newTab.href = href;
+      iframe.src = href;
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+
+    function closeModal() {
+      overlay.classList.remove('active');
+      iframe.src = 'about:blank';
+      document.body.style.overflow = '';
+    }
+
+    // Alle Links zu map_plan_*.html abfangen
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[href*="map_plan_"]');
+      if (!link) return;
+      e.preventDefault();
+      openModal(link.getAttribute('href'));
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
+    });
+  })();
+  </script>
 </body>
 </html>
