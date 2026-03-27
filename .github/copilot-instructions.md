@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## Tech Stack
 - Responsive design for all devices
 

@@ -3,18 +3,25 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Microsoft Copilot – Focus meets Creativity. A modern single page about M365 Copilot." />
 		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none'">
 		<meta name="referrer" content="strict-origin-when-cross-origin">
+		<link rel="preconnect" href="https://unpkg.com" crossorigin />
 		<link rel="icon" href="favicon.ico" />
 		<title>Microsoft Copilot – Fresh Start</title>
 		<script
 			type="module"
 			src="https://unpkg.com/@fluentui/web-components@2.6.1/dist/web-components.min.js"
+			integrity="sha384-0KsRB8mOw0FzAvOWr5roo8MGiA8XpkLn32+7rFwx3bUcWMNtq2yAc/bT0YGJ2Kpo"
+			crossorigin="anonymous"
 		></script>
 		<link rel="stylesheet" href="styles.css" />
 		<script src="lang-detect.js"></script>
 	</head>
 	<body>
+		<noscript>
+			<p style="text-align:center;padding:2rem;font-family:system-ui">This page requires JavaScript to display correctly.</p>
+		</noscript>
 		<div class="lang-switch" role="navigation" aria-label="Language selection">
 			<a href="index.html" lang="de">DE</a>
 			<a href="index_en.html" class="active" lang="en">EN</a>
@@ -43,19 +50,19 @@
 
 				<section class="grid">
 					<fluent-card class="card">
-						<h3>Understand Context</h3>
+						<h2>Understand Context</h2>
 						<p>
 							Copilot delivers answers that directly match your documents and goals.
 						</p>
 					</fluent-card>
 					<fluent-card class="card">
-						<h3>Plan with Structure</h3>
+						<h2>Plan with Structure</h2>
 						<p>
 							From task lists to roadmaps – Copilot brings structure to complex projects.
 						</p>
 					</fluent-card>
 					<fluent-card class="card">
-						<h3>Deliver Together</h3>
+						<h2>Deliver Together</h2>
 						<p>Faster alignment and clear summaries for teams.</p>
 					</fluent-card>
 				</section>
@@ -69,7 +76,7 @@
 				</section>
 			</main>
 			<footer>
-				<a href="https://www.microsoft.com/microsoft-copilot" target="_blank" rel="noopener">
+				<a href="https://www.microsoft.com/microsoft-copilot" target="_blank" rel="noopener noreferrer">
 					Microsoft Copilot
 				</a>
 				– more impact in everyday life.

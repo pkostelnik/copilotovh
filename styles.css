@@ -72,6 +72,15 @@ body {
 	min-height: 100vh;
 }
 
+@media (prefers-color-scheme: dark) {
+	body {
+		background: radial-gradient(900px 520px at 0% 0%, rgba(15, 93, 189, 0.15), transparent 60%),
+			radial-gradient(780px 460px at 100% 0%, rgba(0, 183, 195, 0.12), transparent 60%),
+			radial-gradient(760px 520px at 80% 100%, rgba(92, 45, 145, 0.12), transparent 60%),
+			var(--bg);
+	}
+}
+
 .skip-link {
 	position: absolute;
 	left: 16px;
@@ -264,7 +273,7 @@ fluent-card.card {
 	backdrop-filter: blur(14px);
 }
 
-.card h3 {
+.card h2 {
 	margin: 0 0 8px;
 	font-size: 1.15rem;
 	font-weight: 600;
@@ -277,7 +286,7 @@ fluent-card.card {
 }
 
 @media (prefers-color-scheme: dark) {
-	.card h3,
+	.card h2,
 	.hero h1,
 	.cta h2 {
 		color: #ffffff;
