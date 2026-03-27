@@ -15,6 +15,21 @@
 			"label": "Delete build_maps.py",
 			"type": "shell",
 			"command": "rm -f '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh/build_maps.py' && echo 'build_maps.py DELETED'"
+		},
+		{
+			"label": "Git Pull",
+			"type": "shell",
+			"command": "git pull 2>&1 && echo '---STATUS---' && git status -sb 2>&1"
+		},
+		{
+			"label": "Git Status",
+			"type": "shell",
+			"command": "git status -sb 2>&1"
+		},
+		{
+			"label": "Run Git Sequence",
+			"type": "shell",
+			"command": "bash '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh/run_git.sh'"
 		}
 	]
 }
