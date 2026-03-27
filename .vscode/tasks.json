@@ -1,0 +1,20 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Delete write_dive.py",
+			"type": "shell",
+			"command": "rm -f '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh/write_dive.py' '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh/cleanup.sh' && echo 'DELETED OK'"
+		},
+		{
+			"label": "Run build_maps.py",
+			"type": "shell",
+			"command": "python3 '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh/build_maps.py'"
+		},
+		{
+			"label": "Delete build_maps.py",
+			"type": "shell",
+			"command": "rm -f '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh/build_maps.py' && echo 'build_maps.py DELETED'"
+		}
+	]
+}
