@@ -30,6 +30,26 @@
 			"label": "Run Git Sequence",
 			"type": "shell",
 			"command": "bash '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh/run_git.sh'"
+		},
+		{
+			"label": "Git Step 2 - add",
+			"type": "shell",
+			"command": "cd '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh' && git add index.html index_en.html styles.css lang-detect.js 2>&1; echo \"EXIT=$?\""
+		},
+		{
+			"label": "Git Step 3 - commit",
+			"type": "shell",
+			"command": "cd '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh' && git commit -m 'fix: CSP, accessibility, SEO & code quality improvements\n\n- Remove unsafe-inline from CSP, add .noscript-msg CSS class\n- Add Open Graph meta tags (og:title, og:description, og:type, og:locale)\n- Add hreflang alternate links for DE/EN SEO\n- Add aria-label on hero, grid, cta sections\n- Add sr-only class and screen reader hint on external footer link\n- Add role=contentinfo on footer inside custom element\n- Validate localStorage langPref value (de/en only)\n- Consolidate duplicate dark-mode CSS rules\n- Fix crossorigin attribute on preconnect link' 2>&1"
+		},
+		{
+			"label": "Git Step 4 - push",
+			"type": "shell",
+			"command": "cd '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh' && git push 2>&1"
+		},
+		{
+			"label": "Git Step 5 - status",
+			"type": "shell",
+			"command": "cd '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh' && git status -sb 2>&1"
 		}
 	]
 }

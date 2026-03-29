@@ -1,5 +1,7 @@
 ## Tech Stack
 - Responsive design for all devices
+- HTLML5, CSS3, JavaScript (ES6+)
+- React for web applications
 
 ## Development Guidelines
 - Use proper component structure with separation of concerns
