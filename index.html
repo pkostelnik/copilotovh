@@ -4,9 +4,15 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="Microsoft Copilot – Fokus trifft Kreativität. Eine moderne Einzelseite rund um M365 Copilot." />
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none'">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self'; img-src 'self' data:; frame-ancestors 'none'">
 		<meta name="referrer" content="strict-origin-when-cross-origin">
-		<link rel="preconnect" href="https://unpkg.com" crossorigin />
+		<meta property="og:title" content="Microsoft Copilot – Fokus trifft Kreativität" />
+		<meta property="og:description" content="Eine moderne Einzelseite rund um M365 Copilot – Ideen bündeln, Workflows beschleunigen, Teams im Flow halten." />
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="de_DE" />
+		<link rel="alternate" hreflang="de" href="index.html" />
+		<link rel="alternate" hreflang="en" href="index_en.html" />
+		<link rel="preconnect" href="https://unpkg.com" crossorigin="anonymous" />
 		<link rel="icon" href="favicon.ico" />
 		<title>Microsoft Copilot – Fresh Start</title>
 		<script
@@ -20,7 +26,7 @@
 	</head>
 	<body>
 		<noscript>
-			<p style="text-align:center;padding:2rem;font-family:system-ui">Diese Seite benötigt JavaScript, um korrekt dargestellt zu werden.</p>
+			<p class="noscript-msg">Diese Seite benötigt JavaScript, um korrekt dargestellt zu werden.</p>
 		</noscript>
 		<div class="lang-switch" role="navigation" aria-label="Sprachwahl">
 			<a href="index.html" class="active" lang="de">DE</a>
@@ -29,7 +35,7 @@
 		<fluent-design-system-provider use-defaults>
 			<a class="skip-link" href="#main">Zum Inhalt springen</a>
 			<main id="main">
-				<section class="hero">
+				<section class="hero" aria-label="Einführung">
 					<div class="hero-badge">M365 Copilot</div>
 					<h1>Microsoft Copilot. Fokus trifft Kreativität.</h1>
 					<div class="hero-stack">
@@ -48,7 +54,7 @@
 					</div>
 				</section>
 
-				<section class="grid">
+				<section class="grid" aria-label="Copilot Funktionen">
 					<fluent-card class="card">
 						<h2>Kontext verstehen</h2>
 						<p>
@@ -67,7 +73,7 @@
 					</fluent-card>
 				</section>
 
-				<section class="cta">
+				<section class="cta" aria-label="Handlungsaufforderung">
 					<div>
 						<h2>Bereit für den nächsten Schritt</h2>
 						<p>Copilot unterstützt dich dabei, Ideen schnell in Ergebnisse zu verwandeln.</p>
@@ -75,9 +81,9 @@
 					<div class="cta-accent" aria-hidden="true"></div>
 				</section>
 			</main>
-			<footer>
+			<footer role="contentinfo">
 				<a href="https://www.microsoft.com/microsoft-copilot" target="_blank" rel="noopener noreferrer">
-					Microsoft Copilot
+					Microsoft Copilot<span class="sr-only"> (öffnet in neuem Tab)</span>
 				</a>
 				– mehr Wirkung im Alltag.
 			</footer>

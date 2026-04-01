@@ -11,6 +11,7 @@
   var pref = null;
   try {
     pref = localStorage.getItem('langPref');
+    if (pref !== 'de' && pref !== 'en') pref = null;
   } catch (e) {
     // localStorage nicht verfügbar (z.B. Private Mode in manchen Browsern)
   }
