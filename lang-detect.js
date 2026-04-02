@@ -36,7 +36,13 @@
     } else {
       targetFile = file.replace('_en.html', '.html');
     }
-    window.location.replace(targetFile);
+    
+    // Sicherheitsprüfung: Endlos-Schleifen und XSS (z.B. javascript:-Schema) abfangen
+    if (targetFile === file || targetFile.indexOf(':') !== -1) {
+      return;
+    }
+
+    window.location.replace('./' + encodeURIComponent(targetFile));
     return;
   }
 
