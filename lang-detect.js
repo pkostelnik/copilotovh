@@ -58,5 +58,19 @@
         }
       });
     }
+
+    // 6. OS Theme synchronisieren (Light / Dark) für Fluent UI
+    var provider = document.querySelector('fluent-design-system-provider');
+    if (provider && window.matchMedia) {
+      var updateTheme = function() {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          provider.setAttribute('base-layer-luminance', '0.15');
+        } else {
+          provider.setAttribute('base-layer-luminance', '1');
+        }
+      };
+      updateTheme();
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
+    }
   });
 })();
