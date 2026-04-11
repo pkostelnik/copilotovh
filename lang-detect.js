@@ -59,18 +59,33 @@
       });
     }
 
-    // 6. OS Theme synchronisieren (Light / Dark) für Fluent UI
-    var provider = document.querySelector('fluent-design-system-provider');
-    if (provider && window.matchMedia) {
-      var updateTheme = function() {
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          provider.setAttribute('base-layer-luminance', '0.15');
-        } else {
-          provider.setAttribute('base-layer-luminance', '1');
-        }
-      };
-      updateTheme();
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
+    // 6. Scroll-reveal animations via IntersectionObserver
+    if ('IntersectionObserver' in window) {
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+
+            // For stagger containers, also reveal child cards
+            var cards = entry.target.querySelectorAll('.card');
+            cards.forEach(function (card) {
+              card.classList.add('is-visible');
+            });
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        revealObserver.observe(el);
+      });
+    } else {
+      // Fallback: just show everything immediately
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
     }
   });
 })();
