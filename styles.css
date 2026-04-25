@@ -877,3 +877,278 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 .reveal.is-visible { opacity: 1; transform: none; }
 .reveal-stagger > * { transition-delay: calc(var(--i, 0) * 80ms); }
+
+/* ═══════════════════════════════════════════════
+   3D / DEPTH PASS
+   Plastic, tactile feel via stacked shadows + insets + subtle tilt.
+   Layered on top of existing rules; respects contrast & reduced-motion.
+   ═══════════════════════════════════════════════ */
+
+/* ── Depth token stacks (dark default) ── */
+:root,
+:root[data-theme="dark"] {
+--depth-card:
+0 1px 0 rgba(255, 255, 255, 0.07) inset,
+0 -1px 0 rgba(0, 0, 0, 0.45) inset,
+0 1px 2px rgba(0, 0, 0, 0.5),
+0 10px 24px rgba(0, 0, 0, 0.45),
+0 30px 60px rgba(0, 0, 0, 0.5);
+--depth-card-hover:
+0 1px 0 rgba(255, 255, 255, 0.14) inset,
+0 -1px 0 rgba(0, 0, 0, 0.55) inset,
+0 4px 10px rgba(0, 0, 0, 0.5),
+0 20px 44px rgba(0, 0, 0, 0.5),
+0 48px 96px rgba(0, 240, 255, 0.18);
+--depth-pop:
+0 1px 0 rgba(255, 255, 255, 0.12) inset,
+0 -1px 0 rgba(0, 0, 0, 0.3) inset,
+0 2px 4px rgba(0, 0, 0, 0.35),
+0 12px 28px rgba(0, 0, 0, 0.45);
+--depth-button:
+0 1px 0 rgba(255, 255, 255, 0.45) inset,
+0 -2px 0 rgba(0, 0, 0, 0.18) inset,
+0 8px 18px rgba(0, 240, 255, 0.4),
+0 2px 6px rgba(139, 92, 246, 0.3);
+--depth-button-hover:
+0 1px 0 rgba(255, 255, 255, 0.55) inset,
+0 -2px 0 rgba(0, 0, 0, 0.25) inset,
+0 14px 32px rgba(0, 240, 255, 0.55),
+0 4px 10px rgba(139, 92, 246, 0.4);
+--depth-orb:
+0 1px 0 rgba(255, 255, 255, 0.5) inset,
+0 -2px 6px rgba(0, 0, 0, 0.35) inset,
+0 6px 14px rgba(0, 240, 255, 0.4),
+0 2px 4px rgba(0, 0, 0, 0.4);
+--sheen: radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.55), transparent 50%);
+}
+
+/* ── Light variant ── */
+@media (prefers-color-scheme: light) {
+:root:not([data-theme="dark"]):not([data-theme="contrast"]):not([data-theme="light"]) {
+--depth-card:
+0 1px 0 rgba(255, 255, 255, 0.95) inset,
+0 -1px 0 rgba(20, 30, 60, 0.05) inset,
+0 1px 2px rgba(20, 30, 60, 0.06),
+0 8px 20px rgba(20, 30, 60, 0.08),
+0 28px 56px rgba(20, 30, 60, 0.1);
+--depth-card-hover:
+0 1px 0 rgba(255, 255, 255, 1) inset,
+0 -1px 0 rgba(20, 30, 60, 0.08) inset,
+0 4px 10px rgba(20, 30, 60, 0.08),
+0 20px 44px rgba(20, 30, 60, 0.14),
+0 48px 96px rgba(0, 144, 168, 0.18);
+--depth-pop:
+0 1px 0 rgba(255, 255, 255, 1) inset,
+0 -1px 0 rgba(20, 30, 60, 0.06) inset,
+0 2px 4px rgba(20, 30, 60, 0.06),
+0 10px 24px rgba(20, 30, 60, 0.1);
+--depth-button:
+0 1px 0 rgba(255, 255, 255, 0.7) inset,
+0 -2px 0 rgba(20, 30, 60, 0.12) inset,
+0 8px 18px rgba(0, 144, 168, 0.35),
+0 2px 6px rgba(109, 63, 192, 0.25);
+--depth-button-hover:
+0 1px 0 rgba(255, 255, 255, 0.85) inset,
+0 -2px 0 rgba(20, 30, 60, 0.16) inset,
+0 14px 32px rgba(0, 144, 168, 0.45),
+0 4px 10px rgba(109, 63, 192, 0.35);
+--depth-orb:
+0 1px 0 rgba(255, 255, 255, 0.85) inset,
+0 -2px 6px rgba(20, 30, 60, 0.18) inset,
+0 6px 14px rgba(0, 144, 168, 0.3),
+0 2px 4px rgba(20, 30, 60, 0.18);
+}
+}
+:root[data-theme="light"] {
+--depth-card:
+0 1px 0 rgba(255, 255, 255, 0.95) inset,
+0 -1px 0 rgba(20, 30, 60, 0.05) inset,
+0 1px 2px rgba(20, 30, 60, 0.06),
+0 8px 20px rgba(20, 30, 60, 0.08),
+0 28px 56px rgba(20, 30, 60, 0.1);
+--depth-card-hover:
+0 1px 0 rgba(255, 255, 255, 1) inset,
+0 -1px 0 rgba(20, 30, 60, 0.08) inset,
+0 4px 10px rgba(20, 30, 60, 0.08),
+0 20px 44px rgba(20, 30, 60, 0.14),
+0 48px 96px rgba(0, 144, 168, 0.18);
+--depth-pop:
+0 1px 0 rgba(255, 255, 255, 1) inset,
+0 -1px 0 rgba(20, 30, 60, 0.06) inset,
+0 2px 4px rgba(20, 30, 60, 0.06),
+0 10px 24px rgba(20, 30, 60, 0.1);
+--depth-button:
+0 1px 0 rgba(255, 255, 255, 0.7) inset,
+0 -2px 0 rgba(20, 30, 60, 0.12) inset,
+0 8px 18px rgba(0, 144, 168, 0.35),
+0 2px 6px rgba(109, 63, 192, 0.25);
+--depth-button-hover:
+0 1px 0 rgba(255, 255, 255, 0.85) inset,
+0 -2px 0 rgba(20, 30, 60, 0.16) inset,
+0 14px 32px rgba(0, 144, 168, 0.45),
+0 4px 10px rgba(109, 63, 192, 0.35);
+--depth-orb:
+0 1px 0 rgba(255, 255, 255, 0.85) inset,
+0 -2px 6px rgba(20, 30, 60, 0.18) inset,
+0 6px 14px rgba(0, 144, 168, 0.3),
+0 2px 4px rgba(20, 30, 60, 0.18);
+}
+
+/* ── Apply depth to surfaces ── */
+.card-v2,
+.step,
+.testimonial,
+.faq-item,
+.cta-final {
+box-shadow: var(--depth-card);
+}
+.card-v2:hover,
+.step:hover,
+.testimonial:hover {
+box-shadow: var(--depth-card-hover);
+}
+
+/* Buttons get the full plastic treatment */
+.btn-primary {
+box-shadow: var(--depth-button);
+background-image:
+linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 40%),
+linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+}
+.btn-primary:hover {
+box-shadow: var(--depth-button-hover);
+transform: translateY(-2px);
+}
+.btn-primary:active {
+transform: translateY(0);
+box-shadow:
+0 1px 0 rgba(255, 255, 255, 0.25) inset,
+0 -1px 0 rgba(0, 0, 0, 0.25) inset,
+0 4px 10px rgba(0, 240, 255, 0.3);
+}
+
+.btn-ghost { box-shadow: var(--depth-pop); }
+.btn-ghost:hover { box-shadow: var(--depth-card); }
+
+/* Brand mark = polished sphere */
+.brand-mark {
+background-image:
+var(--sheen),
+conic-gradient(from 200deg at 50% 50%,
+var(--accent-cyan), var(--accent-violet), var(--accent-magenta), var(--accent-cyan));
+box-shadow: var(--depth-orb);
+}
+
+/* Avatar = sphere */
+.avatar {
+background-image:
+var(--sheen),
+linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+box-shadow: var(--depth-orb);
+}
+
+/* Card icons get embossed treatment */
+.card-v2 .card-icon {
+background-image:
+linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 60%),
+linear-gradient(135deg, rgba(0, 240, 255, 0.16), rgba(139, 92, 246, 0.1));
+box-shadow:
+0 1px 0 rgba(255, 255, 255, 0.18) inset,
+0 -1px 0 rgba(0, 0, 0, 0.3) inset,
+0 4px 10px rgba(0, 240, 255, 0.18);
+}
+
+/* Hero badge: pill with depth */
+.hero-badge {
+box-shadow:
+0 1px 0 rgba(255, 255, 255, 0.12) inset,
+0 -1px 0 rgba(0, 0, 0, 0.25) inset,
+0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* Pill-shaped controls in nav: subtle depth */
+.lang-switch,
+.theme-toggle,
+.mobile-toggle {
+box-shadow:
+0 1px 0 rgba(255, 255, 255, 0.08) inset,
+0 1px 2px rgba(0, 0, 0, 0.25),
+0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.theme-toggle:hover { transform: translateY(-1px); }
+
+/* Featured/large bento card: more raised */
+.card-v2.feature-large {
+box-shadow:
+0 1px 0 rgba(255, 255, 255, 0.1) inset,
+0 -1px 0 rgba(0, 0, 0, 0.5) inset,
+0 12px 28px rgba(0, 0, 0, 0.5),
+0 40px 90px rgba(139, 92, 246, 0.15);
+}
+
+/* Final CTA: stronger float */
+.cta-final {
+box-shadow:
+0 1px 0 rgba(255, 255, 255, 0.12) inset,
+0 -1px 0 rgba(0, 0, 0, 0.4) inset,
+0 12px 30px rgba(0, 0, 0, 0.45),
+0 50px 120px rgba(0, 240, 255, 0.18),
+0 50px 120px rgba(139, 92, 246, 0.12);
+}
+
+/* ── Subtle 3D tilt on hover (only with pointer + no reduced-motion) ── */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+.bento { perspective: 1400px; }
+.card-v2 {
+transform-style: preserve-3d;
+will-change: transform;
+transition: transform 0.45s var(--ease-out),
+            box-shadow 0.4s, border-color 0.3s;
+}
+.card-v2:hover {
+transform: translateY(-6px) rotateX(2deg) rotateY(-2deg);
+}
+.card-v2.feature-large:hover {
+transform: translateY(-6px) rotateX(1deg) rotateY(-1deg);
+}
+.steps, .testimonials { perspective: 1400px; }
+.step, .testimonial {
+transform-style: preserve-3d;
+transition: transform 0.4s var(--ease-out), box-shadow 0.4s;
+}
+.step:hover, .testimonial:hover {
+transform: translateY(-4px) rotateX(1.5deg);
+}
+.brand-mark, .avatar { transition: transform 0.3s var(--ease-out); }
+.brand:hover .brand-mark { transform: rotate(-8deg) scale(1.05); }
+}
+
+/* ── Strip 3D & plastic effects in high-contrast mode ── */
+:root[data-theme="contrast"] .card-v2,
+:root[data-theme="contrast"] .step,
+:root[data-theme="contrast"] .testimonial,
+:root[data-theme="contrast"] .faq-item,
+:root[data-theme="contrast"] .cta-final,
+:root[data-theme="contrast"] .btn-primary,
+:root[data-theme="contrast"] .btn-ghost,
+:root[data-theme="contrast"] .brand-mark,
+:root[data-theme="contrast"] .avatar,
+:root[data-theme="contrast"] .card-v2 .card-icon,
+:root[data-theme="contrast"] .hero-badge,
+:root[data-theme="contrast"] .lang-switch,
+:root[data-theme="contrast"] .theme-toggle,
+:root[data-theme="contrast"] .mobile-toggle {
+background-image: none !important;
+box-shadow: none !important;
+transform: none !important;
+}
+@media (prefers-contrast: more) {
+:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .card-v2,
+:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .btn-primary,
+:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .brand-mark,
+:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .avatar {
+background-image: none !important;
+box-shadow: none !important;
+transform: none !important;
+}
+}
