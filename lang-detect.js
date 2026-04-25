@@ -22,10 +22,9 @@
     pref = browserLang.startsWith('de') ? 'de' : 'en';
   }
 
-  // 3. Aktuelle Seite bestimmen (mit Mapping-Tabelle für v1 und v2)
+  // 3. Aktuelle Seite bestimmen (mit Mapping-Tabelle)
   var pagePairs = [
-    { de: 'index.html',    en: 'index_en.html'    },
-    { de: 'index-v2.html', en: 'index-v2_en.html' }
+    { de: 'index.html', en: 'index_en.html' }
   ];
   var path = window.location.pathname;
   var file = path.substring(path.lastIndexOf('/') + 1) || 'index.html';

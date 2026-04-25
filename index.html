@@ -3,14 +3,14 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="description" content="Microsoft Copilot – Fokus trifft Kreativität. Eine moderne Einzelseite rund um M365 Copilot." />
+		<meta name="description" content="Microsoft Copilot – Fokus trifft Kreativität. Eine moderne Landingpage rund um M365 Copilot mit Features und FAQ." />
 		<meta name="color-scheme" content="light dark" />
-		<meta name="theme-color" content="#0a0e1a" media="(prefers-color-scheme: dark)" />
-		<meta name="theme-color" content="#f0f2f8" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#06080f" media="(prefers-color-scheme: dark)" />
+		<meta name="theme-color" content="#f5f7fc" media="(prefers-color-scheme: light)" />
 		<meta name="referrer" content="strict-origin-when-cross-origin">
 		<meta name="robots" content="index,follow,max-image-preview:large" />
 		<meta property="og:title" content="Microsoft Copilot – Fokus trifft Kreativität" />
-		<meta property="og:description" content="Eine moderne Einzelseite rund um M365 Copilot – Ideen bündeln, Workflows beschleunigen, Teams im Flow halten." />
+		<meta property="og:description" content="Eine moderne Landingpage rund um M365 Copilot – Features, FAQ und mehr." />
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="copilot.ovh" />
 		<meta property="og:url" content="https://www.copilot.ovh/" />
@@ -22,7 +22,7 @@
 		<meta property="og:locale:alternate" content="en_US" />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content="Microsoft Copilot – Fokus trifft Kreativität" />
-		<meta name="twitter:description" content="Eine moderne Einzelseite rund um M365 Copilot – Ideen bündeln, Workflows beschleunigen, Teams im Flow halten." />
+		<meta name="twitter:description" content="Eine moderne Landingpage rund um M365 Copilot – Features, FAQ und mehr." />
 		<meta name="twitter:image" content="https://www.copilot.ovh/og-image.jpg" />
 		<link rel="canonical" href="https://www.copilot.ovh/" />
 		<link rel="alternate" hreflang="de" href="https://www.copilot.ovh/index.html" />
@@ -32,129 +32,333 @@
 		<link rel="icon" type="image/svg+xml" href="icon.svg" />
 		<link rel="apple-touch-icon" href="apple-touch-icon.png" />
 		<link rel="manifest" href="manifest.json" />
-		<link rel="preload" as="image" href="hero-ai.webp" type="image/webp" fetchpriority="high" />
 		<title>Microsoft Copilot – Fokus trifft Kreativität</title>
 		<link rel="stylesheet" href="styles.css" />
 		<script src="lang-detect.js" defer></script>
+		<script src="nav.js" defer></script>
 		<script type="application/ld+json">
 		{
 			"@context": "https://schema.org",
 			"@type": "WebSite",
 			"url": "https://www.copilot.ovh/",
 			"name": "Microsoft Copilot – Fokus trifft Kreativität",
-			"description": "Eine moderne Einzelseite rund um M365 Copilot – Ideen bündeln, Workflows beschleunigen, Teams im Flow halten.",
+			"description": "Eine moderne Landingpage rund um M365 Copilot – Features, FAQ und mehr.",
 			"inLanguage": ["de-DE", "en-US"]
 		}
 		</script>
 	</head>
 	<body>
 		<noscript>
-			<p class="noscript-msg">Diese Seite benötigt JavaScript, um korrekt dargestellt zu werden.</p>
+			<p class="noscript-msg">Diese Seite funktioniert auch ohne JavaScript – nur Animationen und der FAQ-Akkordeon-Modus sind reduziert.</p>
 		</noscript>
-		<div class="lang-switch" role="navigation" aria-label="Sprachwahl">
-			<a href="index.html" class="active" lang="de">DE</a>
-			<a href="index_en.html" lang="en">EN</a>
-		</div>
 		<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+		<!-- ═══ NAV ═══ -->
+		<header class="nav" role="banner">
+			<div class="container nav-inner">
+				<a href="#" class="brand" aria-label="Copilot Startseite">
+					<span class="brand-mark" aria-hidden="true">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+							<polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.5 9 9 12 2"/>
+						</svg>
+					</span>
+					Copilot
+				</a>
+
+				<nav aria-label="Hauptnavigation">
+					<ul class="nav-links">
+						<li><a href="#features">Features</a></li>
+						<li><a href="#how">So funktioniert's</a></li>
+						<li><a href="#testimonials">Stimmen</a></li>
+						<li><a href="#faq">FAQ</a></li>
+					</ul>
+				</nav>
+
+				<div class="nav-actions">
+					<div class="lang-switch" role="navigation" aria-label="Sprachwahl">
+						<a href="index.html" class="active" lang="de">DE</a>
+						<a href="index_en.html" lang="en">EN</a>
+					</div>
+					<a href="#cta" class="btn btn-primary">Jetzt starten</a>
+					<button class="mobile-toggle" aria-label="Navigation öffnen" aria-expanded="false" aria-controls="main-nav">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<line x1="4" y1="6" x2="20" y2="6"/>
+							<line x1="4" y1="12" x2="20" y2="12"/>
+							<line x1="4" y1="18" x2="20" y2="18"/>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</header>
+
 		<main id="main">
 			<!-- ═══ HERO ═══ -->
-			<section class="hero" aria-label="Einführung">
+			<section class="hero-v2" aria-label="Einführung">
 				<canvas id="particles" aria-hidden="true"></canvas>
-				<picture>
-					<source type="image/webp" srcset="hero-ai.webp" />
-					<img src="hero-ai.png" alt="" class="hero-image" aria-hidden="true" decoding="async" />
-				</picture>
-
-				<div class="hero-content">
-					<div class="hero-badge">
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-							<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-						</svg>
-						M365 Copilot
-					</div>
-					<h1>Microsoft Copilot.<br/>Fokus trifft Kreativität.</h1>
-					<p class="hero-description">
-						Eine frische, moderne Einzelseite, die zeigt, wie Copilot Ideen bündelt,
-						Workflows beschleunigt und Teams im Flow hält.
+				<div class="container hero-content reveal">
+					<div class="hero-badge">M365 Copilot · Live</div>
+					<h1>Fokus trifft <span class="accent">Kreativität.</span></h1>
+					<p class="hero-lead">
+						Bündele Ideen, beschleunige Workflows und halte dein Team im Flow –
+						mit einem KI-Assistenten, der direkt in deinen Microsoft-365-Apps lebt.
 					</p>
-				</div>
-
-				<div class="scroll-hint" aria-hidden="true">
-					<span>Entdecken</span>
-					<span class="scroll-hint-line"></span>
+					<div class="hero-actions">
+						<a href="#cta" class="btn btn-primary btn-lg">
+							Kostenlos ausprobieren
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+								<line x1="5" y1="12" x2="19" y2="12"/>
+								<polyline points="12 5 19 12 12 19"/>
+							</svg>
+						</a>
+						<a href="#features" class="btn btn-ghost btn-lg">Features ansehen</a>
+					</div>
+					<div class="hero-meta" aria-label="Vorteile">
+						<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Keine Kreditkarte</span>
+						<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>DSGVO-konform</span>
+						<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>In Sekunden bereit</span>
+					</div>
 				</div>
 			</section>
 
-			<!-- ═══ FEATURES ═══ -->
-			<section class="grid reveal reveal-stagger" aria-label="Copilot Funktionen">
-				<div class="card reveal">
-					<div class="card-icon" aria-hidden="true">
-						<svg viewBox="0 0 48 48">
-							<circle cx="24" cy="14" r="6"/>
-							<path d="M24 22v8"/>
-							<circle cx="12" cy="30" r="4"/>
-							<circle cx="36" cy="30" r="4"/>
-							<path d="M24 30l-8 4"/>
-							<path d="M24 30l8 4"/>
-							<circle cx="24" cy="42" r="3"/>
-							<path d="M24 33v6"/>
-							<path d="M8 18c-2 4 0 10 4 14"/>
-							<path d="M40 18c2 4 0 10-4 14"/>
-						</svg>
-					</div>
-					<h2>Kontext verstehen</h2>
-					<p>Copilot liefert Antworten, die direkt zu deinen Dokumenten und Zielen passen.</p>
-				</div>
-				<div class="card reveal">
-					<div class="card-icon" aria-hidden="true">
-						<svg viewBox="0 0 48 48">
-							<path d="M6 12h36"/>
-							<path d="M6 24h24"/>
-							<path d="M6 36h16"/>
-							<circle cx="40" cy="24" r="4"/>
-							<circle cx="30" cy="36" r="4"/>
-							<path d="M36 24l4-8"/>
-							<path d="M26 36l-4-8"/>
-							<polyline points="14 18 20 24 14 30"/>
-						</svg>
-					</div>
-					<h2>Strukturiert planen</h2>
-					<p>Von Aufgabenlisten bis Roadmaps – Copilot bringt Struktur in komplexe Projekte.</p>
-				</div>
-				<div class="card reveal">
-					<div class="card-icon" aria-hidden="true">
-						<svg viewBox="0 0 48 48">
-							<circle cx="16" cy="20" r="5"/>
-							<circle cx="32" cy="20" r="5"/>
-							<circle cx="24" cy="36" r="5"/>
-							<path d="M20 22l4 8"/>
-							<path d="M28 22l-4 8"/>
-							<path d="M16 15v-4h16v4"/>
-							<line x1="24" y1="11" x2="24" y2="6"/>
-							<path d="M20 40c-6 2-12-2-12-10"/>
-							<path d="M28 40c6 2 12-2 12-10"/>
-						</svg>
-					</div>
-					<h2>Gemeinsam liefern</h2>
-					<p>Schnellere Abstimmungen und klare Zusammenfassungen für Teams.</p>
+			<!-- ═══ TRUST BAR ═══ -->
+			<section class="trust container reveal" aria-label="Integriert in">
+				<p class="trust-label">Integriert in dein Microsoft 365</p>
+				<div class="trust-logos">
+					<span class="trust-logo"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2" y="2" width="9" height="9" fill="#f25022"/><rect x="13" y="2" width="9" height="9" fill="#7fba00"/><rect x="2" y="13" width="9" height="9" fill="#00a4ef"/><rect x="13" y="13" width="9" height="9" fill="#ffb900"/></svg>Microsoft 365</span>
+					<span class="trust-logo">Word</span>
+					<span class="trust-logo">Excel</span>
+					<span class="trust-logo">PowerPoint</span>
+					<span class="trust-logo">Outlook</span>
+					<span class="trust-logo">Teams</span>
+					<span class="trust-logo">OneNote</span>
 				</div>
 			</section>
 
-			<!-- ═══ CTA ═══ -->
-			<section class="cta reveal" aria-label="Handlungsaufforderung">
-				<div>
-					<h2>Bereit für den nächsten Schritt</h2>
-					<p>Copilot unterstützt dich dabei, Ideen schnell in Ergebnisse zu verwandeln.</p>
+			<!-- ═══ FEATURES BENTO ═══ -->
+			<section id="features" class="section">
+				<div class="container">
+					<div class="section-head reveal">
+						<span class="eyebrow">Features</span>
+						<h2>Alles was du brauchst – an einem Ort</h2>
+						<p>Sechs Bausteine, die deinen Arbeitsalltag spürbar entlasten und gleichzeitig Tiefe für komplexe Vorhaben bieten.</p>
+					</div>
+
+					<div class="bento reveal-stagger">
+						<article class="card-v2 feature-large span-4 row-2 reveal">
+							<div class="visual" aria-hidden="true"></div>
+							<div class="card-icon">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2 12h3M19 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/></svg>
+							</div>
+							<h3>Kontext, der versteht</h3>
+							<p>Copilot greift sicher auf deine Dateien, Mails und Chats zu – und liefert Antworten, die zu deinen Zielen passen. Kein Copy-Paste, kein Prompt-Engineering nötig.</p>
+						</article>
+
+						<article class="card-v2 span-2 reveal">
+							<div class="card-icon">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h12M3 18h6"/></svg>
+							</div>
+							<h3>Strukturiert planen</h3>
+							<p>Aus Notizen werden Roadmaps. Aus Backlog wird Sprint.</p>
+						</article>
+
+						<article class="card-v2 span-2 reveal">
+							<div class="card-icon">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+							</div>
+							<h3>Klar kommunizieren</h3>
+							<p>Tonfall, Länge, Sprache – auf Wunsch in einem Klick.</p>
+						</article>
+
+						<article class="card-v2 span-3 reveal">
+							<div class="card-icon">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+							</div>
+							<h3>Tief integriert</h3>
+							<p>Word, Excel, PowerPoint, Outlook, Teams – Copilot ist da, wo du arbeitest. Ohne Kontextwechsel, ohne neuen Tab.</p>
+						</article>
+
+						<article class="card-v2 span-3 reveal">
+							<div class="card-icon">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+							</div>
+							<h3>Enterprise-Sicherheit</h3>
+							<p>Daten bleiben in deinem Tenant. EU-Datengrenze, RBAC, Audit-Logs und Sensitivity Labels werden respektiert.</p>
+						</article>
+
+						<article class="card-v2 span-6 reveal">
+							<div class="card-icon">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+							</div>
+							<h3>Messbar produktiver</h3>
+							<p>Studien zeigen: Bis zu 29 % schneller bei wiederkehrenden Aufgaben, 70 % höhere wahrgenommene Produktivität – validiert über tausende Knowledge-Worker.</p>
+						</article>
+					</div>
 				</div>
-				<div class="cta-glow" aria-hidden="true"></div>
+			</section>
+
+			<!-- ═══ HOW IT WORKS ═══ -->
+			<section id="how" class="section">
+				<div class="container">
+					<div class="section-head reveal">
+						<span class="eyebrow">So funktioniert's</span>
+						<h2>In drei Schritten startklar</h2>
+						<p>Keine Installation, keine wochenlange Migration. Aktivieren, verbinden, loslegen.</p>
+					</div>
+
+					<div class="steps reveal-stagger">
+						<div class="step reveal">
+							<h3>Aktivieren</h3>
+							<p>Copilot-Lizenz im Microsoft-365-Adminportal hinzufügen oder Trial starten – in unter zwei Minuten.</p>
+						</div>
+						<div class="step reveal">
+							<h3>Verbinden</h3>
+							<p>Berechtigungen für Dateien, Mails und Chats prüfen. Sensitivity Labels werden automatisch übernommen.</p>
+						</div>
+						<div class="step reveal">
+							<h3>Loslegen</h3>
+							<p>Im Word-Dokument, im Excel-Sheet oder im Teams-Meeting: Frag Copilot direkt – in deiner Sprache, in deinem Kontext.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- ═══ PRICING removed ═══ -->
+
+			<!-- ═══ TESTIMONIALS ═══ -->
+			<section id="testimonials" class="section">
+				<div class="container">
+					<div class="section-head reveal">
+						<span class="eyebrow">Stimmen</span>
+						<h2>Was Teams nach 30 Tagen sagen</h2>
+						<p>Echte Erfahrungsberichte aus Pilotprojekten in Mittelstand und Konzern.</p>
+					</div>
+
+					<div class="testimonials reveal-stagger">
+						<figure class="testimonial reveal">
+							<blockquote>Unsere Wochenreports schreibt Copilot in Minuten – mit korrekten Zahlen aus SharePoint und Excel. Das Team gewinnt jeden Freitag drei Stunden zurück.</blockquote>
+							<figcaption class="testimonial-author">
+								<span class="avatar" aria-hidden="true">SK</span>
+								<span><span class="author-name">Sandra K.</span><br><span class="author-role">Head of PMO, Industrie</span></span>
+							</figcaption>
+						</figure>
+
+						<figure class="testimonial reveal">
+							<blockquote>Die Akzeptanz ist überraschend hoch. Selbst Kollegen, die nie zu KI griffen, nutzen heute den Mail-Zusammenfasser täglich.</blockquote>
+							<figcaption class="testimonial-author">
+								<span class="avatar" aria-hidden="true">MR</span>
+								<span><span class="author-name">Markus R.</span><br><span class="author-role">CIO, Mittelstand</span></span>
+							</figcaption>
+						</figure>
+
+						<figure class="testimonial reveal">
+							<blockquote>Mit eigenen Agents in Copilot Studio haben wir den Onboarding-Prozess komplett automatisiert. ROI nach acht Wochen erreicht.</blockquote>
+							<figcaption class="testimonial-author">
+								<span class="avatar" aria-hidden="true">JW</span>
+								<span><span class="author-name">Julia W.</span><br><span class="author-role">VP People & Culture</span></span>
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+			</section>
+
+			<!-- ═══ FAQ ═══ -->
+			<section id="faq" class="section">
+				<div class="container">
+					<div class="section-head reveal">
+						<span class="eyebrow">FAQ</span>
+						<h2>Häufige Fragen</h2>
+						<p>Du hast eine andere Frage? Schreib uns – wir antworten in der Regel innerhalb eines Werktages.</p>
+					</div>
+
+					<div class="faq reveal">
+						<details class="faq-item">
+							<summary>Bleiben meine Daten in der EU?</summary>
+							<div class="faq-body">Ja. Mit aktivierter EU-Datengrenze werden Prompts und Antworten ausschließlich in europäischen Microsoft-Rechenzentren verarbeitet.</div>
+						</details>
+						<details class="faq-item">
+							<summary>Werden meine Inhalte zum Modell-Training verwendet?</summary>
+							<div class="faq-body">Nein. M365 Copilot nutzt deine Daten nicht zum Training der Foundation Models. Sie verbleiben in deinem Tenant und unterliegen deinen Compliance-Vorgaben.</div>
+						</details>
+						<details class="faq-item">
+							<summary>Wie schnell sehe ich Ergebnisse?</summary>
+							<div class="faq-body">Nach Aktivierung sind die meisten Funktionen sofort verfügbar. Erste Produktivitätsgewinne berichten Teams typischerweise nach zwei bis vier Wochen.</div>
+						</details>
+						<details class="faq-item">
+							<summary>Kann ich Copilot mit eigenen Daten erweitern?</summary>
+							<div class="faq-body">Ja – über Copilot Studio lassen sich Agents bauen, die auf eigene Wissensquellen, APIs oder Geschäftsprozesse zugreifen. Low-Code-fähig, kein Modelltraining nötig.</div>
+						</details>
+						<details class="faq-item">
+							<summary>Wie funktioniert die Lizenzierung?</summary>
+							<div class="faq-body">Pro aktiver Nutzer und Monat. Lizenzen sind monatlich oder jährlich buchbar, jederzeit kündbar und in MCA-/EA-Verträgen kombinierbar.</div>
+						</details>
+						<details class="faq-item">
+							<summary>Brauche ich Premium-Hardware?</summary>
+							<div class="faq-body">Nein. Copilot läuft serverseitig – ein moderner Browser oder die aktuellen M365-Apps reichen. Copilot+-PCs bringen lediglich zusätzliche lokale Beschleunigung.</div>
+						</details>
+					</div>
+				</div>
+			</section>
+
+			<!-- ═══ FINAL CTA ═══ -->
+			<section id="cta" class="section">
+				<div class="container">
+					<div class="cta-final reveal">
+						<h2>Bereit für den nächsten Schritt?</h2>
+						<p>Starte heute mit einem 30-Tage-Trial – ohne Kreditkarte, ohne Risiko. Wir helfen beim Setup.</p>
+						<a href="https://www.microsoft.com/microsoft-copilot" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+							Trial starten
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+						</a>
+					</div>
+				</div>
 			</section>
 		</main>
-		<footer role="contentinfo">
-			<a href="https://www.microsoft.com/microsoft-copilot" target="_blank" rel="noopener noreferrer">
-				Microsoft Copilot<span class="sr-only"> (öffnet in neuem Tab)</span>
-			</a>
-			– mehr Wirkung im Alltag.
+
+		<!-- ═══ FOOTER ═══ -->
+		<footer class="footer-v2" role="contentinfo">
+			<div class="container">
+				<div class="footer-grid">
+					<div class="footer-brand">
+						<a href="#" class="brand">
+							<span class="brand-mark" aria-hidden="true">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+							</span>
+							Copilot
+						</a>
+						<p>Ein moderner Showcase rund um Microsoft 365 Copilot – gebaut mit reinem HTML, CSS und Vanilla JavaScript.</p>
+					</div>
+					<div class="footer-col">
+						<h4>Produkt</h4>
+						<ul>
+							<li><a href="#features">Features</a></li>
+							<li><a href="#how">So funktioniert's</a></li>
+							<li><a href="#testimonials">Stimmen</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>Ressourcen</h4>
+						<ul>
+							<li><a href="#faq">FAQ</a></li>
+							<li><a href="https://learn.microsoft.com/copilot" target="_blank" rel="noopener noreferrer">Dokumentation</a></li>
+							<li><a href="https://www.microsoft.com/microsoft-copilot" target="_blank" rel="noopener noreferrer">Microsoft Copilot</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>Sprache</h4>
+						<ul>
+							<li><a href="index.html">Deutsch</a></li>
+							<li><a href="index_en.html">English</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="footer-bottom">
+					<span>© 2026 copilot.ovh – alle Rechte vorbehalten.</span>
+					<a href="https://www.microsoft.com/microsoft-copilot" target="_blank" rel="noopener noreferrer">
+						Powered by Microsoft Copilot<span class="sr-only"> (öffnet in neuem Tab)</span>
+					</a>
+				</div>
+			</div>
 		</footer>
-		<script src="particles.js"></script>
+		<script src="particles.js" defer></script>
 	</body>
 </html>
