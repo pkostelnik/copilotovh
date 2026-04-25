@@ -28,7 +28,6 @@ A modern, futuristic single-page website showcasing **Microsoft 365 Copilot** �
 copilotovh/
 ├── index.html          # Landing page (German)
 ├── index_en.html       # Landing page (English)
-├── pk.html             # Personal portfolio page
 ├── styles.css          # Shared stylesheet (landing page + dive-page styles)
 ├── lang-detect.js      # Language detection, redirection & scroll-reveal logic
 ├── particles.js        # Neural-network particle canvas animation
