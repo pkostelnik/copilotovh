@@ -1152,3 +1152,65 @@ box-shadow: none !important;
 transform: none !important;
 }
 }
+
+/* ═══════════════════════════════════════════════
+   INTRO SHOWCASE (Remotion video loop)
+   ═══════════════════════════════════════════════ */
+.showcase {
+padding: 64px 0 32px;
+}
+.showcase-frame {
+position: relative;
+width: 100%;
+aspect-ratio: 16 / 9;
+border-radius: var(--radius-xl);
+overflow: hidden;
+background: var(--bg-soft);
+border: 1px solid var(--border-strong);
+box-shadow: var(--depth-card);
+transform: translateZ(0); /* establish stacking context */
+}
+.showcase-frame::after {
+/* Inset highlight ring for plastic feel */
+content: "";
+position: absolute;
+inset: 0;
+border-radius: inherit;
+pointer-events: none;
+box-shadow:
+0 1px 0 rgba(255, 255, 255, 0.18) inset,
+0 -1px 0 rgba(0, 0, 0, 0.4) inset;
+}
+.showcase-frame video,
+.showcase-frame img.showcase-poster {
+display: block;
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+.showcase-frame img.showcase-poster {
+position: absolute;
+inset: 0;
+z-index: 1;
+}
+
+/* When user prefers reduced motion: show poster, hide video */
+@media (prefers-reduced-motion: reduce) {
+.showcase-frame video { display: none; }
+.showcase-frame img.showcase-poster { position: static; }
+}
+
+/* High-contrast: show only the poster, no decorative effects */
+:root[data-theme="contrast"] .showcase-frame {
+box-shadow: none !important;
+border: 2px solid #ffffff !important;
+}
+:root[data-theme="contrast"] .showcase-frame video { display: none !important; }
+:root[data-theme="contrast"] .showcase-frame img.showcase-poster {
+position: static !important;
+}
+@media (prefers-contrast: more) {
+:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .showcase-frame video {
+display: none !important;
+}
+}
