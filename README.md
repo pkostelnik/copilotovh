@@ -33,6 +33,16 @@ copilotovh/
 ├── styles.css             # Stylesheet
 ├── lang-detect.js         # Language detection & redirect (DE↔EN)
 ├── nav.js                 # Nav, FAQ accordion, scroll reveal
+├── intro.mp4              # 15s seamless brand intro loop (1920×1080, rendered with Remotion)
+├── intro-poster.jpg       # Poster frame for the video
+├── remotion/              # Remotion sub-project that renders intro.mp4
+│   ├── src/
+│   │   ├── Intro.tsx      # Composition: orbs + sphere + headline (loop-friendly)
+│   │   ├── Root.tsx
+│   │   └── index.ts
+│   ├── package.json       # Run `npm install` then `npm run build` to re-render
+│   ├── tsconfig.json
+│   └── remotion.config.ts
 ├── particles.js           # Neural-network particle canvas animation
 ├── hero-ai.png         # AI-generated hero background image (PNG fallback)
 ├── hero-ai.webp        # AI-generated hero background image (WebP, ~80 KB)
