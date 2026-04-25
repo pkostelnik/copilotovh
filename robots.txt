@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /staticwebapp.config.json
+
+Sitemap: https://www.copilot.ovh/sitemap.xml

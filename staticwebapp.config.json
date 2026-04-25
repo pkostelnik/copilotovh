@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json",
+  "trailingSlash": "auto",
+  "mimeTypes": {
+    ".webp": "image/webp",
+    ".avif": "image/avif",
+    ".webmanifest": "application/manifest+json",
+    ".json": "application/json"
+  },
+  "routes": [
+    {
+      "route": "/pk.html",
+      "statusCode": 410
+    },
+    {
+      "route": "/staticwebapp.config.json",
+      "statusCode": 404
+    }
+  ],
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/index.html",
+      "statusCode": 200
+    }
+  },
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+    "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()",
+    "Cross-Origin-Opener-Policy": "same-origin",
+    "Cross-Origin-Resource-Policy": "same-origin",
+    "X-Permitted-Cross-Domain-Policies": "none"
+  }
+}

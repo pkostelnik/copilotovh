@@ -5,8 +5,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="Microsoft Copilot – Focus meets Creativity. A modern single page about M365 Copilot." />
 		<meta name="color-scheme" content="light dark" />
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none'">
+		<meta name="theme-color" content="#0a0e1a" media="(prefers-color-scheme: dark)" />
+		<meta name="theme-color" content="#f0f2f8" media="(prefers-color-scheme: light)" />
 		<meta name="referrer" content="strict-origin-when-cross-origin">
+		<meta name="robots" content="index,follow,max-image-preview:large" />
 		<meta property="og:title" content="Microsoft Copilot – Focus meets Creativity" />
 		<meta property="og:description" content="A modern single page about M365 Copilot – bundle ideas, accelerate workflows, keep teams in the flow." />
 		<meta property="og:type" content="website" />
@@ -26,10 +28,24 @@
 		<link rel="alternate" hreflang="de" href="https://www.copilot.ovh/index.html" />
 		<link rel="alternate" hreflang="en" href="https://www.copilot.ovh/index_en.html" />
 		<link rel="alternate" hreflang="x-default" href="https://www.copilot.ovh/index_en.html" />
-		<link rel="icon" href="favicon.ico" />
+		<link rel="icon" href="favicon.ico" sizes="any" />
+		<link rel="icon" type="image/svg+xml" href="icon.svg" />
+		<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+		<link rel="manifest" href="manifest.json" />
+		<link rel="preload" as="image" href="hero-ai.webp" type="image/webp" fetchpriority="high" />
 		<title>Microsoft Copilot – Focus meets Creativity</title>
 		<link rel="stylesheet" href="styles.css" />
-		<script src="lang-detect.js"></script>
+		<script src="lang-detect.js" defer></script>
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "WebSite",
+			"url": "https://www.copilot.ovh/index_en.html",
+			"name": "Microsoft Copilot – Focus meets Creativity",
+			"description": "A modern single page about M365 Copilot – bundle ideas, accelerate workflows, keep teams in the flow.",
+			"inLanguage": ["en-US", "de-DE"]
+		}
+		</script>
 	</head>
 	<body>
 		<noscript>
@@ -44,7 +60,10 @@
 			<!-- ═══ HERO ═══ -->
 			<section class="hero" aria-label="Introduction">
 				<canvas id="particles" aria-hidden="true"></canvas>
-				<img src="hero-ai.png" alt="" class="hero-image" aria-hidden="true" />
+				<picture>
+					<source type="image/webp" srcset="hero-ai.webp" />
+					<img src="hero-ai.png" alt="" class="hero-image" aria-hidden="true" decoding="async" />
+				</picture>
 
 				<div class="hero-content">
 					<div class="hero-badge">

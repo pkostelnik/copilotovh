@@ -18,7 +18,9 @@ A modern, futuristic single-page website showcasing **Microsoft 365 Copilot** �
 - **Bilingual** — full German (DE) and English (EN) support with automatic browser language detection
 - **Responsive** — optimized for desktop, tablet, and mobile viewports
 - **Accessible** — skip-link, ARIA labels, `prefers-contrast: more` and `prefers-reduced-motion` support, semantic HTML
-- **Secure** — Content Security Policy (`default-src 'self'`, with explicit `script-src`, `style-src`, `img-src` overrides), strict referrer, `rel="noopener noreferrer"` on external links
+- **Secure** — strict HTTP security headers via `staticwebapp.config.json` (CSP with `frame-ancestors 'none'`, `base-uri 'none'`, `form-action 'none'`; HSTS preload; `X-Content-Type-Options`; `X-Frame-Options`; `Permissions-Policy`; `Cross-Origin-*-Policy`); `rel="noopener noreferrer"` on external links
+- **SEO-ready** — full Open Graph + Twitter Card meta, canonical URLs, `hreflang` (incl. `x-default`), `robots.txt`, `sitemap.xml`, JSON-LD structured data
+- **PWA-ready** — Web App Manifest, SVG favicon, Apple Touch Icon, maskable icon
 
 ---
 
@@ -31,9 +33,19 @@ copilotovh/
 ├── styles.css          # Shared stylesheet (landing page + dive-page styles)
 ├── lang-detect.js      # Language detection, redirection & scroll-reveal logic
 ├── particles.js        # Neural-network particle canvas animation
-├── hero-ai.png         # AI-generated hero background image
+├── hero-ai.png         # AI-generated hero background image (PNG fallback)
+├── hero-ai.webp        # AI-generated hero background image (WebP, ~80 KB)
 ├── og-image.jpg        # Open Graph social media preview (1200×630)
-├── favicon.ico         # Favicon
+├── icon.svg            # Scalable favicon
+├── apple-touch-icon.png # iOS home-screen icon (180×180)
+├── icon-192.png        # PWA icon
+├── icon-512.png        # PWA icon
+├── icon-maskable-512.png # PWA maskable icon
+├── manifest.json       # Web App Manifest (PWA)
+├── robots.txt          # Crawler directives
+├── sitemap.xml         # Sitemap (DE + EN)
+├── staticwebapp.config.json # Azure SWA config (security headers, routes, MIME)
+├── favicon.ico         # Legacy favicon
 ├── .github/
 │   ├── copilot-instructions.md
 │   └── workflows/
