@@ -18,7 +18,7 @@
 
   // 2. Falls keine Präferenz → Browsersprache erkennen
   if (!pref) {
-    var browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+    var browserLang = (navigator.language || (navigator.languages && navigator.languages[0]) || 'en').toLowerCase();
     pref = browserLang.startsWith('de') ? 'de' : 'en';
   }
 

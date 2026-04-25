@@ -7,3 +7,10 @@
 # env files (can opt-in for committing if needed)
 .env*
 !.env.example
+
+# local tooling / scratch
+.venv/
+.vscode/
+get_sri.py
+git_output.txt
+run_git.sh

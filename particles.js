@@ -9,8 +9,16 @@
   var canvas = document.getElementById('particles');
   if (!canvas) return;
 
+  // Respect user motion preferences (a11y)
+  var motionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  if (motionQuery && motionQuery.matches) {
+    canvas.style.display = 'none';
+    return;
+  }
+
   var ctx = canvas.getContext('2d');
   var particles = [];
+  var animationId = null;
   var PARTICLE_COUNT = 80;
   var CONNECT_DIST = 140;
   var mouse = { x: -9999, y: -9999 };
@@ -96,7 +104,28 @@
       }
     }
 
-    requestAnimationFrame(draw);
+    animationId = requestAnimationFrame(draw);
+  }
+
+  // Pause animation when tab is hidden (saves CPU/battery)
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      if (animationId) cancelAnimationFrame(animationId);
+      animationId = null;
+    } else if (!animationId) {
+      draw();
+    }
+  });
+
+  // React to motion preference change at runtime
+  if (motionQuery && motionQuery.addEventListener) {
+    motionQuery.addEventListener('change', function (e) {
+      if (e.matches && animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+        canvas.style.display = 'none';
+      }
+    });
   }
 
   // Throttled resize

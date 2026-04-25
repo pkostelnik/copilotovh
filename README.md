@@ -17,8 +17,8 @@ A modern, futuristic single-page website showcasing **Microsoft 365 Copilot** �
 - **Scroll-triggered reveals** — sections fade and slide in via `IntersectionObserver` with staggered delays
 - **Bilingual** — full German (DE) and English (EN) support with automatic browser language detection
 - **Responsive** — optimized for desktop, tablet, and mobile viewports
-- **Accessible** — skip-link, ARIA labels, `prefers-contrast: more` support, semantic HTML
-- **Secure** — Content Security Policy, strict referrer, `rel="noopener noreferrer"` on external links
+- **Accessible** — skip-link, ARIA labels, `prefers-contrast: more` and `prefers-reduced-motion` support, semantic HTML
+- **Secure** — Content Security Policy (`default-src 'self'`, with explicit `script-src`, `style-src`, `img-src` overrides), strict referrer, `rel="noopener noreferrer"` on external links
 
 ---
 
@@ -32,7 +32,7 @@ copilotovh/
 ├── lang-detect.js      # Language detection, redirection & scroll-reveal logic
 ├── particles.js        # Neural-network particle canvas animation
 ├── hero-ai.png         # AI-generated hero background image
-├── og-image.png        # Open Graph social media preview image
+├── og-image.jpg        # Open Graph social media preview (1200×630)
 ├── favicon.ico         # Favicon
 ├── .github/
 │   ├── copilot-instructions.md
@@ -118,7 +118,7 @@ Users can manually switch via the DE/EN toggle in the top-right corner. The pref
 - Skip-to-content link
 - ARIA labels on all landmarks and interactive elements
 - `prefers-contrast: more` media query disables decorative effects
-- `prefers-reduced-motion` respected by browser defaults
+- `prefers-reduced-motion` honored — particle canvas is disabled when the user requests reduced motion
 - Focus-visible outlines on all interactive elements
 - Semantic HTML5 structure
 
