@@ -322,15 +322,24 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 	top: 0;
 	z-index: 100;
 	padding: 12px 0;
-	background: linear-gradient(180deg, rgba(6, 8, 15, 0.85), rgba(6, 8, 15, 0.5) 70%, transparent);
-	backdrop-filter: blur(16px);
-	-webkit-backdrop-filter: blur(16px);
-	border-bottom: 1px solid var(--border);
+	background: rgba(6, 8, 15, 0.82);
+	backdrop-filter: blur(20px) saturate(160%);
+	-webkit-backdrop-filter: blur(20px) saturate(160%);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
+/* Light theme nav (auto via OS or explicit) */
 @media (prefers-color-scheme: light) {
-	.nav {
-		background: linear-gradient(180deg, rgba(245, 247, 252, 0.9), rgba(245, 247, 252, 0.5) 70%, transparent);
+	:root:not([data-theme="dark"]):not([data-theme="contrast"]):not([data-theme="light"]) .nav {
+		background: rgba(245, 247, 252, 0.85);
+		border-bottom: 1px solid rgba(10, 14, 26, 0.08);
+		box-shadow: 0 8px 24px rgba(20, 30, 60, 0.06);
 	}
+}
+:root[data-theme="light"] .nav {
+	background: rgba(245, 247, 252, 0.85);
+	border-bottom: 1px solid rgba(10, 14, 26, 0.08);
+	box-shadow: 0 8px 24px rgba(20, 30, 60, 0.06);
 }
 .nav-inner {
 	display: flex; align-items: center; justify-content: space-between;
@@ -357,7 +366,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .nav-links a {
 	display: inline-block;
 	padding: 8px 14px; border-radius: 999px;
-	color: var(--muted-strong); text-decoration: none;
+	color: var(--text); text-decoration: none;
 	font-size: 0.92rem; font-weight: 500;
 	transition: color 0.2s, background 0.2s;
 }
@@ -375,7 +384,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 .lang-switch a {
 	padding: 5px 11px; font-size: 0.78rem; font-weight: 600;
-	letter-spacing: 0.04em; color: var(--muted);
+	letter-spacing: 0.04em; color: var(--muted-strong);
 	text-decoration: none; border-radius: 999px;
 	transition: color 0.2s, background 0.2s;
 }
