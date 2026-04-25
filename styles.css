@@ -1,8 +1,13 @@
 /* ═══════════════════════════════════════════════
    Copilot Landing Page V2 — Glassmorphism Premium
+   Theme system:
+   - Default = dark tokens
+   - Auto (no attribute or [data-theme="auto"]) = follows OS via @media
+   - Explicit overrides via [data-theme="light|dark|contrast"]
    ═══════════════════════════════════════════════ */
 
-:root {
+:root,
+:root[data-theme="dark"] {
 	--bg: #06080f;
 	--bg-soft: #0c1124;
 	--surface: rgba(15, 20, 40, 0.55);
@@ -31,8 +36,9 @@
 		Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+/* ── Light tokens (auto via OS or explicit) ── */
 @media (prefers-color-scheme: light) {
-	:root {
+	:root:not([data-theme="dark"]):not([data-theme="contrast"]):not([data-theme="light"]) {
 		--bg: #f5f7fc;
 		--bg-soft: #ffffff;
 		--surface: rgba(255, 255, 255, 0.7);
@@ -53,21 +59,158 @@
 		--shadow-card: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 12px 32px rgba(20, 30, 60, 0.08);
 	}
 }
+:root[data-theme="light"] {
+	--bg: #f5f7fc;
+	--bg-soft: #ffffff;
+	--surface: rgba(255, 255, 255, 0.7);
+	--surface-strong: rgba(255, 255, 255, 0.92);
+	--surface-solid: #ffffff;
+	--text: #1a1e2e;
+	--text-bright: #07091a;
+	--muted: #5a6178;
+	--muted-strong: #2f3654;
+	--accent-cyan: #0090a8;
+	--accent-violet: #6d3fc0;
+	--accent-magenta: #c0185b;
+	--accent-emerald: #1f9d6f;
+	--border: rgba(10, 14, 26, 0.08);
+	--border-strong: rgba(10, 14, 26, 0.16);
+	--glow-cyan: 0 0 16px rgba(0, 144, 168, 0.15), 0 0 48px rgba(0, 144, 168, 0.05);
+	--glow-violet: 0 0 16px rgba(109, 63, 192, 0.15), 0 0 48px rgba(109, 63, 192, 0.05);
+	--shadow-card: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 12px 32px rgba(20, 30, 60, 0.08);
+}
 
+/* ── High Contrast tokens (auto via OS or explicit) ──
+   Aims for WCAG AAA: pure black/white, yellow focus, no transparency,
+   no glow, no decorative gradients. */
 @media (prefers-contrast: more) {
-	:root {
-		--surface: #0a0e1a;
-		--surface-strong: #0a0e1a;
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) {
+		--bg: #000000;
+		--bg-soft: #000000;
+		--surface: #000000;
+		--surface-strong: #000000;
+		--surface-solid: #000000;
+		--text: #ffffff;
+		--text-bright: #ffffff;
+		--muted: #ffffff;
+		--muted-strong: #ffffff;
+		--accent-cyan: #00ffff;
+		--accent-violet: #d8b6ff;
+		--accent-magenta: #ff8ad6;
+		--accent-emerald: #7cff9b;
 		--border: #ffffff;
 		--border-strong: #ffffff;
 		--glow-cyan: none;
 		--glow-violet: none;
 		--shadow-card: none;
 	}
-	.glass, .card-v2, .testimonial, .faq-item {
+}
+:root[data-theme="contrast"] {
+	--bg: #000000;
+	--bg-soft: #000000;
+	--surface: #000000;
+	--surface-strong: #000000;
+	--surface-solid: #000000;
+	--text: #ffffff;
+	--text-bright: #ffffff;
+	--muted: #ffffff;
+	--muted-strong: #ffffff;
+	--accent-cyan: #00ffff;
+	--accent-violet: #d8b6ff;
+	--accent-magenta: #ff8ad6;
+	--accent-emerald: #7cff9b;
+	--border: #ffffff;
+	--border-strong: #ffffff;
+	--glow-cyan: none;
+	--glow-violet: none;
+	--shadow-card: none;
+}
+
+/* ── Visual rules that apply whenever high-contrast is active ── */
+@media (prefers-contrast: more) {
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) {
+		color-scheme: dark;
+	}
+}
+:root[data-theme="contrast"] { color-scheme: dark; }
+
+@media (prefers-contrast: more) {
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .glass,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .card-v2,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .testimonial,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .faq-item,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .step,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .cta-final,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .nav,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .lang-switch,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .btn-ghost,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .hero-badge {
 		backdrop-filter: none !important;
 		-webkit-backdrop-filter: none !important;
+		background: #000000 !important;
+		border: 2px solid #ffffff !important;
+		box-shadow: none !important;
 	}
+}
+:root[data-theme="contrast"] .glass,
+:root[data-theme="contrast"] .card-v2,
+:root[data-theme="contrast"] .testimonial,
+:root[data-theme="contrast"] .faq-item,
+:root[data-theme="contrast"] .step,
+:root[data-theme="contrast"] .cta-final,
+:root[data-theme="contrast"] .nav,
+:root[data-theme="contrast"] .lang-switch,
+:root[data-theme="contrast"] .btn-ghost,
+:root[data-theme="contrast"] .hero-badge {
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+	background: #000000 !important;
+	border: 2px solid #ffffff !important;
+	box-shadow: none !important;
+}
+
+/* Disable decorative effects in contrast mode */
+:root[data-theme="contrast"] body::before,
+:root[data-theme="contrast"] body::after,
+:root[data-theme="contrast"] #particles,
+:root[data-theme="contrast"] .visual,
+:root[data-theme="contrast"] .cta-final::before,
+:root[data-theme="contrast"] .card-v2::before,
+:root[data-theme="contrast"] .card-v2 .visual {
+	display: none !important;
+}
+@media (prefers-contrast: more) {
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) body::before,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) body::after,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) #particles,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .visual,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .cta-final::before,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .card-v2::before {
+		display: none !important;
+	}
+}
+
+/* Force solid headline + button in contrast mode */
+:root[data-theme="contrast"] .hero-v2 h1 .accent {
+	background: none !important;
+	-webkit-text-fill-color: #ffffff !important;
+	color: #ffffff !important;
+}
+:root[data-theme="contrast"] .btn-primary {
+	background: #ffff00 !important;
+	color: #000000 !important;
+	border: 2px solid #ffffff !important;
+}
+:root[data-theme="contrast"] .brand-mark {
+	background: #ffff00 !important;
+	color: #000000 !important;
+	box-shadow: none !important;
+}
+:root[data-theme="contrast"] a:focus-visible,
+:root[data-theme="contrast"] button:focus-visible,
+:root[data-theme="contrast"] summary:focus-visible {
+	outline: 3px solid #ffff00 !important;
+	outline-offset: 3px;
 }
 
 /* ── Reset ── */
@@ -242,6 +385,37 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 	box-shadow: 0 0 0 1px var(--border-strong);
 }
 .lang-switch a:hover:not(.active) { color: var(--text-bright); }
+
+/* ── Theme toggle (Auto / Light / Dark / Contrast) ── */
+.theme-toggle {
+	display: inline-grid;
+	place-items: center;
+	width: 38px; height: 38px;
+	padding: 0;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 999px;
+	color: var(--text-bright);
+	cursor: pointer;
+	font-family: inherit;
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	transition: background 0.2s, border-color 0.2s, transform 0.2s var(--ease-out);
+}
+.theme-toggle:hover {
+	background: var(--surface-strong);
+	border-color: var(--accent-cyan);
+}
+.theme-toggle:active { transform: scale(0.94); }
+.theme-toggle svg { width: 18px; height: 18px; display: none; }
+.theme-toggle [data-icon] { grid-area: 1 / 1; }
+
+/* Show only the icon matching the current theme */
+:root:not([data-theme]) .theme-toggle [data-icon="auto"],
+:root[data-theme="auto"] .theme-toggle [data-icon="auto"],
+:root[data-theme="light"] .theme-toggle [data-icon="light"],
+:root[data-theme="dark"] .theme-toggle [data-icon="dark"],
+:root[data-theme="contrast"] .theme-toggle [data-icon="contrast"] { display: block; }
 
 .btn {
 	display: inline-flex; align-items: center; justify-content: center;
