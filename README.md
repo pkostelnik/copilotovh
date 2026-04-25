@@ -28,11 +28,15 @@ A modern, futuristic single-page website showcasing **Microsoft 365 Copilot** �
 
 ```
 copilotovh/
-├── index.html          # Landing page (German)
-├── index_en.html       # Landing page (English)
-├── styles.css          # Shared stylesheet (landing page + dive-page styles)
-├── lang-detect.js      # Language detection, redirection & scroll-reveal logic
-├── particles.js        # Neural-network particle canvas animation
+├── index.html             # Landing page V1 (German, default)
+├── index_en.html          # Landing page V1 (English)
+├── index-v2.html          # Landing page V2 redesign – Glassmorphism Premium (German)
+├── index-v2_en.html       # Landing page V2 redesign (English)
+├── styles.css             # Stylesheet for V1
+├── styles-v2.css          # Stylesheet for V2 redesign
+├── lang-detect.js         # Language detection & redirect (V1 + V2 mapping)
+├── nav-v2.js              # V2 nav, FAQ accordion, scroll reveal
+├── particles.js           # Neural-network particle canvas animation
 ├── hero-ai.png         # AI-generated hero background image (PNG fallback)
 ├── hero-ai.webp        # AI-generated hero background image (WebP, ~80 KB)
 ├── og-image.jpg        # Open Graph social media preview (1200×630)

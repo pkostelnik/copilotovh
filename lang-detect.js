@@ -22,21 +22,25 @@
     pref = browserLang.startsWith('de') ? 'de' : 'en';
   }
 
-  // 3. Aktuelle Seite bestimmen
+  // 3. Aktuelle Seite bestimmen (mit Mapping-Tabelle für v1 und v2)
+  var pagePairs = [
+    { de: 'index.html',    en: 'index_en.html'    },
+    { de: 'index-v2.html', en: 'index-v2_en.html' }
+  ];
   var path = window.location.pathname;
   var file = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
-  var isEnglishPage = file.indexOf('_en.html') !== -1;
-  var currentLang = isEnglishPage ? 'en' : 'de';
+
+  var currentPair = null;
+  var currentLang = null;
+  for (var p = 0; p < pagePairs.length; p++) {
+    if (pagePairs[p].de === file) { currentPair = pagePairs[p]; currentLang = 'de'; break; }
+    if (pagePairs[p].en === file) { currentPair = pagePairs[p]; currentLang = 'en'; break; }
+  }
 
   // 4. Bei Abweichung → zur passenden Sprachversion weiterleiten
-  if (pref !== currentLang) {
-    var targetFile;
-    if (pref === 'en') {
-      targetFile = file.replace('.html', '_en.html');
-    } else {
-      targetFile = file.replace('_en.html', '.html');
-    }
-    
+  if (currentPair && pref !== currentLang) {
+    var targetFile = pref === 'en' ? currentPair.en : currentPair.de;
+
     // Sicherheitsprüfung: Endlos-Schleifen und XSS (z.B. javascript:-Schema) abfangen
     if (targetFile === file || targetFile.indexOf(':') !== -1) {
       return;
