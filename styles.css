@@ -270,6 +270,11 @@ body::after {
 			linear-gradient(90deg, rgba(10, 14, 26, 0.04) 1px, transparent 1px);
 	}
 }
+:root[data-theme="light"] body::after {
+	background-image:
+		linear-gradient(rgba(10, 14, 26, 0.04) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(10, 14, 26, 0.04) 1px, transparent 1px);
+}
 
 /* ── Utilities ── */
 .sr-only {
@@ -648,6 +653,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .span-4 { grid-column: span 4; }
 .span-2 { grid-column: span 2; }
 .row-2 { grid-row: span 2; }
+.span-6 { grid-column: span 6; }
 
 /* Featured/showcase card */
 .card-v2.feature-large {
@@ -671,12 +677,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 
 @media (max-width: 960px) {
 	.bento { grid-template-columns: repeat(2, 1fr); }
-	.span-3, .span-4, .span-2 { grid-column: span 2; }
+	.span-3, .span-4, .span-2, .span-6 { grid-column: span 2; }
 	.row-2 { grid-row: auto; }
 }
 @media (max-width: 540px) {
 	.bento { grid-template-columns: 1fr; }
-	.span-3, .span-4, .span-2 { grid-column: span 1; }
+	.span-3, .span-4, .span-2, .span-6 { grid-column: span 1; }
 }
 
 /* ═══════════════════════════════════════════════

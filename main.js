@@ -138,16 +138,19 @@
     }, 200);
   });
 
-  // Mouse tracking
-  canvas.addEventListener('mousemove', function (e) {
-    var rect = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
-  });
-  canvas.addEventListener('mouseleave', function () {
-    mouse.x = -9999;
-    mouse.y = -9999;
-  });
+  // Mouse tracking (on parent because canvas has pointer-events:none)
+  var hero = canvas.closest('.hero-v2');
+  if (hero) {
+    hero.addEventListener('mousemove', function (e) {
+      var rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    hero.addEventListener('mouseleave', function () {
+      mouse.x = -9999;
+      mouse.y = -9999;
+    });
+  }
 
   resize();
   createParticles();
@@ -239,7 +242,7 @@
 				} else {
 					document.documentElement.setAttribute('data-theme', theme);
 				}
-				var titlePrefix = (lang === 'de') ? 'Theme: ' : 'Theme: ';
+				var titlePrefix = 'Theme: ';
 				themeBtn.setAttribute('aria-label', titlePrefix + labels[theme]);
 				themeBtn.setAttribute('title', labels[theme]);
 				try { localStorage.setItem('theme', theme); } catch (e) { /* ignore */ }

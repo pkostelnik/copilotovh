@@ -7,7 +7,7 @@
 		<meta name="color-scheme" content="light dark" />
 		<meta name="theme-color" content="#06080f" media="(prefers-color-scheme: dark)" />
 		<meta name="theme-color" content="#f5f7fc" media="(prefers-color-scheme: light)" />
-		<meta name="referrer" content="strict-origin-when-cross-origin">
+		<meta name="referrer" content="strict-origin-when-cross-origin" />
 		<meta name="robots" content="index,follow,max-image-preview:large" />
 		<meta property="og:title" content="Microsoft Copilot – Fokus trifft Kreativität" />
 		<meta property="og:description" content="Eine moderne Landingpage rund um M365 Copilot – Features, FAQ und mehr." />
@@ -33,52 +33,7 @@
 		<link rel="apple-touch-icon" href="apple-touch-icon.png" />
 		<link rel="manifest" href="manifest.json" />
 		<title>Microsoft Copilot – Fokus trifft Kreativität</title>
-		<script>
-			// Theme-init: runs synchronously before stylesheet to prevent FOUC.
-			(function () {
-				try {
-					var t = localStorage.getItem('theme');
-					if (t === 'light' || t === 'dark' || t === 'contrast' || t === 'auto') {
-						if (t !== 'auto') {
-							document.documentElement.setAttribute('data-theme', t);
-						}
-					}
-				} catch (e) {}
-			})();
-
-			// Language detection and redirect (runs synchronously).
-			(function () {
-				'use strict';
-				var pref = null;
-				try {
-					pref = localStorage.getItem('langPref');
-					if (pref !== 'de' && pref !== 'en') pref = null;
-				} catch (e) {}
-
-				if (!pref) {
-					var browserLang = (navigator.language || (navigator.languages && navigator.languages[0]) || 'en').toLowerCase();
-					pref = browserLang.startsWith('de') ? 'de' : 'en';
-				}
-
-				var pagePairs = [{ de: 'index.html', en: 'index_en.html' }];
-				var path = window.location.pathname;
-				var file = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
-
-				var currentPair = null;
-				var currentLang = null;
-				for (var p = 0; p < pagePairs.length; p++) {
-					if (pagePairs[p].de === file) { currentPair = pagePairs[p]; currentLang = 'de'; break; }
-					if (pagePairs[p].en === file) { currentPair = pagePairs[p]; currentLang = 'en'; break; }
-				}
-
-				if (currentPair && pref !== currentLang) {
-					var targetFile = pref === 'en' ? currentPair.en : currentPair.de;
-					if (targetFile !== file && targetFile.indexOf(':') === -1) {
-						window.location.replace('./' + encodeURIComponent(targetFile));
-					}
-				}
-			})();
-		</script>
+		<script src="init.js"></script>
 		<link rel="stylesheet" href="styles.css" />
 		<script src="main.js" defer></script>
 		<script type="application/ld+json">
@@ -110,7 +65,7 @@
 					Copilot
 				</a>
 
-				<nav aria-label="Hauptnavigation">
+				<nav id="main-nav" aria-label="Hauptnavigation">
 					<ul class="nav-links">
 						<li><a href="#features">Features</a></li>
 						<li><a href="#how">So funktioniert's</a></li>
@@ -339,7 +294,7 @@
 							<blockquote>Mit eigenen Agents in Copilot Studio haben wir den Onboarding-Prozess komplett automatisiert. ROI nach acht Wochen erreicht.</blockquote>
 							<figcaption class="testimonial-author">
 								<span class="avatar" aria-hidden="true">JW</span>
-								<span><span class="author-name">Julia W.</span><br><span class="author-role">VP People & Culture</span></span>
+								<span><span class="author-name">Julia W.</span><br><span class="author-role">VP People &amp; Culture</span></span>
 							</figcaption>
 						</figure>
 					</div>
