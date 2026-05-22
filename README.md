@@ -28,35 +28,23 @@ A modern, futuristic single-page website showcasing **Microsoft 365 Copilot** �
 
 ```
 copilotovh/
-├── index.html             # Landing page (German, default) – Glassmorphism Premium
-├── index_en.html          # Landing page (English)
+├── index.html             # Landing page (German, default) – Glassmorphism Premium (with inlined theme-init & lang-detect)
+├── index_en.html          # Landing page (English) (with inlined theme-init & lang-detect)
 ├── styles.css             # Stylesheet
-├── lang-detect.js         # Language detection & redirect (DE↔EN)
-├── nav.js                 # Nav, FAQ accordion, scroll reveal
-├── intro.mp4              # 15s seamless brand intro loop (1920×1080, rendered with Remotion)
+├── main.js                # Consolidated script (Nav, FAQ accordion, scroll reveal, particles)
+├── intro.mp4              # 15s seamless brand intro loop (1920×1080)
 ├── intro-poster.jpg       # Poster frame for the video
-├── remotion/              # Remotion sub-project that renders intro.mp4
-│   ├── src/
-│   │   ├── Intro.tsx      # Composition: orbs + sphere + headline (loop-friendly)
-│   │   ├── Root.tsx
-│   │   └── index.ts
-│   ├── package.json       # Run `npm install` then `npm run build` to re-render
-│   ├── tsconfig.json
-│   └── remotion.config.ts
-├── particles.js           # Neural-network particle canvas animation
-├── hero-ai.png         # AI-generated hero background image (PNG fallback)
-├── hero-ai.webp        # AI-generated hero background image (WebP, ~80 KB)
-├── og-image.jpg        # Open Graph social media preview (1200×630)
-├── icon.svg            # Scalable favicon
-├── apple-touch-icon.png # iOS home-screen icon (180×180)
-├── icon-192.png        # PWA icon
-├── icon-512.png        # PWA icon
-├── icon-maskable-512.png # PWA maskable icon
-├── manifest.json       # Web App Manifest (PWA)
-├── robots.txt          # Crawler directives
-├── sitemap.xml         # Sitemap (DE + EN)
+├── og-image.jpg           # Open Graph social media preview (1200×630)
+├── icon.svg               # Scalable favicon
+├── apple-touch-icon.png   # iOS home-screen icon (180×180)
+├── icon-192.png           # PWA icon
+├── icon-512.png           # PWA icon
+├── icon-maskable-512.png  # PWA maskable icon
+├── manifest.json          # Web App Manifest (PWA)
+├── robots.txt             # Crawler directives
+├── sitemap.xml            # Sitemap (DE + EN)
 ├── staticwebapp.config.json # Azure SWA config (security headers, routes, MIME)
-├── favicon.ico         # Legacy favicon
+├── favicon.ico            # Legacy favicon
 ├── .github/
 │   ├── copilot-instructions.md
 │   └── workflows/
