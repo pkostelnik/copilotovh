@@ -50,6 +50,16 @@
 			"label": "Git Step 5 - status",
 			"type": "shell",
 			"command": "cd '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh' && git status -sb 2>&1"
+		},
+		{
+			"label": "Diff copilot-instructions",
+			"type": "shell",
+			"command": "git -C '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh' --no-pager diff -- .github/copilot-instructions.md"
+		},
+		{
+			"label": "Git commit and push",
+			"type": "shell",
+			"command": "cd '/Users/pkostelnik/Library/CloudStorage/OneDrive-Persönlich/Documents/github/copilotovh' && git add -A && git commit -m \"fix: harden CSP, fix reduced-motion poster & 404 styles, a11y contrast\" -m \"- Drop 'unsafe-inline' from style-src; move 404 inline CSS into styles.css\" -m \"- Fix reduced-motion/high-contrast: intro video now falls back to static poster\" -m \"- Fix swallowed CSS rules caused by a missing @media closing brace (404 page + light button)\" -m \"- Light-theme primary button: white text on darker gradient for WCAG AA contrast\" -m \"- Reindent the 3D/depth CSS tail to tabs for consistency\" -m \"- CI: bump actions/checkout v4 -> v5\" -m \"- Update README to match; fix typos in copilot-instructions.md\" && git push 2>&1"
 		}
 	]
 }

@@ -1,6 +1,6 @@
 ## Tech Stack
 - Responsive design for all devices
-- HTLML5, CSS3, JavaScript (ES6+)
+- HTML5, CSS3, JavaScript (ES6+)
 - React for web applications
 
 ## Development Guidelines
@@ -13,7 +13,7 @@
   - Glassmorphism for web applications
   - Material Design for Android applications
   - Human Interface Guidelines for iOS applications
-- Check the Performace againt Google's Core Web Vitals
+- Check the Performance against Google's Core Web Vitals
 - Follow coding standards and best practices for the respective platforms
 - Implement proper error handling and validation (is or if needed)
 - Follow Web Accessibility best practices:https://www.w3.org/WAI/tips/designing/

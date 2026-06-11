@@ -8,7 +8,7 @@ A modern, futuristic single-page website showcasing **Microsoft 365 Copilot** �
 
 ## ✨ Features
 
-- **Adaptive theme** — automatically matches OS light/dark mode via `prefers-color-scheme`, with a stunning dark-first and a clean light variant
+- **Adaptive theme** — four modes via a single toggle: **Auto** (follows OS `prefers-color-scheme`/`prefers-contrast`), **Light**, **Dark**, and **High Contrast** (WCAG-AAA oriented); the choice is saved in `localStorage`
 - **Animated particle canvas** — neural-network style floating dots with interactive mouse-reactive connections
 - **AI-generated hero imagery** — abstract data-flow background behind the hero section
 - **Glassmorphism cards** — translucent feature cards with backdrop blur, neon border glow, and hover effects
@@ -17,8 +17,8 @@ A modern, futuristic single-page website showcasing **Microsoft 365 Copilot** �
 - **Scroll-triggered reveals** — sections fade and slide in via `IntersectionObserver` with staggered delays
 - **Bilingual** — full German (DE) and English (EN) support with automatic browser language detection
 - **Responsive** — optimized for desktop, tablet, and mobile viewports
-- **Accessible** — skip-link, ARIA labels, `prefers-contrast: more` and `prefers-reduced-motion` support, semantic HTML
-- **Secure** — strict HTTP security headers via `staticwebapp.config.json` (CSP with `frame-ancestors 'none'`, `base-uri 'none'`, `form-action 'none'`; HSTS preload; `X-Content-Type-Options`; `X-Frame-Options`; `Permissions-Policy`; `Cross-Origin-*-Policy`); `rel="noopener noreferrer"` on external links
+- **Accessible** — skip-link, ARIA labels, `prefers-contrast: more` and `prefers-reduced-motion` support, semantic HTML; the brand intro video falls back to a static poster image for reduced-motion and high-contrast users; WCAG-AA button contrast in light mode
+- **Secure** — strict HTTP security headers via `staticwebapp.config.json` (strict CSP with **no `'unsafe-inline'`**, `frame-ancestors 'none'`, `base-uri 'none'`, `form-action 'none'`; HSTS preload; `X-Content-Type-Options`; `X-Frame-Options`; `Permissions-Policy`; `Cross-Origin-*-Policy`); `rel="noopener noreferrer"` on external links
 - **SEO-ready** — full Open Graph + Twitter Card meta, canonical URLs, `hreflang` (incl. `x-default`), `robots.txt`, `sitemap.xml`, JSON-LD structured data
 - **PWA-ready** — Web App Manifest, SVG favicon, Apple Touch Icon, maskable icon
 
@@ -28,10 +28,12 @@ A modern, futuristic single-page website showcasing **Microsoft 365 Copilot** �
 
 ```
 copilotovh/
-├── index.html             # Landing page (German, default) – Glassmorphism Premium (with inlined theme-init & lang-detect)
-├── index_en.html          # Landing page (English) (with inlined theme-init & lang-detect)
-├── styles.css             # Stylesheet
-├── main.js                # Consolidated script (Nav, FAQ accordion, scroll reveal, particles)
+├── index.html             # Landing page (German, default) – Glassmorphism Premium
+├── index_en.html          # Landing page (English)
+├── 404.html               # Custom 404 error page
+├── styles.css             # Stylesheet (incl. 404 page styles – CSP-friendly, no inline CSS)
+├── init.js                # Synchronous theme + language init (runs before CSS to prevent FOUC)
+├── main.js                # Consolidated script (Nav, FAQ accordion, scroll reveal, particles, theme toggle)
 ├── intro.mp4              # 15s seamless brand intro loop (1920×1080)
 ├── intro-poster.jpg       # Poster frame for the video
 ├── og-image.jpg           # Open Graph social media preview (1200×630)
@@ -107,7 +109,7 @@ Users can manually switch via the DE/EN toggle in the top-right corner. The pref
 
 | Token | Value | Usage |
 |---|---|---|
-| `--bg` | `#0a0e1a` | Page background |
+| `--bg` | `#06080f` | Page background |
 | `--accent-cyan` | `#00f0ff` | Primary accent, links |
 | `--accent-violet` | `#8b5cf6` | Secondary accent |
 | `--accent-magenta` | `#ff2d7b` | Tertiary accent |
@@ -128,8 +130,9 @@ Users can manually switch via the DE/EN toggle in the top-right corner. The pref
 
 - Skip-to-content link
 - ARIA labels on all landmarks and interactive elements
-- `prefers-contrast: more` media query disables decorative effects
-- `prefers-reduced-motion` honored — particle canvas is disabled when the user requests reduced motion
+- Four theme modes (Auto / Light / Dark / High Contrast); `prefers-contrast: more` disables decorative effects
+- `prefers-reduced-motion` honored — particle canvas is disabled and the brand intro video is replaced by a static poster image when the user requests reduced motion
+- WCAG-AA contrast for the primary button in light mode
 - Focus-visible outlines on all interactive elements
 - Semantic HTML5 structure
 
@@ -137,7 +140,7 @@ Users can manually switch via the DE/EN toggle in the top-right corner. The pref
 
 ## 🔒 Security
 
-- **Content Security Policy** — restricts script, style, font, and image sources
+- **Content Security Policy** — restricts script, style, font, and image sources to `'self'` (no `'unsafe-inline'`; 404 page styles live in `styles.css`)
 - **Strict referrer policy** — `strict-origin-when-cross-origin`
 - **Frame protection** — `frame-ancestors 'none'`
 - **External links** — all use `rel="noopener noreferrer"`
