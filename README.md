@@ -16,6 +16,7 @@ A modern, futuristic single-page website showcasing **Microsoft 365 Copilot** �
 - **SVG icon stroke-draw** — card icons animate their stroke path when scrolled into view
 - **Scroll-triggered reveals** — sections fade and slide in via `IntersectionObserver` with staggered delays
 - **Bilingual** — full German (DE) and English (EN) support with automatic browser language detection
+- **AI disclaimer page** — a friendly, slightly cheeky `disclaimer.html` explaining that the site was built with Copilot AI plus responsible-AI-use guidance; a **single file** that auto-detects the browser language and switches DE/EN in place (no redirect), announcing changes via an `aria-live` region
 - **Responsive** — optimized for desktop, tablet, and mobile viewports
 - **Accessible** — skip-link, ARIA labels, `prefers-contrast: more` and `prefers-reduced-motion` support, semantic HTML; the brand intro video falls back to a static poster image for reduced-motion and high-contrast users; WCAG-AA button contrast in light mode
 - **Secure** — strict HTTP security headers via `staticwebapp.config.json` (strict CSP with **no `'unsafe-inline'`**, `frame-ancestors 'none'`, `base-uri 'none'`, `form-action 'none'`; HSTS preload; `X-Content-Type-Options`; `X-Frame-Options`; `Permissions-Policy`; `Cross-Origin-*-Policy`); `rel="noopener noreferrer"` on external links
@@ -30,8 +31,10 @@ A modern, futuristic single-page website showcasing **Microsoft 365 Copilot** �
 copilotovh/
 ├── index.html             # Landing page (German, default) – Glassmorphism Premium
 ├── index_en.html          # Landing page (English)
+├── disclaimer.html        # AI disclaimer page (single file, client-side DE/EN switching)
+├── disclaimer.js          # i18n logic for disclaimer.html (auto-detect + in-place language switch)
 ├── 404.html               # Custom 404 error page
-├── styles.css             # Stylesheet (incl. 404 page styles – CSP-friendly, no inline CSS)
+├── styles.css             # Stylesheet (incl. 404 + disclaimer page styles – CSP-friendly, no inline CSS)
 ├── init.js                # Synchronous theme + language init (runs before CSS to prevent FOUC)
 ├── main.js                # Consolidated script (Nav, FAQ accordion, scroll reveal, particles, theme toggle)
 ├── intro.mp4              # 15s seamless brand intro loop (1920×1080)
@@ -44,7 +47,7 @@ copilotovh/
 ├── icon-maskable-512.png  # PWA maskable icon
 ├── manifest.json          # Web App Manifest (PWA)
 ├── robots.txt             # Crawler directives
-├── sitemap.xml            # Sitemap (DE + EN)
+├── sitemap.xml            # Sitemap (DE + EN, incl. disclaimer)
 ├── staticwebapp.config.json # Azure SWA config (security headers, routes, MIME)
 ├── favicon.ico            # Legacy favicon
 ├── .github/
@@ -100,6 +103,8 @@ The site auto-detects the browser language and redirects accordingly:
 - **All other languages** → `index_en.html`
 
 Users can manually switch via the DE/EN toggle in the top-right corner. The preference is saved in `localStorage`.
+
+The **disclaimer page** (`disclaimer.html`) takes a different, single-file approach: instead of redirecting between two files, it auto-detects the browser language and swaps all content **in place** via `disclaimer.js` (DE/EN dictionary), updating `<html lang>`, the document title and meta description, and announcing the change through an `aria-live` region. The same `langPref` is reused.
 
 ---
 

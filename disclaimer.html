@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="AI disclaimer for copilot.ovh — this site was built with Microsoft Copilot, plus a friendly guide to using AI responsibly." data-i18n="metaDescription" />
+		<meta name="color-scheme" content="light dark" />
+		<meta name="theme-color" content="#06080f" media="(prefers-color-scheme: dark)" />
+		<meta name="theme-color" content="#f5f7fc" media="(prefers-color-scheme: light)" />
+		<meta name="referrer" content="strict-origin-when-cross-origin" />
+		<meta name="robots" content="index,follow,max-image-preview:large" />
+		<meta property="og:title" content="AI Disclaimer – copilot.ovh" />
+		<meta property="og:description" content="This site was built with Microsoft Copilot. A friendly note on what that means and how to use AI responsibly." />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="copilot.ovh" />
+		<meta property="og:url" content="https://www.copilot.ovh/disclaimer.html" />
+		<meta property="og:image" content="https://www.copilot.ovh/og-image.jpg" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="AI Disclaimer – copilot.ovh" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:locale:alternate" content="de_DE" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="AI Disclaimer – copilot.ovh" />
+		<meta name="twitter:description" content="This site was built with Microsoft Copilot. A friendly note on what that means and how to use AI responsibly." />
+		<meta name="twitter:image" content="https://www.copilot.ovh/og-image.jpg" />
+		<link rel="canonical" href="https://www.copilot.ovh/disclaimer.html" />
+		<link rel="alternate" hreflang="de" href="https://www.copilot.ovh/disclaimer.html" />
+		<link rel="alternate" hreflang="en" href="https://www.copilot.ovh/disclaimer.html" />
+		<link rel="alternate" hreflang="x-default" href="https://www.copilot.ovh/disclaimer.html" />
+		<link rel="icon" href="favicon.ico" sizes="any" />
+		<link rel="icon" type="image/svg+xml" href="icon.svg" />
+		<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+		<link rel="manifest" href="manifest.json" />
+		<title>AI Disclaimer – copilot.ovh</title>
+		<script src="init.js"></script>
+		<link rel="stylesheet" href="styles.css" />
+		<script src="main.js" defer></script>
+		<script src="disclaimer.js" defer></script>
+	</head>
+	<body>
+		<noscript>
+			<p class="noscript-msg">This page works without JavaScript — language is shown in English and a few animations are reduced.</p>
+		</noscript>
+		<a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
+
+		<!-- ═══ NAV ═══ -->
+		<header class="nav" role="banner">
+			<div class="container nav-inner">
+				<a href="index.html" class="brand" aria-label="Copilot home" data-i18n-aria="brandHome">
+					<span class="brand-mark" aria-hidden="true">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+							<polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.5 9 9 12 2"/>
+						</svg>
+					</span>
+					Copilot
+				</a>
+
+				<div class="nav-actions">
+					<div class="lang-switch" role="group" aria-label="Language selection" data-i18n-aria="langGroup">
+						<a href="#" class="lang-link" lang="de" data-lang="de">DE</a>
+						<a href="#" class="lang-link active" lang="en" data-lang="en">EN</a>
+					</div>
+					<button id="theme-toggle" class="theme-toggle" type="button" aria-label="Theme: Automatic (system)" title="Automatic (system)">
+						<span class="sr-only" data-i18n="themeToggle">Change theme</span>
+						<svg data-icon="auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<rect x="2" y="4" width="20" height="14" rx="2"/>
+							<path d="M8 22h8M12 18v4"/>
+						</svg>
+						<svg data-icon="light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<circle cx="12" cy="12" r="4"/>
+							<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+						</svg>
+						<svg data-icon="dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+						</svg>
+						<svg data-icon="contrast" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<circle cx="12" cy="12" r="9"/>
+							<path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"/>
+						</svg>
+					</button>
+					<a href="index.html" class="btn btn-primary" data-i18n="navHome">Back home</a>
+				</div>
+			</div>
+		</header>
+
+		<!-- aria-live announcement for language changes -->
+		<p id="lang-announce" class="sr-only" aria-live="polite"></p>
+
+		<main id="main" class="disc-main">
+			<!-- ═══ HERO ═══ -->
+			<section class="disc-hero" aria-labelledby="disc-title">
+				<div class="container disc-hero-inner reveal">
+					<span class="eyebrow" data-i18n="heroEyebrow">AI Disclaimer</span>
+					<h1 id="disc-title" data-i18n="heroTitle">Yes, a robot helped build this.</h1>
+					<p class="disc-lead" data-i18n="heroLead">
+						This website — its words, its code, even this very sentence — was crafted hand-in-hand
+						with Microsoft Copilot. AI is clever, fast, and occasionally makes things up with
+						supreme confidence. Here's the honest, slightly cheeky rundown.
+					</p>
+					<p class="disc-tldr-pill" data-i18n="heroTldr">
+						⚡ TL;DR: Built with AI. Double-check anything important. Don't paste your passwords. Be kind.
+					</p>
+				</div>
+			</section>
+
+			<!-- ═══ CARDS ═══ -->
+			<section class="container disc-section" aria-label="Disclaimer details">
+				<ul class="disc-grid reveal-stagger">
+					<li class="disc-card reveal">
+						<span class="disc-icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.5 2.5M16.5 16.5L19 19M19 5l-2.5 2.5M7.5 16.5L5 19"/>
+								<circle cx="12" cy="12" r="3.5"/>
+							</svg>
+						</span>
+						<h2 data-i18n="card1Title">Built by humans + AI</h2>
+						<p data-i18n="card1Body">
+							A real person had ideas and made the calls; Copilot helped write the markup, styles,
+							scripts and copy. Think of it as pair programming where one partner never needs coffee
+							and types alarmingly fast.
+						</p>
+					</li>
+					<li class="disc-card reveal">
+						<span class="disc-icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M12 9v4"/>
+								<path d="M12 17h.01"/>
+								<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>
+							</svg>
+						</span>
+						<h2 data-i18n="card2Title">AI can be confidently wrong</h2>
+						<p data-i18n="card2Body">
+							Generative AI sometimes "hallucinates" — it states wrong things as if they were gospel.
+							Treat anything here as a helpful starting point, not legal, medical, financial or
+							life-or-death advice. When it matters, verify with a trusted source.
+						</p>
+					</li>
+					<li class="disc-card reveal">
+						<span class="disc-icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M9 12l2 2 4-4"/>
+								<path d="M12 3 4 6v6c0 5 3.5 7.5 8 9 4.5-1.5 8-4 8-9V6l-8-3z"/>
+							</svg>
+						</span>
+						<h2 data-i18n="card3Title">Your part of the deal</h2>
+						<p data-i18n="card3Body">
+							Use AI responsibly: keep a human in the loop, review before you ship, and never paste
+							secrets, passwords or sensitive personal data into a chatbot. You're the captain — AI
+							is just a very enthusiastic co-pilot.
+						</p>
+					</li>
+					<li class="disc-card reveal">
+						<span class="disc-icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<rect x="3" y="11" width="18" height="10" rx="2"/>
+								<path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+							</svg>
+						</span>
+						<h2 data-i18n="card4Title">Privacy, plainly</h2>
+						<p data-i18n="card4Body">
+							This page itself has no tracking, no cookies and no analytics — zero third-party
+							requests. We're not watching you read this. (We'd just like to imagine you're smiling.)
+						</p>
+					</li>
+				</ul>
+			</section>
+
+			<!-- ═══ TL;DR CALLOUT ═══ -->
+			<section class="container disc-section" aria-labelledby="disc-callout-title">
+				<div class="disc-callout reveal">
+					<h2 id="disc-callout-title" data-i18n="calloutTitle">The short version</h2>
+					<p data-i18n="calloutBody">
+						AI is a tool, not an oracle. It helped make this site delightful and fast — but you still
+						bring the judgement. Stay curious, verify the important stuff, and remember: behind every
+						good co-pilot, there's a human who decides where to land. 🛬
+					</p>
+					<a href="index.html" class="btn btn-primary" data-i18n="calloutCta">Take me back to the good stuff</a>
+				</div>
+			</section>
+		</main>
+
+		<!-- ═══ FOOTER ═══ -->
+		<footer class="footer-v2" role="contentinfo">
+			<div class="container">
+				<div class="footer-bottom">
+					<span data-i18n="footerCopy">© 2026 copilot.ovh – all rights reserved.</span>
+					<a href="https://www.microsoft.com/microsoft-copilot" target="_blank" rel="noopener noreferrer">
+						<span data-i18n="footerPowered">Powered by Microsoft Copilot</span><span class="sr-only" data-i18n="footerNewTab"> (opens in a new tab)</span>
+					</a>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
