@@ -13,6 +13,7 @@
   - Glassmorphism for web applications
   - Material Design for Android applications
   - Human Interface Guidelines for iOS applications
+Choos which one suites best or is being used already in existing files otherway ask to select one
 - Check the Performance against Google's Core Web Vitals
 - Follow coding standards and best practices for the respective platforms
 - Implement proper error handling and validation (is or if needed)
