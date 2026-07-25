@@ -35,6 +35,7 @@
 			footerCopy: '© 2026 copilot.ovh – alle Rechte vorbehalten.',
 			footerPowered: 'Powered by Microsoft Copilot',
 			footerNewTab: ' (öffnet in neuem Tab)',
+			themeLabel: 'Design: ',
 			theme: { auto: 'Automatisch (System)', light: 'Hell', dark: 'Dunkel', contrast: 'Hoher Kontrast' },
 			announce: 'Sprache auf Deutsch umgestellt.'
 		},
@@ -64,6 +65,7 @@
 			footerCopy: '© 2026 copilot.ovh – all rights reserved.',
 			footerPowered: 'Powered by Microsoft Copilot',
 			footerNewTab: ' (opens in a new tab)',
+			themeLabel: 'Theme: ',
 			theme: { auto: 'Automatic (system)', light: 'Light', dark: 'Dark', contrast: 'High contrast' },
 			announce: 'Language set to English.'
 		}
@@ -108,12 +110,14 @@
 			if (dict[aKey] != null) ariaNodes[j].setAttribute('aria-label', dict[aKey]);
 		}
 
-		// Theme-toggle label stays localized
+		// Theme-toggle label stays localized.
+		// aria-label carries the action; the current state goes in title
+		// (and into the live region on change) — see main.js.
 		var themeBtn = document.getElementById('theme-toggle');
 		if (themeBtn) {
 			var th = currentTheme();
-			themeBtn.setAttribute('aria-label', 'Theme: ' + dict.theme[th]);
-			themeBtn.setAttribute('title', dict.theme[th]);
+			themeBtn.setAttribute('aria-label', dict.themeToggle);
+			themeBtn.setAttribute('title', dict.themeLabel + dict.theme[th]);
 		}
 
 		// Active language link

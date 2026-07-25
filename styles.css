@@ -18,6 +18,10 @@
 	--muted: #9ba4b8;
 	--muted-strong: #cbd2e0;
 	--accent-cyan: #00f0ff;
+	/* Text-safe cyan. --accent-cyan is tuned for gradients/glows; as small
+	   text on the light background it only reaches ~3.6:1 and fails WCAG AA.
+	   Use this token wherever cyan is used as a *text* colour. */
+	--accent-cyan-text: #00f0ff;
 	--accent-violet: #8b5cf6;
 	--accent-magenta: #ff2d7b;
 	--accent-emerald: #34d399;
@@ -49,6 +53,7 @@
 		--muted: #5a6178;
 		--muted-strong: #2f3654;
 		--accent-cyan: #0090a8;
+		--accent-cyan-text: #00707f;
 		--accent-violet: #6d3fc0;
 		--accent-magenta: #c0185b;
 		--accent-emerald: #1f9d6f;
@@ -70,6 +75,7 @@
 	--muted: #5a6178;
 	--muted-strong: #2f3654;
 	--accent-cyan: #0090a8;
+	--accent-cyan-text: #00707f;
 	--accent-violet: #6d3fc0;
 	--accent-magenta: #c0185b;
 	--accent-emerald: #1f9d6f;
@@ -95,6 +101,7 @@
 		--muted: #ffffff;
 		--muted-strong: #ffffff;
 		--accent-cyan: #00ffff;
+		--accent-cyan-text: #00ffff;
 		--accent-violet: #d8b6ff;
 		--accent-magenta: #ff8ad6;
 		--accent-emerald: #7cff9b;
@@ -116,6 +123,7 @@
 	--muted: #ffffff;
 	--muted-strong: #ffffff;
 	--accent-cyan: #00ffff;
+	--accent-cyan-text: #00ffff;
 	--accent-violet: #d8b6ff;
 	--accent-magenta: #ff8ad6;
 	--accent-emerald: #7cff9b;
@@ -215,7 +223,13 @@
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+	scroll-behavior: smooth;
+	/* Keeps anchor targets clear of the sticky header (.nav ≈ 62px tall).
+	   Without this, every #features/#faq/skip-link jump hides the target
+	   heading behind the navigation bar. */
+	scroll-padding-top: 5.5rem;
+}
 @media (prefers-reduced-motion: reduce) {
 	html { scroll-behavior: auto; }
 	*, *::before, *::after {
@@ -233,6 +247,7 @@ body {
 	color: var(--text);
 	background: var(--bg);
 	min-height: 100vh;
+	min-height: 100dvh; /* avoids the mobile address-bar gap; vh above is the fallback */
 	overflow-x: hidden;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -283,13 +298,16 @@ body::after {
 }
 .skip-link {
 	position: absolute; left: 16px; top: -64px;
-	background: var(--surface-solid); color: var(--accent-cyan);
+	background: var(--surface-solid); color: var(--accent-cyan-text);
 	padding: 10px 16px; border-radius: var(--radius-sm);
 	border: 1px solid var(--accent-cyan); box-shadow: var(--glow-cyan);
 	text-decoration: none; font-weight: 600; z-index: 9999;
 	transition: top 0.2s ease;
 }
 .skip-link:focus, .skip-link:focus-visible { top: 16px; }
+/* Programmatic focus target for the skip link: focusable but no focus ring,
+   so screen readers reliably land on (and announce) the main region. */
+[tabindex="-1"]:focus { outline: none; }
 
 a:focus-visible, button:focus-visible, summary:focus-visible {
 	outline: 2px solid var(--accent-cyan);
@@ -471,13 +489,17 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 		display: flex; flex-direction: column;
 		position: absolute; top: 100%; left: 12px; right: 12px;
 		padding: 12px; margin-top: 8px;
-		background: var(--surface-strong);
+		/* Opaque, not --surface-strong: at 0.92 alpha the hero headline read
+		   straight through the menu items. backdrop-filter cannot be relied
+		   on to fix legibility here. */
+		background: var(--surface-solid);
 		border: 1px solid var(--border-strong); border-radius: var(--radius-lg);
 		box-shadow: var(--shadow-card);
-		backdrop-filter: blur(24px);
-		-webkit-backdrop-filter: blur(24px);
 	}
-	.nav.open .nav-actions .btn { display: inline-flex; }
+	/* The CTA stays hidden while the menu is open. Revealing it put a fourth
+	   control into the header row, which then overflowed the viewport and got
+	   clipped by body{overflow-x:hidden}. The hero and the final section both
+	   carry the same call to action anyway. */
 }
 
 /* ═══════════════════════════════════════════════
@@ -588,7 +610,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .eyebrow {
 	display: inline-block;
 	font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase;
-	color: var(--accent-cyan); font-weight: 700;
+	color: var(--accent-cyan-text); font-weight: 700;
 	margin-bottom: 12px;
 }
 .section-head h2 {
@@ -639,7 +661,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 	border-radius: 12px;
 	background: linear-gradient(135deg, rgba(0,240,255,0.12), rgba(139,92,246,0.08));
 	border: 1px solid rgba(0,240,255,0.18);
-	color: var(--accent-cyan);
+	color: var(--accent-cyan-text);
 }
 .card-v2 .card-icon svg { width: 22px; height: 22px; }
 .card-v2 h3 {
@@ -744,7 +766,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .testimonial blockquote::before {
 	content: "“"; display: block;
 	font-size: 2.4rem; line-height: 0.6;
-	color: var(--accent-cyan); margin-bottom: 4px;
+	color: var(--accent-cyan-text); margin-bottom: 4px;
 	font-family: Georgia, serif;
 }
 .testimonial-author {
@@ -791,7 +813,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .faq-item summary::-webkit-details-marker { display: none; }
 .faq-item summary::after {
 	content: "+"; font-size: 1.4rem; font-weight: 400;
-	color: var(--accent-cyan);
+	color: var(--accent-cyan-text);
 	transition: transform 0.25s var(--ease-out);
 	flex-shrink: 0;
 }
@@ -846,7 +868,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 .footer-brand .brand { margin-bottom: 14px; }
 .footer-brand p { color: var(--muted); margin: 0; font-size: 0.92rem; max-width: 320px; }
-.footer-col h4 {
+.footer-col .footer-col-title {
 	margin: 0 0 14px;
 	font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
 	color: var(--text-bright); font-weight: 700;
@@ -863,7 +885,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 	padding-top: 24px; border-top: 1px solid var(--border);
 	font-size: 0.85rem;
 }
-.footer-bottom a { color: var(--accent-cyan); text-decoration: none; font-weight: 600; }
+.footer-bottom a { color: var(--accent-cyan-text); text-decoration: none; font-weight: 600; }
 .footer-bottom a:hover { text-decoration: underline; }
 
 @media (max-width: 720px) {
@@ -877,12 +899,14 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* ═══════════════════════════════════════════════
    REVEAL ANIMATIONS
    ═══════════════════════════════════════════════ */
-.reveal {
+/* Scoped to :root.js — without JavaScript the elements must stay visible,
+   because only main.js ever adds .is-visible. See init.js. */
+:root.js .reveal {
 	opacity: 0; transform: translateY(24px);
 	transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
 }
-.reveal.is-visible { opacity: 1; transform: none; }
-.reveal-stagger > * { transition-delay: calc(var(--i, 0) * 80ms); }
+:root.js .reveal.is-visible { opacity: 1; transform: none; }
+:root.js .reveal-stagger > * { transition-delay: calc(var(--i, 0) * 80ms); }
 
 /* ═══════════════════════════════════════════════
    3D / DEPTH PASS
@@ -1083,6 +1107,41 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 .theme-toggle:hover { transform: translateY(-1px); }
 
+/* ── Touch targets ──
+   The compact desktop sizing (lang pills ≈ 22px tall, toggles 38–40px) is
+   below the 44px platform convention and, for the language pills, below the
+   24px WCAG 2.2 (2.5.8) floor. Enlarge wherever the primary input is touch. */
+@media (pointer: coarse) {
+	.lang-switch a {
+		min-height: 44px;
+		padding-inline: 16px;
+		display: inline-flex;
+		align-items: center;
+	}
+	.theme-toggle,
+	.mobile-toggle {
+		width: 44px;
+		height: 44px;
+	}
+	.nav-links a { min-height: 44px; display: flex; align-items: center; }
+	.footer-col a { display: inline-block; padding-block: 6px; }
+}
+
+/* ── Narrow phones (≤560px) ──
+   Brand + language switch + theme toggle + hamburger must all fit on one
+   row. With 44px touch targets that overflows a 320px viewport, and because
+   body has overflow-x:hidden the hamburger silently ends up off-screen and
+   unclickable. Tighten the surrounding chrome, never the targets. */
+@media (max-width: 560px) {
+	.container { padding-inline: 16px; }
+	.nav-inner { gap: 8px; }
+	.nav-actions { gap: 6px; }
+	.brand { font-size: 0.95rem; gap: 8px; }
+	.brand-mark { width: 28px; height: 28px; }
+	.lang-switch { padding: 2px; }
+	.lang-switch a { padding-inline: 10px; font-size: 0.75rem; }
+}
+
 /* Featured/large bento card: more raised */
 .card-v2.feature-large {
 	box-shadow:
@@ -1194,34 +1253,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 	height: 100%;
 	object-fit: cover;
 }
-.showcase-frame img.showcase-poster {
-	/* The video is shown by default; the poster is the static
-	   fallback for reduced-motion and high-contrast users. */
-	display: none;
-}
+/* Poster is the default state for everyone. main.js swaps in the video only
+   when it is actually appropriate (wide viewport, motion allowed, no
+   save-data). That single gate replaces the previous stack of
+   reduced-motion / high-contrast overrides. */
+.showcase-frame video { display: none; }
+.showcase-frame.video-ready video { display: block; }
+.showcase-frame.video-ready img.showcase-poster { display: none; }
 
-/* When user prefers reduced motion: show poster, hide video */
-@media (prefers-reduced-motion: reduce) {
-	.showcase-frame video { display: none; }
-	.showcase-frame img.showcase-poster { display: block; }
-}
-
-/* High-contrast: show only the poster, no decorative effects */
+/* High-contrast: keep decoration off the frame itself */
 :root[data-theme="contrast"] .showcase-frame {
 	box-shadow: none !important;
 	border: 2px solid #ffffff !important;
-}
-:root[data-theme="contrast"] .showcase-frame video { display: none !important; }
-:root[data-theme="contrast"] .showcase-frame img.showcase-poster {
-	display: block !important;
-}
-@media (prefers-contrast: more) {
-	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .showcase-frame video {
-		display: none !important;
-	}
-	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .showcase-frame img.showcase-poster {
-		display: block !important;
-	}
 }
 
 /* ════════════════════════════════════════════════
@@ -1235,6 +1278,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 	align-items: center;
 	justify-content: center;
 	min-height: 80vh;
+	min-height: 80dvh;
 	text-align: center;
 	padding: 40px 24px;
 }
@@ -1375,7 +1419,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 	border-radius: var(--radius-md);
 	border: 1px solid var(--border-strong);
 	background: var(--bg-soft);
-	color: var(--accent-cyan);
+	color: var(--accent-cyan-text);
 }
 .disc-icon svg { width: 26px; height: 26px; }
 .disc-card h2 {

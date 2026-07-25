@@ -4,6 +4,12 @@
  * Extracted from inline <script> for CSP compliance (script-src 'self').
  */
 
+// JS-capability flag.
+// Everything that JS later has to "undo" (e.g. .reveal starting at opacity 0)
+// must be scoped to :root.js — otherwise the page renders blank when this
+// script is blocked or fails. Set first, before anything can throw.
+document.documentElement.classList.add('js');
+
 // Theme-init
 (function () {
 	try {

@@ -49,16 +49,16 @@
 	</head>
 	<body>
 		<noscript>
-			<p class="noscript-msg">Diese Seite funktioniert auch ohne JavaScript – nur Animationen und der FAQ-Akkordeon-Modus sind reduziert.</p>
+			<p class="noscript-msg">Diese Seite funktioniert auch ohne JavaScript – es entfallen lediglich die Einblend-Animationen und das Intro-Video.</p>
 		</noscript>
 		<a class="skip-link" href="#main">Zum Inhalt springen</a>
 
 		<!-- ═══ NAV ═══ -->
 		<header class="nav" role="banner">
 			<div class="container nav-inner">
-				<a href="#" class="brand" aria-label="Copilot Startseite">
+				<a href="index.html" class="brand" aria-label="Copilot Startseite">
 					<span class="brand-mark" aria-hidden="true">
-						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+						<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
 							<polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.5 9 9 12 2"/>
 						</svg>
 					</span>
@@ -75,12 +75,11 @@
 				</nav>
 
 				<div class="nav-actions">
-					<div class="lang-switch" role="navigation" aria-label="Sprachwahl">
-						<a href="index.html" class="active" lang="de">DE</a>
+					<div class="lang-switch" role="group" aria-label="Sprachwahl">
+						<a href="index.html" class="active" lang="de" aria-current="page">DE</a>
 						<a href="index_en.html" lang="en">EN</a>
 					</div>
-					<button id="theme-toggle" class="theme-toggle" type="button" aria-label="Theme: Automatisch (System)" title="Automatisch (System)">
-						<span class="sr-only">Design wechseln</span>
+					<button id="theme-toggle" class="theme-toggle" type="button" aria-label="Design wechseln" title="Design: Automatisch (System)">
 						<svg data-icon="auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 							<rect x="2" y="4" width="20" height="14" rx="2"/>
 							<path d="M8 22h8M12 18v4"/>
@@ -109,7 +108,10 @@
 			</div>
 		</header>
 
-		<main id="main">
+		<!-- Announces theme changes; the button label stays the action. -->
+		<p id="theme-announce" class="sr-only" aria-live="polite"></p>
+
+		<main id="main" tabindex="-1">
 			<!-- ═══ HERO ═══ -->
 			<section class="hero-v2" aria-label="Einführung">
 				<canvas id="particles" aria-hidden="true"></canvas>
@@ -131,9 +133,9 @@
 						<a href="#features" class="btn btn-ghost btn-lg">Features ansehen</a>
 					</div>
 					<div class="hero-meta" aria-label="Vorteile">
-						<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Keine Kreditkarte</span>
-						<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>DSGVO-konform</span>
-						<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>In Sekunden bereit</span>
+						<span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Keine Kreditkarte</span>
+						<span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>DSGVO-konform</span>
+						<span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>In Sekunden bereit</span>
 					</div>
 				</div>
 			</section>
@@ -156,18 +158,23 @@
 			<section class="showcase reveal" aria-label="Markenintro">
 				<div class="container">
 					<div class="showcase-frame">
+						<!-- No autoplay attribute and no <source> on purpose:
+						     main.js attaches the 7.7 MB file only on wide viewports
+						     without reduced-motion/save-data, then starts playback.
+						     controls satisfies WCAG 2.2.2 (pause/stop moving content).
+						     Until then the poster below is what users see. -->
 						<video
-							autoplay
 							muted
 							loop
 							playsinline
-							preload="metadata"
+							controls
+							preload="none"
 							poster="intro-poster.jpg"
+							data-src="intro.mp4"
+							data-type="video/mp4"
 							aria-label="Animiertes Markenintro – nahtlose 15-Sekunden-Schleife"
-						>
-							<source src="intro.mp4" type="video/mp4" />
-						</video>
-						<img class="showcase-poster" src="intro-poster.jpg" alt="Microsoft Copilot – Fokus trifft Kreativität" />
+						></video>
+						<img class="showcase-poster" src="intro-poster.jpg" width="1200" height="675" alt="Microsoft Copilot – Fokus trifft Kreativität" />
 					</div>
 				</div>
 			</section>
@@ -185,7 +192,7 @@
 						<article class="card-v2 feature-large span-4 row-2 reveal">
 							<div class="visual" aria-hidden="true"></div>
 							<div class="card-icon">
-								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2 12h3M19 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/></svg>
+								<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2 12h3M19 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/></svg>
 							</div>
 							<h3>Kontext, der versteht</h3>
 							<p>Copilot greift sicher auf deine Dateien, Mails und Chats zu – und liefert Antworten, die zu deinen Zielen passen. Kein Copy-Paste, kein Prompt-Engineering nötig.</p>
@@ -193,7 +200,7 @@
 
 						<article class="card-v2 span-2 reveal">
 							<div class="card-icon">
-								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h12M3 18h6"/></svg>
+								<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h12M3 18h6"/></svg>
 							</div>
 							<h3>Strukturiert planen</h3>
 							<p>Aus Notizen werden Roadmaps. Aus Backlog wird Sprint.</p>
@@ -201,7 +208,7 @@
 
 						<article class="card-v2 span-2 reveal">
 							<div class="card-icon">
-								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+								<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
 							</div>
 							<h3>Klar kommunizieren</h3>
 							<p>Tonfall, Länge, Sprache – auf Wunsch in einem Klick.</p>
@@ -209,7 +216,7 @@
 
 						<article class="card-v2 span-3 reveal">
 							<div class="card-icon">
-								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+								<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
 							</div>
 							<h3>Tief integriert</h3>
 							<p>Word, Excel, PowerPoint, Outlook, Teams – Copilot ist da, wo du arbeitest. Ohne Kontextwechsel, ohne neuen Tab.</p>
@@ -217,7 +224,7 @@
 
 						<article class="card-v2 span-3 reveal">
 							<div class="card-icon">
-								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+								<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
 							</div>
 							<h3>Enterprise-Sicherheit</h3>
 							<p>Daten bleiben in deinem Tenant. EU-Datengrenze, RBAC, Audit-Logs und Sensitivity Labels werden respektiert.</p>
@@ -225,10 +232,10 @@
 
 						<article class="card-v2 span-6 reveal">
 							<div class="card-icon">
-								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+								<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
 							</div>
 							<h3>Messbar produktiver</h3>
-							<p>Studien zeigen: Bis zu 29 % schneller bei wiederkehrenden Aufgaben, 70 % höhere wahrgenommene Produktivität – validiert über tausende Knowledge-Worker.</p>
+							<p>Microsoft berichtet aus eigenen Untersuchungen spürbare Zeitgewinne bei wiederkehrenden Aufgaben. Die konkreten Zahlen schwanken stark je nach Aufgabe, Team und Datenlage – prüfe sie am besten an deinem eigenen Szenario.</p>
 						</article>
 					</div>
 				</div>
@@ -267,8 +274,8 @@
 				<div class="container">
 					<div class="section-head reveal">
 						<span class="eyebrow">Stimmen</span>
-						<h2>Was Teams nach 30 Tagen sagen</h2>
-						<p>Echte Erfahrungsberichte aus Pilotprojekten in Mittelstand und Konzern.</p>
+						<h2>Wie Feedback aussehen könnte</h2>
+						<p><strong>Fiktive Beispielstimmen.</strong> Diese Seite ist ein Design-Showcase – die folgenden Zitate und Personen sind erfunden und keine echten Kundenreferenzen.</p>
 					</div>
 
 					<div class="testimonials reveal-stagger">
@@ -357,16 +364,16 @@
 			<div class="container">
 				<div class="footer-grid">
 					<div class="footer-brand">
-						<a href="#" class="brand">
+						<a href="index.html" class="brand">
 							<span class="brand-mark" aria-hidden="true">
-								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+								<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
 							</span>
 							Copilot
 						</a>
 						<p>Ein moderner Showcase rund um Microsoft 365 Copilot – gebaut mit reinem HTML, CSS und Vanilla JavaScript.</p>
 					</div>
 					<div class="footer-col">
-						<h4>Produkt</h4>
+						<h2 class="footer-col-title">Produkt</h2>
 						<ul>
 							<li><a href="#features">Features</a></li>
 							<li><a href="#how">So funktioniert's</a></li>
@@ -374,7 +381,7 @@
 						</ul>
 					</div>
 					<div class="footer-col">
-						<h4>Ressourcen</h4>
+						<h2 class="footer-col-title">Ressourcen</h2>
 						<ul>
 							<li><a href="#faq">FAQ</a></li>
 							<li><a href="disclaimer.html">KI-Hinweis</a></li>
@@ -383,7 +390,7 @@
 						</ul>
 					</div>
 					<div class="footer-col">
-						<h4>Sprache</h4>
+						<h2 class="footer-col-title">Sprache</h2>
 						<ul>
 							<li><a href="index.html">Deutsch</a></li>
 							<li><a href="index_en.html">English</a></li>
