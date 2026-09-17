@@ -1,21 +1,5 @@
-## Tech Stack
-- Responsive design for all devices
-- HTML5, CSS3, JavaScript (ES6+)
-- React for web applications
+# GitHub-Copilot-Anweisungen
 
-## Development Guidelines
-- Use proper component structure with separation of concerns
-- Ensure responsive design across devices
-- Accessibility-First approach
-- Use the following design languages: 
-  - Fluent UI for web applications
-  - Bento Grid for web applications
-  - Glassmorphism for web applications
-  - Material Design for Android applications
-  - Human Interface Guidelines for iOS applications
-Choos which one suites best or is being used already in existing files otherway ask to select one
-- Check the Performance against Google's Core Web Vitals
-- Follow coding standards and best practices for the respective platforms
-- Implement proper error handling and validation (is or if needed)
-- Follow Web Accessibility best practices:https://www.w3.org/WAI/tips/designing/
-- Ensure full accessibility compatibility across all devices
+- Lies und befolge die gemeinsamen [Repository-Regeln](../AGENTS.md) vor Änderungen. Entwicklungsbefehle, Sprachwechsel, Script-Reihenfolge, Themes, Medien und Deployment sind dort zentral dokumentiert.
+- Das Projekt ist eine statische HTML/CSS/Vanilla-JS-Website auf Azure Static Web Apps. Es gibt weder React-Komponenten noch Backend, Paketmanifest oder lokalen Build-Schritt.
+- Verwende die vorhandenen HTML-/CSS-Muster. [Designhinweise](../design.md) beschreiben die Umsetzung; `styles.css` ist die Quelle der tatsächlich verwendeten Tokens.

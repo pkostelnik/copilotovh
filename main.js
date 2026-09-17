@@ -3,20 +3,46 @@
  * Combines navigation, interactivity, theme handling, and particles background.
  */
 
+(function () {
+'use strict';
+
+// One policy for both decorative media surfaces, including runtime changes.
+var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+var contrastQuery = window.matchMedia('(prefers-contrast: more)');
+var pointerQuery = window.matchMedia('(pointer: fine)');
+var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+function mediaAllowed() {
+  return window.innerWidth >= 861 && !motionQuery.matches && !contrastQuery.matches &&
+    document.documentElement.getAttribute('data-theme') !== 'contrast' && !(connection && connection.saveData);
+}
+function watchMedia(update) {
+  [motionQuery, contrastQuery, pointerQuery].forEach(function (query) {
+    if (query.addEventListener) query.addEventListener('change', update);
+    else if (query.addListener) query.addListener(update);
+  });
+  if (connection && connection.addEventListener) connection.addEventListener('change', update);
+  new MutationObserver(update).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  var timer;
+  window.addEventListener('resize', function () {
+    clearTimeout(timer);
+    timer = setTimeout(update, 200);
+  });
+  update();
+}
+
 // --- PARTICLE BACKGROUND ANIMATION ---
 (function () {
   'use strict';
   var canvas = document.getElementById('particles');
   if (!canvas) return;
 
-  // Respect user motion preferences (a11y)
-  var motionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-  if (motionQuery && motionQuery.matches) {
+  var ctx;
+  try { ctx = canvas.getContext('2d'); } catch (e) { /* optional decoration */ }
+  if (!ctx) {
     canvas.style.display = 'none';
     return;
   }
 
-  var ctx = canvas.getContext('2d');
   var particles = [];
   var animationId = null;
   var CONNECT_DIST = 140;
@@ -29,17 +55,10 @@
   // effect that also can't be interacted with — there is no cursor to follow.
   // Skip it entirely unless we have a fine pointer on a reasonably large canvas.
   function canRunEffect() {
-    var finePointer = !window.matchMedia || window.matchMedia('(pointer: fine)').matches;
-    return finePointer && window.innerWidth >= 861;
+    return mediaAllowed() && pointerQuery.matches;
   }
 
-  // Honour Save-Data / metered connections.
-  var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  if (conn && conn.saveData) return;
-  if (!canRunEffect()) {
-    canvas.style.display = 'none';
-    return;
-  }
+  var failed = false;
 
   function resize() {
     canvas.width = canvas.offsetWidth * (window.devicePixelRatio || 1);
@@ -66,6 +85,18 @@
   }
 
   function draw() {
+    animationId = null;
+    if (failed || !canRunEffect() || !inView || document.hidden) return;
+    try {
+      paint();
+      animationId = requestAnimationFrame(draw);
+    } catch (e) {
+      failed = true;
+      canvas.style.display = 'none';
+    }
+  }
+
+  function paint() {
     var w = canvas.offsetWidth;
     var h = canvas.offsetHeight;
     ctx.clearRect(0, 0, w, h);
@@ -124,14 +155,12 @@
         ctx.stroke();
       }
     }
-
-    animationId = requestAnimationFrame(draw);
   }
 
   // Single place that decides whether the loop should be running.
   // Guards against double-scheduling (which would double the frame rate).
   function start() {
-    if (animationId === null && inView && !document.hidden) {
+    if (!failed && canRunEffect() && animationId === null && inView && !document.hidden) {
       animationId = requestAnimationFrame(draw);
     }
   }
@@ -152,38 +181,32 @@
   // running for the entire page even though the canvas was long gone.
   var heroEl = canvas.closest('.hero-v2');
   if (heroEl && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function (entries) {
-      inView = entries[0].isIntersecting;
-      if (inView) start(); else stop();
-    }, { threshold: 0 }).observe(heroEl);
+    try {
+      new IntersectionObserver(function (entries) {
+        inView = entries[0].isIntersecting;
+        if (inView) start(); else stop();
+      }, { threshold: 0 }).observe(heroEl);
+    } catch (e) {
+      canvas.style.display = 'none';
+      return;
+    }
   }
 
-  // React to motion preference change at runtime
-  if (motionQuery && motionQuery.addEventListener) {
-    motionQuery.addEventListener('change', function (e) {
-      if (e.matches) {
-        stop();
-        canvas.style.display = 'none';
-      }
-    });
-  }
-
-  // Throttled resize
-  var resizeTimer;
-  window.addEventListener('resize', function () {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function () {
-      // Viewport may have shrunk below the threshold (or rotated into it).
-      if (!canRunEffect()) {
-        stop();
-        canvas.style.display = 'none';
-        return;
-      }
+  watchMedia(function () {
+    stop();
+    if (failed || !canRunEffect()) {
+      canvas.style.display = 'none';
+      return;
+    }
+    try {
       canvas.style.display = '';
       resize();
       createParticles();
       start();
-    }, 200);
+    } catch (e) {
+      failed = true;
+      canvas.style.display = 'none';
+    }
   });
 
   // Mouse tracking (on parent because canvas has pointer-events:none)
@@ -199,9 +222,6 @@
     });
   }
 
-  resize();
-  createParticles();
-  start();
 })();
 
 // --- NAVIGATION & INTERACTIVITY ---
@@ -245,20 +265,25 @@
 
 		// Scroll reveal
 		if ('IntersectionObserver' in window) {
-			var io = new IntersectionObserver(function (entries) {
-				entries.forEach(function (entry) {
-					if (entry.isIntersecting) {
-						entry.target.classList.add('is-visible');
-						io.unobserve(entry.target);
+			try {
+				var io = new IntersectionObserver(function (entries) {
+					entries.forEach(function (entry) {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('is-visible');
+							io.unobserve(entry.target);
+						}
+					});
+				}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+				document.querySelectorAll('.reveal').forEach(function (el, idx) {
+					if (el.parentElement && el.parentElement.classList.contains('reveal-stagger')) {
+						el.style.setProperty('--i', String(idx));
 					}
+					io.observe(el);
 				});
-			}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-			document.querySelectorAll('.reveal').forEach(function (el, idx) {
-				if (el.parentElement && el.parentElement.classList.contains('reveal-stagger')) {
-					el.style.setProperty('--i', String(idx));
-				}
-				io.observe(el);
-			});
+				document.documentElement.classList.add('reveal-ready');
+			} catch (e) {
+				document.documentElement.classList.remove('reveal-ready');
+			}
 		} else {
 			document.querySelectorAll('.reveal').forEach(function (el) {
 				el.classList.add('is-visible');
@@ -271,26 +296,43 @@
 		var frame = document.querySelector('.showcase-frame');
 		var video = frame && frame.querySelector('video[data-src]');
 		if (video) {
-			var conn2 = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-			var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-			var highContrast = document.documentElement.getAttribute('data-theme') === 'contrast' ||
-				(window.matchMedia && window.matchMedia('(prefers-contrast: more)').matches);
-			var wideEnough = window.innerWidth >= 861;
-
-			if (wideEnough && !reduced && !highContrast && !(conn2 && conn2.saveData)) {
-				var src = document.createElement('source');
-				src.src = video.getAttribute('data-src');
-				src.type = video.getAttribute('data-type') || 'video/mp4';
-				video.appendChild(src);
-				video.load();
-				// Only swap out the poster once we know playback actually works,
-				// so a failed load leaves the static image in place.
-				video.addEventListener('loadeddata', function () {
-					frame.classList.add('video-ready');
-					var p = video.play();
-					if (p && p.catch) p.catch(function () { /* autoplay blocked: controls remain */ });
-				}, { once: true });
+			var source = null;
+			var videoFailed = false;
+			function showVideo() {
+				if (!source || videoFailed || !mediaAllowed()) return;
+				frame.classList.add('video-ready');
+				var playback = video.play();
+				if (playback && playback.catch) playback.catch(function () { /* controls remain available */ });
 			}
+			function hideVideo() {
+				video.pause();
+				frame.classList.remove('video-ready');
+			}
+			function videoError() {
+				videoFailed = true;
+				hideVideo();
+			}
+			video.addEventListener('loadeddata', showVideo);
+			video.addEventListener('error', videoError);
+			watchMedia(function () {
+				if (!mediaAllowed() || videoFailed) {
+					hideVideo();
+					if (source) {
+						video.removeChild(source);
+						source = null;
+						video.load(); // cancel a download that is no longer permitted
+					}
+					return;
+				}
+				if (!source) {
+					source = document.createElement('source');
+					source.src = video.getAttribute('data-src');
+					source.type = video.getAttribute('data-type') || 'video/mp4';
+					source.addEventListener('error', videoError);
+					video.appendChild(source);
+					video.load();
+				}
+			});
 		}
 
 		// FAQ accordion
@@ -314,8 +356,6 @@
 				de: { action: 'Design wechseln', announce: 'Design: ', auto: 'Automatisch (System)', light: 'Hell', dark: 'Dunkel', contrast: 'Hoher Kontrast' },
 				en: { action: 'Change theme',    announce: 'Theme: ',  auto: 'Automatic (system)',   light: 'Light', dark: 'Dark',  contrast: 'High contrast'   }
 			};
-			var lang = (document.documentElement.getAttribute('lang') === 'en') ? 'en' : 'de';
-			var labels = labelMap[lang];
 
 			// Screen readers need the *action* on the button, not the current
 			// state — "Theme: Dark, button" doesn't tell you what a click does.
@@ -328,6 +368,7 @@
 			}
 
 			function applyTheme(theme, announce) {
+				var labels = labelMap[document.documentElement.lang === 'en' ? 'en' : 'de'];
 				if (theme === 'auto') {
 					document.documentElement.removeAttribute('data-theme');
 				} else {
@@ -348,4 +389,5 @@
 			});
 		}
 	});
+})();
 })();

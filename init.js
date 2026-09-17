@@ -5,9 +5,7 @@
  */
 
 // JS-capability flag.
-// Everything that JS later has to "undo" (e.g. .reveal starting at opacity 0)
-// must be scoped to :root.js — otherwise the page renders blank when this
-// script is blocked or fails. Set first, before anything can throw.
+// Reveal hiding is enabled separately by main.js only after observers exist.
 document.documentElement.classList.add('js');
 
 // Theme-init
@@ -36,21 +34,12 @@ document.documentElement.classList.add('js');
 		pref = browserLang.startsWith('de') ? 'de' : 'en';
 	}
 
-	var pagePairs = [{ de: 'index.html', en: 'index_en.html' }];
 	var path = window.location.pathname;
-	var file = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
-
-	var currentPair = null;
-	var currentLang = null;
-	for (var p = 0; p < pagePairs.length; p++) {
-		if (pagePairs[p].de === file) { currentPair = pagePairs[p]; currentLang = 'de'; break; }
-		if (pagePairs[p].en === file) { currentPair = pagePairs[p]; currentLang = 'en'; break; }
-	}
-
-	if (currentPair && pref !== currentLang) {
-		var targetFile = pref === 'en' ? currentPair.en : currentPair.de;
-		if (targetFile !== file && targetFile.indexOf(':') === -1) {
-			window.location.replace('./' + encodeURIComponent(targetFile));
-		}
+	// Azure normalizes .html URLs; match only known root routes, not 404 paths.
+	var currentLang = /^\/(?:index(?:\.html)?\/?)?$/.test(path) ? 'de' :
+		(/^\/index_en(?:\.html)?\/?$/.test(path) ? 'en' : null);
+	if (currentLang && pref !== currentLang) {
+		var target = pref === 'en' ? '/index_en.html' : '/index.html';
+		window.location.replace(target + window.location.search + window.location.hash);
 	}
 })();

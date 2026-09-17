@@ -11,6 +11,17 @@
   "routes": [
     {
       "route": "/pk.html",
+      "rewrite": "/410.html",
+      "statusCode": 410
+    },
+    {
+      "route": "/pk",
+      "rewrite": "/410.html",
+      "statusCode": 410
+    },
+    {
+      "route": "/pk/",
+      "rewrite": "/410.html",
       "statusCode": 410
     },
     {

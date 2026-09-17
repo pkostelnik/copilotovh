@@ -220,6 +220,26 @@
 	outline: 3px solid #ffff00 !important;
 	outline-offset: 3px;
 }
+/* Match the explicit contrast treatment when Auto follows the OS. */
+@media (prefers-contrast: more) {
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .hero-v2 h1 .accent {
+		background: none !important;
+		-webkit-text-fill-color: #ffffff !important;
+		color: #ffffff !important;
+	}
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) :is(.btn-primary, .brand-mark) {
+		background: #ffff00 !important;
+		color: #000000 !important;
+		box-shadow: none !important;
+	}
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .btn-primary {
+		border: 2px solid #ffffff !important;
+	}
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) :is(a, button, summary):focus-visible {
+		outline: 3px solid #ffff00 !important;
+		outline-offset: 3px;
+	}
+}
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; }
@@ -899,14 +919,13 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* ═══════════════════════════════════════════════
    REVEAL ANIMATIONS
    ═══════════════════════════════════════════════ */
-/* Scoped to :root.js — without JavaScript the elements must stay visible,
-   because only main.js ever adds .is-visible. See init.js. */
-:root.js .reveal {
+/* Hide only once main.js has installed the observers successfully. */
+:root.js.reveal-ready .reveal {
 	opacity: 0; transform: translateY(24px);
 	transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
 }
-:root.js .reveal.is-visible { opacity: 1; transform: none; }
-:root.js .reveal-stagger > * { transition-delay: calc(var(--i, 0) * 80ms); }
+:root.js.reveal-ready .reveal.is-visible { opacity: 1; transform: none; }
+:root.js.reveal-ready .reveal-stagger > * { transition-delay: calc(var(--i, 0) * 80ms); }
 
 /* ═══════════════════════════════════════════════
    3D / DEPTH PASS
@@ -1469,6 +1488,46 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 	.disc-card,
 	.disc-callout,
 	.disc-tldr-pill { -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+
+/* Contrast overrides follow all component/depth rules, for both entry paths. */
+:root[data-theme="contrast"] .avatar {
+	color: #000000;
+	background: #ffffff;
+}
+:root[data-theme="contrast"] .step::before,
+:root[data-theme="contrast"] .error-code {
+	color: #ffffff;
+	-webkit-text-fill-color: #ffffff;
+	background: none;
+	opacity: 1;
+}
+:root[data-theme="contrast"] *,
+:root[data-theme="contrast"] *::before,
+:root[data-theme="contrast"] *::after {
+	animation: none !important;
+}
+@media (prefers-contrast: more) {
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .avatar {
+		color: #000000;
+		background: #ffffff;
+	}
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .step::before,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .error-code {
+		color: #ffffff;
+		-webkit-text-fill-color: #ffffff;
+		background: none;
+		opacity: 1;
+	}
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) .showcase-frame {
+		box-shadow: none !important;
+		border: 2px solid #ffffff !important;
+	}
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) *,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) *::before,
+	:root:not([data-theme="dark"]):not([data-theme="light"]):not([data-theme="contrast"]) *::after {
+		animation: none !important;
+	}
 }
 @media (prefers-reduced-motion: reduce) {
 	.disc-card { transition: none; }

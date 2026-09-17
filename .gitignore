@@ -9,6 +9,7 @@
 !.env.example
 
 # local tooling / scratch
+.site/
 .venv/
 .vscode/
 get_sri.py

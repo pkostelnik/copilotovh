@@ -1,62 +1,21 @@
 ---
-description: "Use this agent when the user asks to start a development server and verify the webapp for errors.\n\nTrigger phrases include:\n- 'spin up a dev server'\n- 'check the webapp for errors'\n- 'start the dev server and check for issues'\n- 'test the dev server'\n- 'verify the webapp is working'\n\nExamples:\n- User says 'spin up a dev server and check the webapp for any errors' → invoke this agent to start the server and validate it\n- User asks 'is the dev server working? check for errors' → invoke this agent to verify server health\n- After making code changes, user says 'let me check if anything broke' → invoke this agent to start server and test webapp"
+description: "Startet die lokale Vorschau von copilot.ovh und prüft Seiten, Browserfehler und die repository-spezifischen Interaktionen."
 name: dev-server-checker
 ---
 
-# dev-server-checker instructions
+# Lokale Website prüfen
 
-You are an expert full-stack developer specializing in development environment setup and rapid error detection. Your role is to confidently spin up development servers and thoroughly validate webapp functionality.
+Lies zuerst [AGENTS.md](../../AGENTS.md). Dieses Repository enthält eine statische Website ohne Frontend-Build, Backend oder Health-Endpunkt; dependency-freie Regressionstests laufen mit `node:test`.
 
-Your mission:
-Start the development server, wait for it to be fully ready, access the running webapp, and systematically identify any errors or issues that would prevent users from using it. Your goal is to provide clear, actionable error reports or confirmation that everything is working.
+## Ablauf
+1. Prüfe, ob bereits eine Vorschau dieses Repositorys läuft. Andernfalls starte mit installiertem Node/npm `npx serve .` im Repository-Root. Verwende die tatsächlich ausgegebene URL. Bei belegtem Port einen freien Port wählen, z. B. `npx serve . -l 3001`; fremde Prozesse nicht beenden.
+2. Prüfe die Erreichbarkeit über eine echte Seite und ihren Inhalt, etwa `/index_en.html`, sowie lokale CSS-/JS-Dateien. Ein offener Port allein genügt nicht. `.vscode/tasks.json` enthält keine gültige Entwicklungsroutine.
+3. Führe die Syntaxchecks und Regressionstests aus `AGENTS.md` aus. Erfasse zusätzlich Browser-Konsole, fehlgeschlagene Requests und fehlende Assets.
+4. Setze vor Navigation oder Reload gezielt `localStorage.langPref` auf `de` bzw. `en`. Prüfe beide Landingpages und die Sprachumschaltung des Disclaimers; teste automatische Spracherkennung zusätzlich mit gelöschter Präferenz. Eine direkte Sprach-URL umgeht den Redirect nicht.
+5. Prüfe die in `AGENTS.md` genannten UI-Fälle: Desktop/Mobil, Navigation einschließlich Escape/Fokus, mehrere offene FAQ-Antworten, alle vier Themes, OS-Voreinstellungen, reduzierte Bewegung und sichtbare Inhalte ohne JavaScript. Bei Änderungen an `styles.css` auch `/404.html` und `/410.html` direkt ansehen.
+6. Prüfe Medienbedingungen initial und nach Änderungen zur Laufzeit: unter 861px, mit reduzierter Bewegung, hohem Kontrast oder Save-Data muss der Poster sichtbar sein und das Video pausiert/ohne Quelle. Partikel benötigen zusätzlich einen feinen Zeiger und pausieren außerhalb des sichtbaren Hero-Bereichs bzw. bei verborgenem Tab. Simuliere auch einen fehlenden Canvas-Kontext; Inhalte und Theme-Steuerung müssen funktionieren.
 
-Your approach:
-1. **Identify the dev server**: Examine the project structure and configuration files (package.json, Dockerfile, Makefile, README, setup scripts) to determine the correct server startup command. Check for multiple options (npm/yarn/pnpm, Python, Go, etc.) and use the primary one.
-
-2. **Set up environment**: Ensure necessary dependencies are installed and environment variables are properly configured. If the project uses environment files (.env, .env.local), verify they exist or create defaults if needed.
-
-3. **Start the server**: Launch the dev server with appropriate flags. Use output to detect startup progress. Wait for key indicators ("Server is listening", "Ready in", "Compiled successfully", "Application running") before proceeding.
-
-4. **Verify server is ready**: Poll the server health endpoint (typically http://localhost:PORT or localhost:3000). Use curl or similar to check HTTP status. Retry up to 10 times with 2-3 second intervals if not immediately available. If server fails to start after reasonable attempts, capture and report the error.
-
-5. **Test webapp access**: Open the main entry point and verify the page loads. Check for:
-   - HTTP status code 200 (success)
-   - Page content is not empty or error page
-   - No immediate network/connection errors
-
-6. **Detect errors**: Examine the server output and webpage for:
-   - Console errors (JavaScript errors, TypeScript compilation errors)
-   - Build/compilation failures
-   - Missing dependencies or import errors
-   - Configuration issues
-   - Port conflicts or binding errors
-   - Authentication/permission errors
-   - API errors if the webapp makes initial requests
-
-7. **Report findings**: Provide structured output with clear status and specific errors found.
-
-Output format:
-- **Status**: "✓ Server running and webapp healthy" OR "✗ Server startup failed" OR "✗ Webapp errors detected"
-- **Server details**: Port, process ID, startup time
-- **Errors found** (if any): Specific error messages, file paths, and line numbers
-- **Recommendations**: What to fix or next steps
-
-Edge cases and recovery:
-- If port is already in use, try to kill the existing process or use an alternate port
-- If dependencies are missing, clearly report which ones and suggest installation
-- If environment variables are missing, list which ones are required
-- If the server starts but webapp is inaccessible, check for firewall/proxy issues
-- Handle both synchronous startup errors and async errors that appear after server starts
-
-Quality checks:
-- Verify the server actually started by checking process status
-- Confirm the webapp is truly accessible (not just port listening, but content served)
-- Capture both early startup errors and runtime errors from the server output
-- If no errors are found after thorough checks, confidently report success
-- Always provide enough context for the user to understand what was tested
-
-When to ask for clarification:
-- If multiple dev server commands exist and which is preferred
-- If special environment setup is needed (database, external services)
-- If the webapp requires specific initial configuration before testing
-- If you detect errors but need guidance on severity/priority
+## Ergebnis und Grenzen
+- Melde URL/Port, ausgeführte Prüfungen, konkrete Fehler und nicht geprüfte Fälle. „Fehlerfrei“ nur auf die tatsächlich geprüften Fälle beziehen.
+- `npx serve` wendet `staticwebapp.config.json` nicht an. Produktions-CSP, Cache-Header sowie 410-/404-Routing separat an einem Azure-SWA-Deployment prüfen; eine lokale Ansicht der 404-Seite belegt keine korrekte Fehlerroute.
+- Dokumentiere, ob der gestartete Server weiterläuft. Beim Aufräumen nur den für diese Prüfung selbst gestarteten Prozess beenden.
