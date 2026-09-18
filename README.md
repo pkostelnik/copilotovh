@@ -113,6 +113,8 @@ For UI changes, use the browser checks in [AGENTS.md](AGENTS.md), including both
 
 After upload, `.github/scripts/verify-deployment.cjs` checks the deployment URL for security headers, document exclusions and routing: status-only 410 responses are intended for `/pk.html`, `/pk` and `/pk/`; `/remotion/*` is blocked and missing pages serve `/404.html` with status 404. Azure rejects `rewrite` combined with `statusCode` inside `routes`, so `410.html` is not used as the body of those responses. The earlier live deployment returned 404 for `/pk.html`; the live check deliberately continues to fail if the 410 requirement is not met. To verify manually: `node .github/scripts/verify-deployment.cjs https://<deployment-host>`.
 
+Azure also rejects separate `/pk` and `/pk/` rules as duplicates. Only `/pk` is configured alongside `/pk.html`; both trailing-slash variants remain covered by the live verification.
+
 ---
 
 ## 🌍 Language Support

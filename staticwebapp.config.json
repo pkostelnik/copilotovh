@@ -18,10 +18,6 @@
       "statusCode": 410
     },
     {
-      "route": "/pk/",
-      "statusCode": 410
-    },
-    {
       "route": "/staticwebapp.config.json",
       "statusCode": 404
     },

@@ -23,13 +23,24 @@ test('deployment artifact contains only allowlisted site files with working loca
       }
     }
     const config = JSON.parse(fs.readFileSync(path.join(target, 'staticwebapp.config.json')));
-    for (const route of ['/pk', '/pk/', '/pk.html']) {
+    for (const route of ['/pk', '/pk.html']) {
       const rule = config.routes.find(rule => rule.route === route);
       assert.equal(rule.statusCode, 410);
       assert.equal(rule.rewrite, undefined);
     }
   } finally {
     fs.rmSync(temp, { recursive: true, force: true });
+  }
+});
+
+test('Azure routes are unique after trailing-slash normalization', () => {
+  const config = require('../staticwebapp.config.json');
+  const seen = new Map();
+  for (const rule of config.routes) {
+    // Azure rejects /pk and /pk/ as duplicate rules, even when both return 410.
+    const normalized = rule.route.replace(/\/+$/, '') || '/';
+    assert.ok(!seen.has(normalized), `${rule.route}: duplicate of ${seen.get(normalized)}`);
+    seen.set(normalized, rule.route);
   }
 });
 
