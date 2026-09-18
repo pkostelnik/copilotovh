@@ -17,5 +17,5 @@ Lies zuerst [AGENTS.md](../../AGENTS.md). Dieses Repository enthält eine statis
 
 ## Ergebnis und Grenzen
 - Melde URL/Port, ausgeführte Prüfungen, konkrete Fehler und nicht geprüfte Fälle. „Fehlerfrei“ nur auf die tatsächlich geprüften Fälle beziehen.
-- `npx serve` wendet `staticwebapp.config.json` nicht an. Produktions-CSP, Cache-Header sowie 410-/404-Routing separat an einem Azure-SWA-Deployment prüfen; eine lokale Ansicht der 404-Seite belegt keine korrekte Fehlerroute.
+- `npx serve` wendet `staticwebapp.config.json` nicht an. Produktions-CSP, Cache-Header und 404-Routing (einschließlich aller `/pk`-Varianten) separat an einem Azure-SWA-Deployment prüfen; eine lokale Ansicht der 404-Seite belegt keine korrekte Fehlerroute.
 - Dokumentiere, ob der gestartete Server weiterläuft. Beim Aufräumen nur den für diese Prüfung selbst gestarteten Prozess beenden.

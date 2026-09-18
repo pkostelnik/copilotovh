@@ -6,7 +6,7 @@ async function verifyDeployment(base) {
   assert.equal(new URL(origin).protocol, 'https:', 'Use the HTTPS deployment URL');
   const routes = [
     ['/', 200], ['/index_en.html', 200], ['/disclaimer.html', 200],
-    ['/pk.html', 410], ['/pk', 410], ['/pk/', 410],
+    ['/pk.html', 404], ['/pk', 404], ['/pk/', 404],
     ['/remotion/deployment-check', 404], ['/deployment-check/missing-page', 404],
     ['/staticwebapp.config.json', 404], ['/README.md', 404], ['/AGENTS.md', 404],
     ['/CLAUDE.md', 404], ['/GEMINI.md', 404], ['/design.md', 404],

@@ -11,11 +11,11 @@
   "routes": [
     {
       "route": "/pk.html",
-      "statusCode": 410
+      "statusCode": 404
     },
     {
       "route": "/pk",
-      "statusCode": 410
+      "statusCode": 404
     },
     {
       "route": "/staticwebapp.config.json",
