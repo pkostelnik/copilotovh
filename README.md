@@ -34,7 +34,7 @@ copilotovh/
 ├── disclaimer.html        # AI disclaimer page (single file, client-side DE/EN switching)
 ├── disclaimer.js          # i18n logic for disclaimer.html (auto-detect + in-place language switch)
 ├── 404.html               # Custom 404 error page
-├── 410.html               # Removed-page response for /pk aliases
+├── 410.html               # Standalone removed-page information (not wired to /pk)
 ├── styles.css             # Stylesheet (incl. 404 + disclaimer page styles – CSP-friendly, no inline CSS)
 ├── init.js                # Synchronous theme + language init (runs before CSS to prevent FOUC)
 ├── main.js                # Nav, scroll reveal, particles, conditional video loading, theme toggle
@@ -111,7 +111,7 @@ For UI changes, use the browser checks in [AGENTS.md](AGENTS.md), including both
 
 `.github/workflows/azure-static-web-apps-salmon-sand-0c2aea603.yml` deploys pushes and pull requests targeting `main`; closing a PR closes its preview. SHA-pinned actions use job-scoped permissions. Syntax checks and tests run before `.github/scripts/prepare-site.cjs` copies an explicit public-file allowlist into a fresh `.site/` directory; Azure uploads that directory with `skip_app_build: true`. Add new website assets to the allowlist. Documentation and tooling are excluded.
 
-After upload, `.github/scripts/verify-deployment.cjs` checks the deployment URL for security headers, document exclusions and routing: 410 is intended for `/pk.html`, `/pk` and `/pk/` using `/410.html`; `/remotion/*` is blocked and missing pages serve `/404.html` with status 404. The earlier live deployment returned 404 for `/pk.html`, so the corrected rule remains subject to this live check. To verify manually: `node .github/scripts/verify-deployment.cjs https://<deployment-host>`.
+After upload, `.github/scripts/verify-deployment.cjs` checks the deployment URL for security headers, document exclusions and routing: status-only 410 responses are intended for `/pk.html`, `/pk` and `/pk/`; `/remotion/*` is blocked and missing pages serve `/404.html` with status 404. Azure rejects `rewrite` combined with `statusCode` inside `routes`, so `410.html` is not used as the body of those responses. The earlier live deployment returned 404 for `/pk.html`; the live check deliberately continues to fail if the 410 requirement is not met. To verify manually: `node .github/scripts/verify-deployment.cjs https://<deployment-host>`.
 
 ---
 

@@ -26,10 +26,21 @@ test('deployment artifact contains only allowlisted site files with working loca
     for (const route of ['/pk', '/pk/', '/pk.html']) {
       const rule = config.routes.find(rule => rule.route === route);
       assert.equal(rule.statusCode, 410);
-      assert.ok(fs.existsSync(path.join(target, rule.rewrite.slice(1))));
+      assert.equal(rule.rewrite, undefined);
     }
   } finally {
     fs.rmSync(temp, { recursive: true, force: true });
+  }
+});
+
+test('Azure route rules never combine rewrite with statusCode or redirect', () => {
+  const config = require('../staticwebapp.config.json');
+  // This restriction is for routes, not the separate responseOverrides API.
+  for (const rule of config.routes) {
+    if (Object.hasOwn(rule, 'rewrite')) {
+      assert.ok(!Object.hasOwn(rule, 'statusCode'), `${rule.route}: rewrite cannot specify statusCode`);
+      assert.ok(!Object.hasOwn(rule, 'redirect'), `${rule.route}: rewrite cannot specify redirect`);
+    }
   }
 });
 
